@@ -36,10 +36,10 @@ Amazon EC2 인스턴스의 서버나 클러스터를 관리할 필요 없이 컨
 # Amazon ECS 클러스터 구성
 Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Clusters 를 선택 후에 아래 그림과 같이 구성합니다. 본 구성에서는 AWS Fargate 를 사용하기 때문에 Infrastructure 에서 AWS Fargate (serverless) 를 선택합니다.
 
-<img width="1125" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/28445be5-3374-43f4-b611-72b928a5e5c2">
-<img width="811" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c16d52f1-9f8e-40aa-88aa-fb4f19ebaa45">
-<img width="813" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1bb5b37f-78ed-4bae-9f2f-1e8712d916d8">
-<img width="817" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e598504f-85ab-447c-8df2-4319226701e4">
+<img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/28445be5-3374-43f4-b611-72b928a5e5c2">
+<img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c16d52f1-9f8e-40aa-88aa-fb4f19ebaa45">
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1bb5b37f-78ed-4bae-9f2f-1e8712d916d8">
+<img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e598504f-85ab-447c-8df2-4319226701e4">
 
 구성을 완료한 다음에 Create 버튼을 누르고 기다리면 Amazon ECS Cluster 가 생성된 것을 확인할 수 있습니다.
 
