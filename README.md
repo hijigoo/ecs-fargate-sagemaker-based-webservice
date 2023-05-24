@@ -55,7 +55,7 @@ Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Cluste
 ## ECR 에 Web Application 이미지 등록
 ## Task definitions 정의
 ## Application Load Balancer 생성
-## Service 생성
+## Web Service 생성
 
 # AWS Fargate 기반 WAS Service 구성
 
@@ -63,7 +63,7 @@ Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Cluste
 ## ECR 에 WAS Application 이미지 등록
 ## Task definitions 정의
 ## Application Load Balancer 생성
-## Service 생성
+## WAS Service 생성
 
 # AWS CodePipeline 을 이용한 CI/CD 구성
 
