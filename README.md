@@ -52,6 +52,19 @@ Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Cluste
 # AWS Fargate 기반 Web Service 구성
 
 ## Web Application 다운로드 및 빌드
+
+[Web Codes](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/web) 에서 다운 받습니다. 그리고 아래 명령어로 Docker 빌드를 진행합니다.
+
+Docker 빌드
+```
+#docker build  -t app-web .
+```
+
+Mac M1, M2 환경에서는 기본 linux/arm64 로 빌드되기 때문에 아래 명령어로 Docker 빌드를 수행합니다.
+```
+docker buildx build --platform=linux/amd64 -t $app-web .
+```
+
 ## ECR 에 Web Application 이미지 등록
 ## Task definitions 정의
 ## Application Load Balancer 생성
