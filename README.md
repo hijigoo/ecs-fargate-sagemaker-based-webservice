@@ -53,16 +53,19 @@ Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Cluste
 
 ## Web Application 다운로드 및 빌드
 
-[Web Codes](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/web) 에서 다운 받습니다. 그리고 아래 명령어로 Docker 빌드를 진행합니다.
-
-Docker 빌드
+[Web](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/web) 에서 프로젝트 코드를 다운 받습니다. 그리고 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
 ```
-#docker build  -t app-web .
+docker build  -t app-web .
 ```
 
-Mac M1, M2 환경에서는 기본 linux/arm64 로 빌드되기 때문에 아래 명령어로 Docker 빌드를 수행합니다.
+Mac M1, M2 환경에서는 기본 linux/arm64 로 빌드되기 때문에 다음 명령어로 Docker 빌드를 수행합니다.
 ```
-docker buildx build --platform=linux/amd64 -t $app-web .
+docker buildx build --platform=linux/amd64 -t app-web .
+```
+
+Docker 이미지가 빌드되었는지 확인합니다.
+```
+docker images
 ```
 
 ## ECR 에 Web Application 이미지 등록
