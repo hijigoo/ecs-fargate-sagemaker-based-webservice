@@ -53,7 +53,7 @@ Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Cluste
 
 ## Web Application 다운로드 및 빌드
 
-[Web](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/web) 에서 프로젝트 코드를 다운 받습니다. 그리고 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
+[Web Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/web) 샘플 프로젝트 코드를 다운 받습니다. 그리고 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
 ```
 docker build  -t app-web .
 ```
