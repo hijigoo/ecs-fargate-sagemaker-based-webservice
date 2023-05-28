@@ -46,7 +46,7 @@ Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Cluste
 
 구성을 완료한 다음에 Create 버튼을 누르고 기다리면 Amazon ECS 클러스터가 생성된 것을 확인할 수 있습니다.
 
-<img width="1177" alt="5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a18254a4-362e-488a-84f2-b6bf7f6bafd3">
+<img width="1024" alt="5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a18254a4-362e-488a-84f2-b6bf7f6bafd3">
 
 
 # AWS Fargate 기반 Web Service 구성
@@ -68,7 +68,19 @@ Docker 이미지가 빌드되었는지 확인합니다.
 docker images
 ```
 
-## ECR 에 Web Application 이미지 등록
+## Amazon ECR 에 Web Application 이미지 등록
+Amazon Elastic Container Registry 콘솔로 이동 후 왼쪽 메뉴에서 Repositories 를 선택합니다. 그리고 Private 탭에서 Create repository 버튼을 눌러서 레바지토리를 생성을 시작합니다.
+
+<img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/d3b7c698-c72e-4a00-92b8-3d1f093671ef">
+
+레파지토리는 아래 그림과 같이 구성합니다. 이름은 app-web  으로 입력하고 나머지는 그대로 둡니다.
+
+<img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c11ff57f-b3c8-455c-bef3-976548fe968b">
+
+구성을 완료한 다음에 맨 아래에 있는 Create 버튼을 누르고 기다리면 레파지토리가 생성된 것을 확인할 수 있습니다.
+
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/9e7e97fd-7f1d-4b70-ba4c-e7d26b136931">
+
 ## Task definitions 정의
 ## Application Load Balancer 생성
 ## Web Service 생성
@@ -76,7 +88,7 @@ docker images
 # AWS Fargate 기반 WAS Service 구성
 
 ## WAS Application 다운로드 및 빌드
-## ECR 에 WAS Application 이미지 등록
+## Amazon ECR 에 WAS Application 이미지 등록
 ## Task definitions 정의
 ## Application Load Balancer 생성
 ## WAS Service 생성
