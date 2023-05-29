@@ -32,16 +32,33 @@ Amazon EC2 인스턴스의 서버나 클러스터를 관리할 필요 없이 컨
 
 데이터 과학자 및 개발자가 모든 규모의 기계 학습 모델을 간편하게 빌드, 학습 및 배포할 수 있도록 하는 완전 관리형 서비스로 클라우드 환경에서 학습을 진행하고 모델 서빙을 위한 Endpoint 를 구성할 수 있습니다. 또한 학습부터 배포까지 자동화할 수 있는 Pipeline 기능도 제공합니다.
 
+# VPC 생성
+VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
+
+<p align="center">
+<img width="693" alt="0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/597166b5-7584-4cee-b9af-ea039a99384f">
+</p>
+
+Resources to create 으로 VPC and more 를 선택합니다. 2개의 AZ 를 구성할 예정이기 때문에 Number of Availability Zones (AZs) 값으로 2를 선택합니다. 그리고 Number of public subnets 은 2, Number of private subnets 는 2를 선택합니다. 전체 구성은 아래와 같습니다. 
+
+<p align="center">
+<img width="506" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/40047ac6-99cc-44ef-b5f9-fdd714b1349e">
+<img width="505" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/d243317d-ed30-4262-9505-e10d0a922f21">
+<img width="1448" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6ad72229-d781-4606-a751-f2d9b479bd81">
+
+</p>
+
+구성을 완료한 다음에 Create VPC 버튼을 누르고 기다리면 VPC 와 Subnet이 생성된 것을 확인할 수 있습니다.
 
 # Amazon ECS 클러스터 구성
 Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 Clusters 를 선택 하고 Create Cluster 버튼을 눌러서 클러스터를 생성을 시작합니다. 
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/28445be5-3374-43f4-b611-72b928a5e5c2">
 
-클러스터는 아래 그림과 같이 구성합니다. 이름은 AppEcsCluster 로 입력합니다. 그리고 Multi Available Zone 에 클러스터를 구성하기 때문에 각 Available Zone 에 위치한 Subnet 을 각각 선택합니다. 또한 AWS Fargate 를 사용하기 때문에 Infrastructure 에서 AWS Fargate (serverless) 를 선택합니다.
+클러스터는 아래 그림과 같이 구성합니다. 이름은 AppEcsCluster 로 입력합니다. 그리고 Multi Available Zone 에 클러스터를 구성하기 때문에 각 Available Zone 에 위치한 Private Subnet 을 각각 선택합니다. 또한 AWS Fargate 를 사용하기 때문에 Infrastructure 에서 AWS Fargate (serverless) 를 선택합니다.
 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c16d52f1-9f8e-40aa-88aa-fb4f19ebaa45">
-<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1bb5b37f-78ed-4bae-9f2f-1e8712d916d8">
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/46bbb48d-59de-43a9-8540-aeeea82e75c1">
 <img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e598504f-85ab-447c-8df2-4319226701e4">
 
 구성을 완료한 다음에 Create 버튼을 누르고 기다리면 Amazon ECS 클러스터가 생성된 것을 확인할 수 있습니다.
@@ -107,10 +124,21 @@ Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/225cf129-5c97-4c77-a0de-0ffc9762fef4">
 
 
-## Application Load Balancer 생성
-## Web Service 생성
+## AWS ECS 서비스 생성
+앞 단계에서 만든 Task definition 을 이용해서 AWS ECS 서비스를 구성하고 생성합니다. 서비스를 구성할 때 트래픽 분산을 위한 Load balancer 도 생성하고, 스케일 아웃을 위한 Service auto scaling 도 함께 구성합니다. 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 그리고 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다.
+
+[그림1]
+
+서비스는 다음 그림과 같이 구성합니다. Compute options 으로 Launch Type 을 선택하고, Application type 으로 Service 를 선택합니다. 그리고 family 값으로 앞서 생성한 task definition 인 app-web 을 선택합니다. Service Name 으로는 app-web-service 를 입력합니다. Desired tasks 값으로 2를 입력합니다.
+
+[그림2]
+[그림3]
+
+
+
 
 # AWS Fargate 기반 WAS Service 구성
+
 
 ## WAS Application 다운로드 및 빌드
 ## Amazon ECR 에 WAS Application 이미지 등록
