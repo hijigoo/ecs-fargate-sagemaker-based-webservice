@@ -98,7 +98,7 @@ Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정
 
 태스크 정의는 다음 그림과 같이 구성합니다. Task definition family 는 app-web-td 로 지정합니다. 그리고 태스크를 구성할 컨테이너 정보를 입력합니다. Name 은 app-web 으로 지정하고 Image URI 는 ECR 콘솔에서 앞 단계에서 푸시한 이미지 URI 를 찾아서 입력합니다. 포트는 8000 으로 입력합니다. Next 버튼을 눌러서 다음으로 진행합니다.
 
-<p style="text-align: center;">
+<p align="center">
 <img width="613" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/eeebecad-3fdf-444f-9d07-ea6d2569b4ae">
 </p>
 
