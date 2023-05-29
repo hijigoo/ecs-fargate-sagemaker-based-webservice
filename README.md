@@ -123,6 +123,14 @@ Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정
 
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/225cf129-5c97-4c77-a0de-0ffc9762fef4">
 
+## 보안 그룹 생성
+AWS ECS 서비스의 보안 그룹과 서비스 앞에서 트래픽을 분산할 Load balancer 의 보안 그룹을 생성합니다. 먼저 Load balancer 의 보안 그룹을 생성합니다.
+
+[보안그룹 생성1]
+
+다음으로 ECS 서비스의 보안 그룹을 생성합니다. 
+
+[보안그룹 생성2]
 
 ## AWS ECS 서비스 생성
 앞 단계에서 만든 Task definition 을 이용해서 AWS ECS 서비스를 구성하고 생성합니다. 서비스를 구성할 때 트래픽 분산을 위한 Load balancer 도 생성하고, 스케일 아웃을 위한 Service auto scaling 도 함께 구성합니다. 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 그리고 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다.
