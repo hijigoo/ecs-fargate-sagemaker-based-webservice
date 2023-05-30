@@ -133,13 +133,13 @@ AWS ECS 서비스에 적용할 보안 그룹과 서비스 앞에서 트래픽을
 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/9a189f8b-0b60-410b-b27d-8710eed86fd0">
 
+기다리면 다음과 같이 두 개의 보안 그룹이 생성된 것을 확인할 수 있습니다. 보기 편하게 Name 값을 Security Group Name 과 동일하게 변경합니다.
 
-[보안그룹 생성2]
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6694397b-d770-461e-ac4e-893c481a30b1">
+
 
 ## AWS ECS 서비스 생성
 앞 단계에서 만든 Task definition 을 이용해서 AWS ECS 서비스를 구성하고 생성합니다. 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다. 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 구성할 때 트래픽 분산을 위한 Load balancer 와 스케일 아웃을 위한 Service auto scaling 도 함께 구성합니다.
-
-
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f2d9d52f-c540-400e-802f-ba540d3cee29">
 
@@ -149,9 +149,6 @@ AWS ECS 서비스에 적용할 보안 그룹과 서비스 앞에서 트래픽을
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/879595fb-e543-40dc-9817-28512fde554b">
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c15eedd3-a8d4-4fdb-890c-506bbbad6788">
 
-기다리면 다음과 같이 두 개의 보안 그룹이 생성된 것을 확인할 수 있습니다. 보기 편하게 Name 값을 Security Group Name 과 동일하게 변경합니다.
-
-<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6694397b-d770-461e-ac4e-893c481a30b1">
 
 
 # AWS Fargate 기반 WAS Service 구성
