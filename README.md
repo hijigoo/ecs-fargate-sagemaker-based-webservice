@@ -113,7 +113,7 @@ Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a90b05e1-bb2a-4a19-8592-d75a526fe276">
 
 
-태스크 정의는 다음 그림과 같이 구성합니다. Task definition family 는 app-web-td 로 지정합니다. 그리고 태스크를 구성할 컨테이너 정보를 입력합니다. Name 은 app-web 으로 지정하고 Image URI 는 ECR 콘솔에서 앞 단계에서 푸시한 이미지 URI 를 찾아서 입력합니다. 포트는 8000 으로 입력합니다. Next 버튼을 눌러서 다음으로 진행합니다.
+태스크 정의는 다음 그림과 같이 구성합니다. Task definition family 는 app-web-td 로 지정합니다. 그리고 태스크를 구성할 컨테이너 정보를 입력합니다. Name 은 app-web 으로 지정하고 Image URI 는 ECR 콘솔에서 앞 단계에서 푸시한 이미지 URI 를 찾아서 입력합니다. 포트는 8000 으로 입력합니다. Next 버튼을 눌러서 다음으로 진행합니다. 
 
 <p align="center">
 <img width="613" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/eeebecad-3fdf-444f-9d07-ea6d2569b4ae">
@@ -124,24 +124,27 @@ Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/225cf129-5c97-4c77-a0de-0ffc9762fef4">
 
 ## 보안 그룹 생성
-AWS ECS 서비스의 보안 그룹과 서비스 앞에서 트래픽을 분산할 Load balancer 의 보안 그룹을 생성합니다. 먼저 Load balancer 의 보안 그룹을 생성합니다.
+AWS ECS 서비스에 적용할 보안 그룹과 서비스 앞에서 트래픽을 분산할 Load balancer 에 적용할 보안 그룹을 생성합니다. 먼저 Load balancer 에 적용할 보안 그룹을 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Security Groups 를 선택합니다. 그리고 Create security group 버튼을 눌러서 보안 그룹 생성을 시작합니다. Security group name 은 app-web-alb-sg 로 지정합니다. VPC 는 처음 생성한 app-vpc 를 선택합니다. 외부와 HTTP 통신을 위해서 80 포트를 인바운드 값으로 허용합니다. 구성을 완료한 다음에 Create security group 버튼을 누르고 기다리면 보안 그룹이 생성된 것을 확인할 수 있습니다.
 
-[보안그룹 생성1]
+<img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6a3f5456-5b5c-4d83-83e7-a05370ee7978">
 
-다음으로 ECS 서비스의 보안 그룹을 생성합니다. 
+
+다음으로 ECS 서비스에 적용할 보안 그룹을 생성합니다. 
 
 [보안그룹 생성2]
 
 ## AWS ECS 서비스 생성
-앞 단계에서 만든 Task definition 을 이용해서 AWS ECS 서비스를 구성하고 생성합니다. 서비스를 구성할 때 트래픽 분산을 위한 Load balancer 도 생성하고, 스케일 아웃을 위한 Service auto scaling 도 함께 구성합니다. 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 그리고 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다.
+앞 단계에서 만든 Task definition 을 이용해서 AWS ECS 서비스를 구성하고 생성합니다. 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다. 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 구성할 때 트래픽 분산을 위한 Load balancer 와 스케일 아웃을 위한 Service auto scaling 도 함께 구성합니다.
 
-[그림1]
+
+
+<img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f2d9d52f-c540-400e-802f-ba540d3cee29">
+
 
 서비스는 다음 그림과 같이 구성합니다. Compute options 으로 Launch Type 을 선택하고, Application type 으로 Service 를 선택합니다. 그리고 family 값으로 앞서 생성한 task definition 인 app-web 을 선택합니다. Service Name 으로는 app-web-service 를 입력합니다. Desired tasks 값으로 2를 입력합니다.
 
-[그림2]
-[그림3]
-
+<img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/879595fb-e543-40dc-9817-28512fde554b">
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c15eedd3-a8d4-4fdb-890c-506bbbad6788">
 
 
 
