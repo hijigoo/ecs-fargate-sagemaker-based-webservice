@@ -163,9 +163,7 @@ Service auto scaling 구성에서 Use service auto scaling 를 체크합니다. 
 <img width="1024" alt="7-asg" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6422f76d-bc8d-4016-8c66-12a10b537f17">
 <img width="1024" alt="8-asg" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2e2428d0-bb8c-4620-b147-113bd231777a">
 
-다음으로 함께 생성한 로드 밸런서의 Subnets 을 Public subnet 으로 변경하고 보안 그룹도 app-web-alb-sg 로 변경합니다. 변경하지 않으면 서비스의 설정이 자동으로 적용되어 로드 밸런서의 Subnets 은 Private subnet 으로 설정되어 있고 보안 그룹도 app-web-sg 으로 정되어 있습니다. 변경을 위해서 EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load Balancers 를 선택합니다. 
-
-그리고 app-web-alb 를 체크하고 Actions 을 눌러서 버튼을 오픈한뒤 Edit subnets 을 선택하고 모두 Public subnet 으로 변경하고 Save changes 버튼을 눌러서 적용합니다.
+다음으로 함께 생성한 로드 밸런서의 Subnets 을 Public subnet 으로 변경하고 보안 그룹도 app-web-alb-sg 로 변경합니다. 변경하지 않으면 서비스의 설정이 자동으로 적용되어 로드 밸런서의 Subnets 은 Private subnet 으로 설정되어 있고 보안 그룹도 app-web-sg 으로 정되어 있습니다. 변경을 위해서 EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load Balancers 를 선택합니다. 그리고 app-web-alb 를 체크하고 Actions 을 눌러서 버튼을 오픈한뒤 Edit subnets 을 선택하고 모두 Public subnet 으로 변경하고 Save changes 버튼을 눌러서 적용합니다.
 
 <img width="1024" alt="12-alb-subnets" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/50bd20c5-7c9f-477f-88f9-d0c887413c9a">
 
