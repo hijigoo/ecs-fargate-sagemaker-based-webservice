@@ -108,7 +108,7 @@ Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 
 
 
 ## Task definitions 구성
-Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정의합니다. 하나의 태스크에서 한 개 이상의 컨테이너를 정의할 수 있습니다. 즉 서비스를 실행하기 위한 최소 단위라고 생각할 수 있습니다. Amazon Elastic Container Service 콘솔로 이동 후 왼쪽 메뉴에서 Task definition 을 열고 Create new task definition 버튼을 눌러서 태스크 정의를 시작합니다. 
+Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정의합니다. 하나의 태스크에서 한 개 이상의 컨테이너를 정의할 수 있습니다. 즉 서비스를 실행하기 위한 최소 단위라고 생각할 수 있습니다. Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 Task definition 을 열고 Create new task definition 버튼을 눌러서 태스크 정의를 시작합니다. 
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a90b05e1-bb2a-4a19-8592-d75a526fe276">
 
@@ -179,7 +179,7 @@ Service auto scaling 구성에서 Use service auto scaling 를 체크합니다. 
 
 
 # AWS Fargate 기반 WAS Service 구성
-AWS Fargate 기반 Web Service 구성과 비슷한 흐름으로 진행합니다. 다만, Application Load Balancer 과 Sercurity Group 은 다른 부분이 있기 때문에 주의해서 보시기를 바랍니다.
+AWS Fargate 기반 Web Service 구성과 비슷한 흐름으로 진행되지만 다른 부분이 있기 때문에 주의해서 보시기 바랍니다.
 
 [내용 추가 필요]
 
@@ -221,6 +221,68 @@ Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 
 <img width="1024" alt="5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0cb17fbf-abdc-4b72-8fbf-bce70411b594">
 
 ## Task definitions 구성
+Task definition 을 구성하기 전에 Task 에서 Amazon SageMaker Endpoint 를 호출하기 위한 역할을 먼저 생성합니다. Identity and Access Management(IAM) 콘솔로 이동합니다. 왼쪽 메뉴에서 Roles 를 선택하고 Create role 버튼을 눌러서 역할 생성을 시작합니다.
+
+<img width="1024" alt="0-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e39a12ee-f494-4d77-a552-751a823fd437">
+
+Trusted entity type 으로 AWS service 를 선택합니다. User Case 아래 있는 Use cases for other AWS services 에서 Elastic Container Service 를 선택합니다. 그리고 다시 Elastic Container Service Task 를 선택합니다. 구성은 다음과 같습니다. Next 버튼을 눌러서 다음 진행 단계로 넘어갑니다. 
+
+<img width="1024" alt="0-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c4e81f64-342a-4386-a0d8-df474d7a0ac8">
+
+Add permissions 단계에서 Create policy 를 눌러서 정책 생성을 시작합니다. 
+
+<img width="1024" alt="0-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c00a4792-c7bc-418d-bad2-03ab4586d40b">
+
+Policy editor 에서 JSON 을 선택하고 아래와 같이 입력하고 Next 버튼을 눌러서 다음 단계로 넘어갑니다. 
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": "sagemaker:InvokeEndpoint",
+            "Resource": "*"
+        }
+    ]
+}
+```
+
+<img width="1024" alt="0-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e528911f-8bf5-4d56-bcfc-cf5bce38e7c6">
+
+Policy name 에 InvokeSageMakerEndpoint 을 입력하고 맨 아래에 있는 Create policy 버튼을 눌러서 정책을 생성합니다.
+
+<img width="1024" alt="0-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c55065e6-ecf1-4200-b9ab-d2dfa1ff28c0">
+
+InvokeSageMakerEndpoint 으로 검색하면 다음과 같이 정책이 생성된 것을 확인할 수 있습니다.
+
+<img width="1024" alt="0-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1dd1342f-81b0-491e-8ae5-1e2981a03311">
+
+역할을 생성하던 페이지로 다시 돌아온 뒤 Create Policy 버튼 옆에 있는 새로고침 아이콘 버튼을 눌러서 정책리스트를 다시 로드합니다. InvokeSageMakerEndpoint 을 검색하면 방금 생성한 정책이 나옵니다. 나온 정책을 선택하고 Next 버튼을 눌러서 다음 단계로 진행합니다.
+
+<img width="1024" alt="0-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e94ff1f5-3171-4817-a675-f38bdcc6b54e">
+
+Role name 으로 ecsWasTaskRole 으로 입력하고 Create role 버튼을 눌러서 롤 생성을 완료합니다.
+
+<img width="1024" alt="0-8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/214abdd0-67a7-4fab-846b-260a33bb4968">
+
+Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 Task definition 을 선택합니다. 기존에 등록한 app-web 레지스트리가 있는 것을 볼 수 있습니다. Create new task definition 버튼을 눌러서 태스크 정의를 시작합니다. 
+
+<img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a4cb9be8-9e55-413b-86cb-d7aae34dccce">
+
+태스크 정의는 다음 그림과 같이 구성합니다. Task definition family 는 app-was-td 로 지정합니다. 그리고 태스크를 구성할 컨테이너 정보를 입력합니다. Name 은 app-was 으로 지정하고 Image URI 는 ECR 콘솔에서 앞 단계에서 푸시한 이미지 URI 를 찾아서 입력합니다. 포트는 8081 으로 입력합니다. Environment 칸에 있는 Task role 에 앞서 생성한 ecsWasRole 을 선택하여 입력합니다. Next 버튼을 눌러서 다음으로 진행합니다.
+
+<img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/5e4c9828-12c6-4f46-bbf9-e189b134fac9">
+
+<img width="1024" alt="2-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/63fa0856-98e6-4704-acf3-fc649004179d">
+
+Amazon SageMaker Endpoint 를 호출하기 위해서 권한을 추가해야 Task role 을 등록해야 하지만 현재는 모두 기본 값으로 남깁니다. Next 버튼을 눌러서 다음 진행 단계로 넘어갑니다. 구성을 확인하고 맨 아래에 있는 Create 버튼을 누르고 기다리면 태스크 정의가 생성된 것을 확인할 수 있습니다.
+
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c39dfaae-f206-47aa-87d6-8517df60ec14">
+
+
+
 ## Application Load Balancer 생성
 ## Security Group 생성
 ## AWS ECS Service 생성
