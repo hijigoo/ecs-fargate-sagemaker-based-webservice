@@ -29,7 +29,6 @@ router.get("/was/health", function (req, res) {
     console.log(body)
     return res.json({"was-health":JSON.parse(body)})
   })
-  res.json({"version": "0.0.1"});
 });
 
 router.post('/classify/image', multer().single('file'), function(req, res) {
