@@ -136,6 +136,29 @@ AWS ECS 에서 구동되는 Web 서비스에 적용할 보안 그룹과 서비�
 
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6694397b-d770-461e-ac4e-893c481a30b1">
 
+## Load balancer 생성
+AWS ECS 서비스의 구성에 사용할 로드 밸런서를 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load balancers 를 선택합니다. 그리고 Create load balancer 버튼을 눌러서 로드 밸런서 구성을 시작합니다. Application Load Balancer 의 Create 버튼을 눌러서 생성합니다.
+
+<img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/af78d083-6afb-420a-92f3-32a6f6206457">
+
+Load balancer name 는 app-web-alb 으로 입력하고 Scheme 은 Internet-facing 을 선택합니다. Networking 구성에서 VPC 는 생성해 놓은 app-vpc 를 선택하고 Subnets 에는 public subnets 두 개를 선택합니다. 그리고 Security groups 에는 미리 생성해놓은 app-web-alb-sg 를 선택합니다.
+
+<img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f0ddfd81-b722-483e-a1a7-dd71e0adc4e1">
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/258d0d78-2a1d-4f40-abfa-a502e5e37231">
+<img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/eb7bafa5-6508-4fdb-a29b-e028c4474c9f">
+
+Listeners and routing 에서 Create target group 을 누르고 신규 타겟 그룹을 생성합니다. Choose a target type 는 IP addresses 를 선택하고 Target group name 값으로 app-web-alb-tg 를 입력하고 Port 는 80을 입력합니다. VPC 는 app-vpc 를 선택합니다. 그리고 Health check path 값으로 /health 를 입력합니다. Next 버튼을 눌러서 다음 단계를 넘어간 뒤 Create target group 버튼을 눌러서 타겟 그룹을 생성을 완료합니다.
+
+<img width="1024" alt="5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7aa1ce60-8388-4302-852c-1fb635fbb0fa">
+<img width="1024" alt="6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/fc7368ce-4f37-4b31-819f-393d0d7b82c3">
+<img width="1024" alt="7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f46520a7-41cd-4ef0-9843-741487c0406f">
+다시 로드 밸런서 구성 페이지로 돌아옵니다. Select a target group 옆에 새로고침 아이콘 버튼을 눌러서 방금 생성한 타겟 그룹을 가져오고 선택합니다.
+
+<img width="1024" alt="9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/05ef5fae-ff64-420e-9bf1-b4ff12a4b771">
+
+Create load balancer 버튼을 눌러서 로드 밸런서 생성을 완료합니다.
+
+<img width="1024" alt="10" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1b0fda5e-c3e8-4995-92ee-713ce87e2619">
 
 ## AWS ECS Service 생성
 AWS ECS 에서 구동되는 Web 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다. 
@@ -152,32 +175,22 @@ Networking 구성에서 VPC 는 생성해 놓은 app-vpc 를 선택하고 Subnet
 <img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/daf8cbce-ec3b-4ea9-8932-edd587f0c333">
 
 
-Load Balancing 구성에서 트래픽을 분산하기 위해 로드 밸런스를 생성합니다. Load balancer type 으로 Application Load Balancer 를 선택합니다.  Create a new load balancer 를 선택하고 Load balancer name 값으로 app-web-alb 를 입력합니다. 그리고 Target group name 값으로 app-web-alb-tg 를 입력하고, Health check path 값으로 /health 를 입력합니다.
+Load Balancing 구성에서 Load balancer type 으로 Application Load Balancer 를 선택합니다. Use an existing load balancer 를 선택하고 Load balancer 로 app-web-alb 를 선택합니다. Use an existing target group 을 선택하고 app-web-alb-tg 를 선택합니다.
 
-<img width="1024" alt="5-alb" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/494e07bd-e3fc-44d4-9d7f-960409e5b8f3">
-<img width="1024" alt="6-alb" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/341a6841-3f48-471e-bae3-ec37856eb4bb">
-
+<img width="1024" alt="alb2-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2e263fd0-e5ab-4602-982f-4fc5364b397a">
+<img width="1024" alt="alb2-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/45af48c9-a0c3-45e3-8a86-8dd8bab71630">
 
 Service auto scaling 구성에서 Use service auto scaling 를 체크합니다. Minimum number of tasks 값으로 2를 입력하고 Maximum number of tasks 값으로 4를 입력합니다. Policy name 값으로 app-web-asg-policy 을 입력합니다. ECS service metric 으로 ECSServiceMetricAverageCPUUtilization 을 선택하고 Target value 로 70 을 입력합니다. Scale-out cooldown period 과 Scale-in cooldown period 모두 300으로 입력합니다. 모든 구성을 완료한 다음에 Create 버튼을 눌러서 서비스를 생성합니다.
 
 <img width="1024" alt="7-asg" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6422f76d-bc8d-4016-8c66-12a10b537f17">
 <img width="1024" alt="8-asg" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2e2428d0-bb8c-4620-b147-113bd231777a">
 
-다음으로 함께 생성한 로드 밸런서의 Subnets 을 Public subnet 으로 변경하고 보안 그룹도 app-web-alb-sg 로 변경합니다. 변경하지 않으면 서비스의 설정이 자동으로 적용되어 로드 밸런서의 Subnets 은 Private subnet 으로 설정되어 있고 보안 그룹도 app-web-sg 으로 적용되어 있습니다. 변경을 위해서 EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load Balancers 를 선택합니다. 그리고 app-web-alb 를 체크하고 Actions 을 눌러서 버튼을 오픈한뒤 Edit subnets 을 선택합니다. 모두 Public subnet 으로 변경하고 Save changes 버튼을 눌러서 적용합니다.
-
-<img width="1024" alt="12-0-alb-subnets" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/500e52cb-7d9a-41aa-a588-d5746a903dad">
-
-<img width="1024" alt="12-alb-subnets" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/50bd20c5-7c9f-477f-88f9-d0c887413c9a">
-
-다음으로 다시 app-web-alb 를 체크하고 Actions 을 눌러서 버튼을 오픈한뒤 Edit security groups 을 선택합니다. Security groups 을 app-web-alb-sg 로 변경하고 Save changes 버튼을 눌러서 적용합니다.
-
-<img width="1024" alt="10-alb-sg" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/59745dbb-2d55-4811-a09a-d86b909f681e">
-<img width="1024" alt="11-alb-sg" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7e3ab936-d96f-4ba6-ba96-89433bcd09b4">
-
-다시 AWS ECS 클러스터 콘솔로 이동하고 처음에 생성한 AppEcsCluster 를 선택합니다. 그리고 Services 탭에서 app-web-service 를 선택하고 Tasks 탭에 선택해서 들어가면 다음과 같이 태스크가 구동되는 것을 확인할 수 있습니다.
+Services 탭에서 app-web-service 를 선택하고 Tasks 탭에 선택해서 들어가면 다음과 같이 태스크가 구동되는 것을 확인할 수 있습니다.
 
 <img width="1024" alt="9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7c2d73b1-2548-43af-a998-2e208a369478">
 
+## Web 서버 접속 확인
+[추가 필요]
 
 # AWS Fargate 기반 WAS Service 구성
 AWS Fargate 기반 Web Service 구성과 비슷한 흐름으로 진행되지만 다른 부분이 있기 때문에 주의해서 보시기 바랍니다.
@@ -297,6 +310,8 @@ AWS ECS 에서 구동되는 WAS 서비스에 적용할 보안 그룹과 서비�
 
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/3830fb05-d680-42c1-a25c-993e742ce870">
 
+## Load balancer 생성
+[internal 로 생성 필요]
 
 ## AWS ECS Service 생성
 AWS ECS 에서 구동되는 WAS 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭을 보면 기존에 구성한 Web 서비스가 있는 것을 볼 수 있습니다. Create 버튼을 눌러 WAS 서비스 구성을 시작합니다.
@@ -329,6 +344,9 @@ Service auto scaling 구성에서 Use service auto scaling 를 체크합니다. 
 다시 AWS ECS 클러스터 콘솔로 이동하고 처음에 생성한 AppEcsCluster 를 선택합니다. 그리고 Services 탭에서 app-was-service 를 선택하고 Tasks 탭에 선택해서 들어가면 다음과 같이 태스크가 구동되는 것을 확인할 수 있습니다.
 
 <img width="1024" alt="11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8335dfc5-35b3-4cef-b86a-ce901c802d8f">
+
+## WAS 서버 접속 확인
+[추가 필요]
 
 # AWS CodePipeline 을 이용한 CI/CD 구성
 
