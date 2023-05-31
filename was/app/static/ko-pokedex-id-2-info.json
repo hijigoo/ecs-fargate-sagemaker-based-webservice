@@ -1,0 +1,4323 @@
+{
+    "1": {
+        "id": 1,
+        "num": "001",
+        "name": "이상해씨",
+        "img": "http://www.serebii.net/pokemongo/pokemon/001.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "0.71 m",
+        "weight": "6.9 kg",
+        "candy": "25 이상해씨 캔디",
+        "egg": "2 km",
+        "multipliers": 1.58,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "002",
+                "name": "이상해풀"
+            },
+            {
+                "num": "003",
+                "name": "이상해꽃"
+            }
+        ],
+        "description": "태어나서부터 얼마 동안은 등의 씨앗으로부터 영양을 공급받아 크게 성장한다.",
+        "category": "씨앗포켓몬"
+    },
+    "2": {
+        "id": 2,
+        "num": "002",
+        "name": "이상해풀",
+        "img": "http://www.serebii.net/pokemongo/pokemon/002.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "0.99 m",
+        "weight": "13.0 kg",
+        "candy": "100 이상해씨 캔디",
+        "egg": null,
+        "multipliers": [
+            1.2,
+            1.6
+        ],
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "001",
+                "name": "이상해씨"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "003",
+                "name": "이상해꽃"
+            }
+        ],
+        "description": "등의 봉오리가 부풀어 오르면 달콤한 냄새가 감돌기 시작한다. 큰 꽃이 필 조짐이다.",
+        "category": "씨앗포켓몬"
+    },
+    "3": {
+        "id": 3,
+        "num": "003",
+        "name": "이상해꽃",
+        "img": "http://www.serebii.net/pokemongo/pokemon/003.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "2.01 m",
+        "weight": "100.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "001",
+                "name": "이상해씨"
+            },
+            {
+                "num": "002",
+                "name": "이상해풀"
+            }
+        ],
+        "description": "비가 내린 다음 날은 등의 꽃향기가 강해진다. 향기에 이끌려 포켓몬이 모여든다.",
+        "category": "씨앗포켓몬"
+    },
+    "4": {
+        "id": 4,
+        "num": "004",
+        "name": "파이리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/004.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "0.61 m",
+        "weight": "8.5 kg",
+        "candy": "25 파이리 캔디",
+        "egg": "2 km",
+        "multipliers": 1.65,
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "005",
+                "name": "리자드"
+            },
+            {
+                "num": "006",
+                "name": "리자몽"
+            }
+        ],
+        "description": "파이리 꼬리의 불꽃은 생명의 등불이다. 건강할 때는 불꽃도 강하게 타오른다.",
+        "category": "도롱뇽포켓몬"
+    },
+    "5": {
+        "id": 5,
+        "num": "005",
+        "name": "리자드",
+        "img": "http://www.serebii.net/pokemongo/pokemon/005.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "1.09 m",
+        "weight": "19.0 kg",
+        "candy": "100 파이리 캔디",
+        "egg": null,
+        "multipliers": 1.79,
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "004",
+                "name": "파이리"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "006",
+                "name": "리자몽"
+            }
+        ],
+        "description": "리자드가 사는 바위산을 한밤중에 올려다보면 꼬리의 불꽃이 별처럼 보인다.",
+        "category": "화염포켓몬"
+    },
+    "6": {
+        "id": 6,
+        "num": "006",
+        "name": "리자몽",
+        "img": "http://www.serebii.net/pokemongo/pokemon/006.png",
+        "type": [
+            "불꽃",
+            "비행"
+        ],
+        "height": "1.70 m",
+        "weight": "90.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "전기",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "004",
+                "name": "파이리"
+            },
+            {
+                "num": "005",
+                "name": "리자드"
+            }
+        ],
+        "description": "힘든 싸움을 경험한 리자몽일수록 불꽃 온도가 높아진다고 전해진다.",
+        "category": "화염포켓몬"
+    },
+    "7": {
+        "id": 7,
+        "num": "007",
+        "name": "꼬부기",
+        "img": "http://www.serebii.net/pokemongo/pokemon/007.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.51 m",
+        "weight": "9.0 kg",
+        "candy": "25 꼬부기 캔디",
+        "egg": "2 km",
+        "multipliers": 2.1,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "008",
+                "name": "어니부기"
+            },
+            {
+                "num": "009",
+                "name": "거북왕"
+            }
+        ],
+        "description": "등껍질에 숨어 몸을 보호한다. 상대의 빈틈을 놓치지 않고 물을 뿜어내어 반격한다.",
+        "category": "꼬마거북포켓몬"
+    },
+    "8": {
+        "id": 8,
+        "num": "008",
+        "name": "어니부기",
+        "img": "http://www.serebii.net/pokemongo/pokemon/008.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.99 m",
+        "weight": "22.5 kg",
+        "candy": "100 꼬부기 캔디",
+        "egg": null,
+        "multipliers": 1.4,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "007",
+                "name": "꼬부기"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "009",
+                "name": "거북왕"
+            }
+        ],
+        "description": "만 년의 수명을 가지고 있다고 전해진다. 치렁치렁한 꼬리는 장수의 상징으로서 인기가 있다.",
+        "category": "거북포켓몬"
+    },
+    "9": {
+        "id": 9,
+        "num": "009",
+        "name": "거북왕",
+        "img": "http://www.serebii.net/pokemongo/pokemon/009.png",
+        "type": [
+            "물"
+        ],
+        "height": "1.60 m",
+        "weight": "85.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "007",
+                "name": "꼬부기"
+            },
+            {
+                "num": "008",
+                "name": "어니부기"
+            }
+        ],
+        "description": "등껍질의 로켓포로부터 뿜어내는 물줄기는 두꺼운 철판도 한 번에 꿰뚫는 파괴력이 있다.",
+        "category": "껍질포켓몬"
+    },
+    "10": {
+        "id": 10,
+        "num": "010",
+        "name": "캐터피",
+        "img": "http://www.serebii.net/pokemongo/pokemon/010.png",
+        "type": [
+            "벌레"
+        ],
+        "height": "0.30 m",
+        "weight": "2.9 kg",
+        "candy": "12 캐터피 캔디",
+        "egg": "2 km",
+        "multipliers": 1.05,
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "011",
+                "name": "단데기"
+            },
+            {
+                "num": "012",
+                "name": "버터플"
+            }
+        ],
+        "description": "빨간 더듬이로부터 냄새를 내어 상대를 쫓아 버린다. 탈피를 반복하여 자라난다.",
+        "category": "애벌레포켓몬"
+    },
+    "11": {
+        "id": 11,
+        "num": "011",
+        "name": "단데기",
+        "img": "http://www.serebii.net/pokemongo/pokemon/011.png",
+        "type": [
+            "벌레"
+        ],
+        "height": "0.71 m",
+        "weight": "9.9 kg",
+        "candy": "50 캐터피 캔디",
+        "egg": null,
+        "multipliers": [
+            3.55,
+            3.79
+        ],
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "010",
+                "name": "캐터피"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "012",
+                "name": "버터플"
+            }
+        ],
+        "description": "강철같이 단단한 껍질로 부드러운 몸을 보호하고 있다. 진화할 때까지 가만히 참고 있다.",
+        "category": "번데기포켓몬"
+    },
+    "12": {
+        "id": 12,
+        "num": "012",
+        "name": "버터플",
+        "img": "http://www.serebii.net/pokemongo/pokemon/012.png",
+        "type": [
+            "벌레",
+            "비행"
+        ],
+        "height": "1.09 m",
+        "weight": "32.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "전기",
+            "얼음",
+            "비행",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "010",
+                "name": "캐터피"
+            },
+            {
+                "num": "011",
+                "name": "단데기"
+            }
+        ],
+        "description": "꽃의 꿀을 매우 좋아한다. 약간의 꽃가루만으로 꽃밭이 있는 장소를 찾아낼 수 있다.",
+        "category": "나비포켓몬"
+    },
+    "13": {
+        "id": 13,
+        "num": "013",
+        "name": "뿔충이",
+        "img": "http://www.serebii.net/pokemongo/pokemon/013.png",
+        "type": [
+            "벌레",
+            "독"
+        ],
+        "height": "0.30 m",
+        "weight": "3.2 kg",
+        "candy": "12 뿔충이 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            1.01,
+            1.09
+        ],
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "에스퍼",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "014",
+                "name": "딱충이"
+            },
+            {
+                "num": "015",
+                "name": "독침붕"
+            }
+        ],
+        "description": "매일 자신과 똑같은 무게의 잎사귀를 먹는다. 머리의 침으로 달려드는 상대를 물리친다.",
+        "category": "송충이포켓몬"
+    },
+    "14": {
+        "id": 14,
+        "num": "014",
+        "name": "딱충이",
+        "img": "http://www.serebii.net/pokemongo/pokemon/014.png",
+        "type": [
+            "벌레",
+            "독"
+        ],
+        "height": "0.61 m",
+        "weight": "10.0 kg",
+        "candy": "50 뿔충이 캔디",
+        "egg": null,
+        "multipliers": [
+            3.01,
+            3.41
+        ],
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "에스퍼",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "013",
+                "name": "뿔충이"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "015",
+                "name": "독침붕"
+            }
+        ],
+        "description": "천적에게 발견되지 않도록 잎사귀 뒷면이나 가지의 틈새에 숨어서 진화할 때를 기다린다.",
+        "category": "번데기포켓몬"
+    },
+    "15": {
+        "id": 15,
+        "num": "015",
+        "name": "독침붕",
+        "img": "http://www.serebii.net/pokemongo/pokemon/015.png",
+        "type": [
+            "벌레",
+            "독"
+        ],
+        "height": "0.99 m",
+        "weight": "29.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "에스퍼",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "013",
+                "name": "뿔충이"
+            },
+            {
+                "num": "014",
+                "name": "딱충이"
+            }
+        ],
+        "description": "고속으로 날아다니며 독침으로 공격한 뒤 바로 날아가 버리는 전법이 특기다.",
+        "category": "독벌포켓몬"
+    },
+    "16": {
+        "id": 16,
+        "num": "016",
+        "name": "구구",
+        "img": "http://www.serebii.net/pokemongo/pokemon/016.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "0.30 m",
+        "weight": "1.8 kg",
+        "candy": "12 구구 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            1.71,
+            1.92
+        ],
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "017",
+                "name": "피죤"
+            },
+            {
+                "num": "018",
+                "name": "피죤투"
+            }
+        ],
+        "description": "싸움을 좋아하지 않는 얌전한 성격이지만 어설프게 건드리면 강력한 반격을 당하게 된다.",
+        "category": "아기새포켓몬"
+    },
+    "17": {
+        "id": 17,
+        "num": "017",
+        "name": "피죤",
+        "img": "http://www.serebii.net/pokemongo/pokemon/017.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "1.09 m",
+        "weight": "30.0 kg",
+        "candy": "50 구구 캔디",
+        "egg": null,
+        "multipliers": 1.79,
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "016",
+                "name": "구구"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "018",
+                "name": "피죤투"
+            }
+        ],
+        "description": "넓은 영역을 날아다니며 먹이를 찾는다. 발달한 발톱으로 먹이를 꼼짝 못 하게 한다.",
+        "category": "새포켓몬"
+    },
+    "18": {
+        "id": 18,
+        "num": "018",
+        "name": "피죤투",
+        "img": "http://www.serebii.net/pokemongo/pokemon/018.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "1.50 m",
+        "weight": "39.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "016",
+                "name": "구구"
+            },
+            {
+                "num": "017",
+                "name": "피죤"
+            }
+        ],
+        "description": "피죤투의 힘찬 날갯짓은 큰 나무도 휠 정도의 강풍을 일으킨다.",
+        "category": "새포켓몬"
+    },
+    "19": {
+        "id": 19,
+        "num": "019",
+        "name": "꼬렛",
+        "img": "http://www.serebii.net/pokemongo/pokemon/019.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.30 m",
+        "weight": "3.5 kg",
+        "candy": "25 꼬렛 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            2.55,
+            2.73
+        ],
+        "weaknesses": [
+            "격투"
+        ],
+        "next_evolution": [
+            {
+                "num": "020",
+                "name": "레트라"
+            }
+        ],
+        "description": "어떤 장소에도 정착하여 살아갈 수 있는 생명력이 있다. 경계심이 매우 강하다.",
+        "category": "쥐포켓몬"
+    },
+    "20": {
+        "id": 20,
+        "num": "020",
+        "name": "레트라",
+        "img": "http://www.serebii.net/pokemongo/pokemon/020.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.71 m",
+        "weight": "18.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "prev_evolution": [
+            {
+                "num": "019",
+                "name": "꼬렛"
+            }
+        ],
+        "description": "계속 자라는 앞니를 갈아 내려고 딱딱한 것을 갉는 습성이 있다. 벽돌로 된 벽도 갉아서 부순다.",
+        "category": "쥐포켓몬"
+    },
+    "21": {
+        "id": 21,
+        "num": "021",
+        "name": "깨비참",
+        "img": "http://www.serebii.net/pokemongo/pokemon/021.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "0.30 m",
+        "weight": "2.0 kg",
+        "candy": "50 깨비참 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            2.66,
+            2.68
+        ],
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "022",
+                "name": "깨비드릴조"
+            }
+        ],
+        "description": "작은 날개를 쉴 새 없이 파닥여 날아오른다. 풀밭에 있는 먹이를 부리로 찾아낸다.",
+        "category": "아기새포켓몬"
+    },
+    "22": {
+        "id": 22,
+        "num": "022",
+        "name": "깨비드릴조",
+        "img": "http://www.serebii.net/pokemongo/pokemon/022.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "1.19 m",
+        "weight": "38.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "021",
+                "name": "깨비참"
+            }
+        ],
+        "description": "큰 날개로 온종일 날아다닐 수 있는 체력의 소유자다. 날카로운 부리로 싸운다.",
+        "category": "부리포켓몬"
+    },
+    "23": {
+        "id": 23,
+        "num": "023",
+        "name": "아보",
+        "img": "http://www.serebii.net/pokemongo/pokemon/023.png",
+        "type": [
+            "독"
+        ],
+        "height": "2.01 m",
+        "weight": "6.9 kg",
+        "candy": "50 아보 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.21,
+            2.27
+        ],
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "024",
+                "name": "아보크"
+            }
+        ],
+        "description": "소리를 전혀 내지 않고 풀밭 속을 나아간다. 방심하고 있는 먹이를 배후에서 덮친다.",
+        "category": "뱀포켓몬"
+    },
+    "24": {
+        "id": 24,
+        "num": "024",
+        "name": "아보크",
+        "img": "http://www.serebii.net/pokemongo/pokemon/024.png",
+        "type": [
+            "독"
+        ],
+        "height": "3.51 m",
+        "weight": "65.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "023",
+                "name": "아보"
+            }
+        ],
+        "description": "배의 무늬로 상대를 위협한다. 무늬에 겁을 먹고 움직일 수 없게 된 사이에 몸으로 조인다.",
+        "category": "코브라포켓몬"
+    },
+    "25": {
+        "id": 25,
+        "num": "025",
+        "name": "피카츄",
+        "img": "http://www.serebii.net/pokemongo/pokemon/025.png",
+        "type": [
+            "전기"
+        ],
+        "height": "0.41 m",
+        "weight": "6.0 kg",
+        "candy": "50 피카츄 캔디",
+        "egg": "2 km",
+        "multipliers": 2.34,
+        "weaknesses": [
+            "땅"
+        ],
+        "next_evolution": [
+            {
+                "num": "026",
+                "name": "라이츄"
+            }
+        ],
+        "description": "양 볼에는 전기를 저장하는 주머니가 있다. 화가 나면 저장한 전기를 단숨에 방출한다.",
+        "category": "쥐포켓몬"
+    },
+    "26": {
+        "id": 26,
+        "num": "026",
+        "name": "라이츄",
+        "img": "http://www.serebii.net/pokemongo/pokemon/026.png",
+        "type": [
+            "전기"
+        ],
+        "height": "0.79 m",
+        "weight": "30.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "땅"
+        ],
+        "prev_evolution": [
+            {
+                "num": "025",
+                "name": "피카츄"
+            }
+        ],
+        "description": "꼬리가 어스 역할을 하여 전기를 지면으로 흘려보내므로 자신은 감전되거나 하지 않는다.",
+        "category": "쥐포켓몬"
+    },
+    "27": {
+        "id": 27,
+        "num": "027",
+        "name": "모래두지",
+        "img": "http://www.serebii.net/pokemongo/pokemon/027.png",
+        "type": [
+            "땅"
+        ],
+        "height": "0.61 m",
+        "weight": "12.0 kg",
+        "candy": "50 모래두지 캔디",
+        "egg": "5 km",
+        "multipliers": 2.45,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음"
+        ],
+        "next_evolution": [
+            {
+                "num": "028",
+                "name": "고지"
+            }
+        ],
+        "description": "비가 거의 내리지 않는 건조한 토지에 서식한다. 몸을 둥글게 말아서 자신을 보호한다.",
+        "category": "쥐포켓몬"
+    },
+    "28": {
+        "id": 28,
+        "num": "028",
+        "name": "고지",
+        "img": "http://www.serebii.net/pokemongo/pokemon/028.png",
+        "type": [
+            "땅"
+        ],
+        "height": "0.99 m",
+        "weight": "29.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음"
+        ],
+        "prev_evolution": [
+            {
+                "num": "027",
+                "name": "모래두지"
+            }
+        ],
+        "description": "몸을 둥글게 말아서 등으로 몸통박치기한다. 날카로운 가시들이 큰 데미지를 준다.",
+        "category": "쥐포켓몬"
+    },
+    "29": {
+        "id": 29,
+        "num": "029",
+        "name": "니드런♀",
+        "img": "http://www.serebii.net/pokemongo/pokemon/029.png",
+        "type": [
+            "독"
+        ],
+        "height": "0.41 m",
+        "weight": "7.0 kg",
+        "candy": "25 니드런♀ 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.63,
+            2.48
+        ],
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "030",
+                "name": "니드리나"
+            },
+            {
+                "num": "031",
+                "name": "니드퀸"
+            }
+        ],
+        "description": "싸움을 좋아하지 않는 성격이다. 독침에서 분비된 독은 한 방울만 맞아도 생명을 빼앗긴다.",
+        "category": "독침포켓몬"
+    },
+    "30": {
+        "id": 30,
+        "num": "030",
+        "name": "니드리나",
+        "img": "http://www.serebii.net/pokemongo/pokemon/030.png",
+        "type": [
+            "독"
+        ],
+        "height": "0.79 m",
+        "weight": "20.0 kg",
+        "candy": "100 Nidoran ♀ 캔디",
+        "egg": null,
+        "multipliers": [
+            1.83,
+            2.48
+        ],
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "029",
+                "name": "니드런♀"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "031",
+                "name": "니드퀸"
+            }
+        ],
+        "description": "위험을 느끼면 전신의 가시를 곤두세운다. 니드리노에 비해서 가시의 성장이 느리다.",
+        "category": "독침포켓몬"
+    },
+    "31": {
+        "id": 31,
+        "num": "031",
+        "name": "니드퀸",
+        "img": "http://www.serebii.net/pokemongo/pokemon/031.png",
+        "type": [
+            "독",
+            "땅"
+        ],
+        "height": "1.30 m",
+        "weight": "60.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "얼음",
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "029",
+                "name": "니드런♀"
+            },
+            {
+                "num": "030",
+                "name": "니드리나"
+            }
+        ],
+        "description": "갑옷처럼 단단한 비늘이 전신을 둘러싼다. 둥지의 새끼를 목숨 걸고 지킨다.",
+        "category": "드릴포켓몬"
+    },
+    "32": {
+        "id": 32,
+        "num": "032",
+        "name": "니드런♂",
+        "img": "http://www.serebii.net/pokemongo/pokemon/032.png",
+        "type": [
+            "독"
+        ],
+        "height": "0.51 m",
+        "weight": "9.0 kg",
+        "candy": "25 니드런♂ 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.64,
+            1.7
+        ],
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "033",
+                "name": "니드리노"
+            },
+            {
+                "num": "034",
+                "name": "니드킹"
+            }
+        ],
+        "description": "풀밭 위로 귀만 내놓고 주위의 낌새를 살핀다. 맹독의 뿔로 몸을 보호한다.",
+        "category": "독침포켓몬"
+    },
+    "33": {
+        "id": 33,
+        "num": "033",
+        "name": "니드리노",
+        "img": "http://www.serebii.net/pokemongo/pokemon/033.png",
+        "type": [
+            "독"
+        ],
+        "height": "0.89 m",
+        "weight": "19.5 kg",
+        "candy": "100 Nidoran ♂ 캔디",
+        "egg": null,
+        "multipliers": 1.83,
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "032",
+                "name": "니드런♂"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "034",
+                "name": "니드킹"
+            }
+        ],
+        "description": "기질이 거친 포켓몬이다. 상대를 깊이 찌른 충격으로 뿔에서 맹독이 배어 나온다.",
+        "category": "독침포켓몬"
+    },
+    "34": {
+        "id": 34,
+        "num": "034",
+        "name": "니드킹",
+        "img": "http://www.serebii.net/pokemongo/pokemon/034.png",
+        "type": [
+            "독",
+            "땅"
+        ],
+        "height": "1.40 m",
+        "weight": "62.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "얼음",
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "032",
+                "name": "니드런♂"
+            },
+            {
+                "num": "033",
+                "name": "니드리노"
+            }
+        ],
+        "description": "꼬리를 한 번 휘두르면 전신주를 성냥개비마냥 두 동강 내 버린다.",
+        "category": "드릴포켓몬"
+    },
+    "35": {
+        "id": 35,
+        "num": "035",
+        "name": "삐삐",
+        "img": "http://www.serebii.net/pokemongo/pokemon/035.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.61 m",
+        "weight": "7.5 kg",
+        "candy": "50 삐삐 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            2.03,
+            2.14
+        ],
+        "weaknesses": [
+            "격투"
+        ],
+        "next_evolution": [
+            {
+                "num": "036",
+                "name": "픽시"
+            }
+        ],
+        "description": "귀여운 표정과 동작으로 인기가 많다. 조용한 산속에서 동료들과 사는 것으로 여겨지고 있다.",
+        "category": "요정포켓몬"
+    },
+    "36": {
+        "id": 36,
+        "num": "036",
+        "name": "픽시",
+        "img": "http://www.serebii.net/pokemongo/pokemon/036.png",
+        "type": [
+            "노말"
+        ],
+        "height": "1.30 m",
+        "weight": "40.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "prev_evolution": [
+            {
+                "num": "035",
+                "name": "삐삐"
+            }
+        ],
+        "description": "거의 모습을 드러내지 않는다. 보름달에 이끌려 인적 없는 호수에서 논다고 전해진다.",
+        "category": "요정포켓몬"
+    },
+    "37": {
+        "id": 37,
+        "num": "037",
+        "name": "식스테일",
+        "img": "http://www.serebii.net/pokemongo/pokemon/037.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "0.61 m",
+        "weight": "9.9 kg",
+        "candy": "50 식스테일 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.74,
+            2.81
+        ],
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "038",
+                "name": "나인테일"
+            }
+        ],
+        "description": "불꽃의 구슬을 조종한다. 성장하면 6개의 꼬리는 끝이 갈라져서 한층 더 늘어난다.",
+        "category": "여우포켓몬"
+    },
+    "38": {
+        "id": 38,
+        "num": "038",
+        "name": "나인테일",
+        "img": "http://www.serebii.net/pokemongo/pokemon/038.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "1.09 m",
+        "weight": "19.9 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "037",
+                "name": "식스테일"
+            }
+        ],
+        "description": "9개의 꼬리에는 신비한 힘이 깃들어 있다고 전해진다. 천 년을 살 수 있는 듯하다.",
+        "category": "여우포켓몬"
+    },
+    "39": {
+        "id": 39,
+        "num": "039",
+        "name": "푸린",
+        "img": "http://www.serebii.net/pokemongo/pokemon/039.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.51 m",
+        "weight": "5.5 kg",
+        "candy": "50 푸린 캔디",
+        "egg": "2 km",
+        "multipliers": 1.85,
+        "weaknesses": [
+            "격투"
+        ],
+        "next_evolution": [
+            {
+                "num": "040",
+                "name": "푸크린"
+            }
+        ],
+        "description": "초롱초롱한 눈동자가 흔들릴 때 졸음이 쏟아지게 하는 이상하고 기분 좋은 노래를 부른다.",
+        "category": "풍선포켓몬"
+    },
+    "40": {
+        "id": 40,
+        "num": "040",
+        "name": "푸크린",
+        "img": "http://www.serebii.net/pokemongo/pokemon/040.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.99 m",
+        "weight": "12.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "prev_evolution": [
+            {
+                "num": "039",
+                "name": "푸린"
+            }
+        ],
+        "description": "얇고 고운 털을 지니고 있다. 화나게 하면 몸을 점점 부풀리며 덮쳐 오기 때문에 주의가 필요하다.",
+        "category": "풍선포켓몬"
+    },
+    "41": {
+        "id": 41,
+        "num": "041",
+        "name": "주뱃",
+        "img": "http://www.serebii.net/pokemongo/pokemon/041.png",
+        "type": [
+            "독",
+            "비행"
+        ],
+        "height": "0.79 m",
+        "weight": "7.5 kg",
+        "candy": "50 주뱃 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            2.6,
+            3.67
+        ],
+        "weaknesses": [
+            "전기",
+            "얼음",
+            "에스퍼",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "042",
+                "name": "골뱃"
+            }
+        ],
+        "description": "입에서 내는 초음파로 두 눈이 없어도 주위의 장애물을 탐색할 수 있다.",
+        "category": "박쥐포켓몬"
+    },
+    "42": {
+        "id": 42,
+        "num": "042",
+        "name": "골뱃",
+        "img": "http://www.serebii.net/pokemongo/pokemon/042.png",
+        "type": [
+            "독",
+            "비행"
+        ],
+        "height": "1.60 m",
+        "weight": "55.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "얼음",
+            "에스퍼",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "041",
+                "name": "주뱃"
+            }
+        ],
+        "description": "사람이나 포켓몬의 혈액을 매우 좋아한다. 목덜미의 혈관을 노리며 밤하늘을 날아다닌다.",
+        "category": "박쥐포켓몬"
+    },
+    "43": {
+        "id": 43,
+        "num": "043",
+        "name": "뚜벅쵸",
+        "img": "http://www.serebii.net/pokemongo/pokemon/043.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "0.51 m",
+        "weight": "5.4 kg",
+        "candy": "25 뚜벅쵸 캔디",
+        "egg": "5 km",
+        "multipliers": 1.5,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "044",
+                "name": "냄새꼬"
+            },
+            {
+                "num": "045",
+                "name": "라플레시아"
+            }
+        ],
+        "description": "낮에는 뿌리인 발을 땅에 박고 움직이지 않을 때가 많다. 밤에 돌아다니며 씨를 뿌린다.",
+        "category": "잡초포켓몬"
+    },
+    "44": {
+        "id": 44,
+        "num": "044",
+        "name": "냄새꼬",
+        "img": "http://www.serebii.net/pokemongo/pokemon/044.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "0.79 m",
+        "weight": "8.6 kg",
+        "candy": "100 뚜벅쵸 캔디",
+        "egg": null,
+        "multipliers": 1.49,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "043",
+                "name": "뚜벅쵸"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "045",
+                "name": "라플레시아"
+            }
+        ],
+        "description": "입에서 흘러내리는 꿀은 2km 떨어져 있어도 머리가 아플 정도로 심한 악취가 난다.",
+        "category": "잡초포켓몬"
+    },
+    "45": {
+        "id": 45,
+        "num": "045",
+        "name": "라플레시아",
+        "img": "http://www.serebii.net/pokemongo/pokemon/045.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "1.19 m",
+        "weight": "18.6 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "043",
+                "name": "뚜벅쵸"
+            },
+            {
+                "num": "044",
+                "name": "냄새꼬"
+            }
+        ],
+        "description": "세계에서 꽃잎이 제일 크다. 심한 알레르기를 일으킬 독 꽃가루를 흩뿌리며 걷는다.",
+        "category": "꽃포켓몬"
+    },
+    "46": {
+        "id": 46,
+        "num": "046",
+        "name": "파라스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/046.png",
+        "type": [
+            "벌레",
+            "풀"
+        ],
+        "height": "0.30 m",
+        "weight": "5.4 kg",
+        "candy": "50 파라스 캔디",
+        "egg": "5 km",
+        "multipliers": 2.02,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "독",
+            "비행",
+            "벌레",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "047",
+                "name": "파라섹트"
+            }
+        ],
+        "description": "동충하초라고 불리는 버섯을 등에 기르고 있다. 파라스와 함께 크게 자란다.",
+        "category": "버섯포켓몬"
+    },
+    "47": {
+        "id": 47,
+        "num": "047",
+        "name": "파라섹트",
+        "img": "http://www.serebii.net/pokemongo/pokemon/047.png",
+        "type": [
+            "벌레",
+            "풀"
+        ],
+        "height": "0.99 m",
+        "weight": "29.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "독",
+            "비행",
+            "벌레",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "046",
+                "name": "파라스"
+            }
+        ],
+        "description": "몸보다 큰 버섯이 파라섹트를 조종하고 있다. 독 포자를 여기저기 뿌린다.",
+        "category": "버섯포켓몬"
+    },
+    "48": {
+        "id": 48,
+        "num": "048",
+        "name": "콘팡",
+        "img": "http://www.serebii.net/pokemongo/pokemon/048.png",
+        "type": [
+            "벌레",
+            "독"
+        ],
+        "height": "0.99 m",
+        "weight": "30.0 kg",
+        "candy": "50 콘팡 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.86,
+            1.9
+        ],
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "에스퍼",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "049",
+                "name": "도나리"
+            }
+        ],
+        "description": "전신에서 독이 스며 나온다. 어두워지면 밝은 곳에 모인 작은 벌레포켓몬을 잡아먹는다.",
+        "category": "곤충포켓몬"
+    },
+    "49": {
+        "id": 49,
+        "num": "049",
+        "name": "도나리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/049.png",
+        "type": [
+            "벌레",
+            "독"
+        ],
+        "height": "1.50 m",
+        "weight": "12.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "에스퍼",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "048",
+                "name": "콘팡"
+            }
+        ],
+        "description": "날개에 가루가 묻어 있어 팔락팔락 날갯짓을 할 때마다 맹독 가루를 흩뿌린다.",
+        "category": "독나방포켓몬"
+    },
+    "50": {
+        "id": 50,
+        "num": "050",
+        "name": "디그다",
+        "img": "http://www.serebii.net/pokemongo/pokemon/050.png",
+        "type": [
+            "땅"
+        ],
+        "height": "0.20 m",
+        "weight": "0.8 kg",
+        "candy": "50 디그다 캔디",
+        "egg": "5 km",
+        "multipliers": 2.69,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음"
+        ],
+        "next_evolution": [
+            {
+                "num": "051",
+                "name": "닥트리오"
+            }
+        ],
+        "description": "지하 1m 정도를 파고들어 가서 나무뿌리 등을 씹어 먹고 산다. 가끔 지상으로 얼굴을 내민다.",
+        "category": "두더지포켓몬"
+    },
+    "51": {
+        "id": 51,
+        "num": "051",
+        "name": "닥트리오",
+        "img": "http://www.serebii.net/pokemongo/pokemon/051.png",
+        "type": [
+            "땅"
+        ],
+        "height": "0.71 m",
+        "weight": "33.3 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음"
+        ],
+        "prev_evolution": [
+            {
+                "num": "050",
+                "name": "디그다"
+            }
+        ],
+        "description": "3개의 머리가 교차하며 움직이는 것은 주변의 흙을 부드럽게 해 파기 쉽게 하기 위해서다.",
+        "category": "두더지포켓몬"
+    },
+    "52": {
+        "id": 52,
+        "num": "052",
+        "name": "나옹",
+        "img": "http://www.serebii.net/pokemongo/pokemon/052.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.41 m",
+        "weight": "4.2 kg",
+        "candy": "50 나옹 캔디",
+        "egg": "5 km",
+        "multipliers": 1.98,
+        "weaknesses": [
+            "격투"
+        ],
+        "next_evolution": [
+            {
+                "num": "053",
+                "name": "페르시온"
+            }
+        ],
+        "description": "낮에는 거의 잠만 잔다. 밤이 되면 눈을 반짝이며 영역을 돌아다닌다.",
+        "category": "요괴고양이포켓몬"
+    },
+    "53": {
+        "id": 53,
+        "num": "053",
+        "name": "페르시온",
+        "img": "http://www.serebii.net/pokemongo/pokemon/053.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.99 m",
+        "weight": "32.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "prev_evolution": [
+            {
+                "num": "052",
+                "name": "나옹"
+            }
+        ],
+        "description": "털의 결이 아름다워 애완용으로 기르려는 사람이 많지만, 곧잘 할퀴려 들기 때문에 쉽지 않다.",
+        "category": "샴고양이포켓몬"
+    },
+    "54": {
+        "id": 54,
+        "num": "054",
+        "name": "고라파덕",
+        "img": "http://www.serebii.net/pokemongo/pokemon/054.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.79 m",
+        "weight": "19.6 kg",
+        "candy": "50 고라파덕 캔디",
+        "egg": "5 km",
+        "multipliers": 2.27,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "055",
+                "name": "골덕"
+            }
+        ],
+        "description": "항상 두통에 시달리고 있다. 이 두통이 심해지면 이상한 힘을 쓰기 시작한다.",
+        "category": "오리포켓몬"
+    },
+    "55": {
+        "id": 55,
+        "num": "055",
+        "name": "골덕",
+        "img": "http://www.serebii.net/pokemongo/pokemon/055.png",
+        "type": [
+            "물"
+        ],
+        "height": "1.70 m",
+        "weight": "76.6 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "054",
+                "name": "고라파덕"
+            }
+        ],
+        "description": "물갈퀴가 달린 긴 손발을 써서 전력으로 헤엄치면 왠지 이마에서 빛이 반짝인다.",
+        "category": "오리포켓몬"
+    },
+    "56": {
+        "id": 56,
+        "num": "056",
+        "name": "망키",
+        "img": "http://www.serebii.net/pokemongo/pokemon/056.png",
+        "type": [
+            "격투"
+        ],
+        "height": "0.51 m",
+        "weight": "28.0 kg",
+        "candy": "50 망키 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.17,
+            2.28
+        ],
+        "weaknesses": [
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "next_evolution": [
+            {
+                "num": "057",
+                "name": "성원숭"
+            }
+        ],
+        "description": "나무 위에 무리 지어 산다. 무리에서 떨어진 망키는 외로운 나머지 금방 화를 낸다.",
+        "category": "돈숭이포켓몬"
+    },
+    "57": {
+        "id": 57,
+        "num": "057",
+        "name": "성원숭",
+        "img": "http://www.serebii.net/pokemongo/pokemon/057.png",
+        "type": [
+            "격투"
+        ],
+        "height": "0.99 m",
+        "weight": "32.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "prev_evolution": [
+            {
+                "num": "056",
+                "name": "망키"
+            }
+        ],
+        "description": "누군가의 시선을 느끼기만 해도 대단히 화를 낸다. 그리고 눈이 마주친 상대를 쫓아다닌다.",
+        "category": "돈숭이포켓몬"
+    },
+    "58": {
+        "id": 58,
+        "num": "058",
+        "name": "가디",
+        "img": "http://www.serebii.net/pokemongo/pokemon/058.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "0.71 m",
+        "weight": "19.0 kg",
+        "candy": "50 가디 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.31,
+            2.36
+        ],
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "059",
+                "name": "윈디"
+            }
+        ],
+        "description": "자신보다 강하고 큰 상대라도 겁 없이 맞서는 용감하고 믿음직스런 성격이다.",
+        "category": "강아지포켓몬"
+    },
+    "59": {
+        "id": 59,
+        "num": "059",
+        "name": "윈디",
+        "img": "http://www.serebii.net/pokemongo/pokemon/059.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "1.91 m",
+        "weight": "155.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "058",
+                "name": "가디"
+            }
+        ],
+        "description": "초원을 내달리는 모습은 사람들의 마음을 사로잡았다고 옛날 그림에 묘사되어 있다.",
+        "category": "전설포켓몬"
+    },
+    "60": {
+        "id": 60,
+        "num": "060",
+        "name": "발챙이",
+        "img": "http://www.serebii.net/pokemongo/pokemon/060.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.61 m",
+        "weight": "12.4 kg",
+        "candy": "25 발챙이 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.72,
+            1.73
+        ],
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "061",
+                "name": "슈륙챙이"
+            },
+            {
+                "num": "062",
+                "name": "강챙이"
+            }
+        ],
+        "description": "내장이 들여다보일 정도로 피부가 얇다. 갓 자란 다리로 서툴게 걷는다.",
+        "category": "올챙이포켓몬"
+    },
+    "61": {
+        "id": 61,
+        "num": "061",
+        "name": "슈륙챙이",
+        "img": "http://www.serebii.net/pokemongo/pokemon/061.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.99 m",
+        "weight": "20.0 kg",
+        "candy": "100 발챙이 캔디",
+        "egg": null,
+        "multipliers": 1.95,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "060",
+                "name": "발챙이"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "062",
+                "name": "강챙이"
+            }
+        ],
+        "description": "배의 소용돌이는 미묘하게 꾸불거리므로 바라보고 있으면 점점 잠이 오게 된다.",
+        "category": "올챙이포켓몬"
+    },
+    "62": {
+        "id": 62,
+        "num": "062",
+        "name": "강챙이",
+        "img": "http://www.serebii.net/pokemongo/pokemon/062.png",
+        "type": [
+            "물",
+            "격투"
+        ],
+        "height": "1.30 m",
+        "weight": "54.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "prev_evolution": [
+            {
+                "num": "060",
+                "name": "발챙이"
+            },
+            {
+                "num": "061",
+                "name": "슈륙챙이"
+            }
+        ],
+        "description": "강인한 근육을 가지고 있다. 태평양을 쉬지 않고 계속 헤엄칠 수 있다.",
+        "category": "올챙이포켓몬"
+    },
+    "63": {
+        "id": 63,
+        "num": "063",
+        "name": "캐이시",
+        "img": "http://www.serebii.net/pokemongo/pokemon/063.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "0.89 m",
+        "weight": "19.5 kg",
+        "candy": "25 캐이시 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.36,
+            1.95
+        ],
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "next_evolution": [
+            {
+                "num": "064",
+                "name": "윤겔라"
+            },
+            {
+                "num": "065",
+                "name": "후딘"
+            }
+        ],
+        "description": "매일 18시간을 잠잔다. 깨어 있을 때도 앉은 채 순간이동으로 이동한다.",
+        "category": "초능력포켓몬"
+    },
+    "64": {
+        "id": 64,
+        "num": "064",
+        "name": "윤겔라",
+        "img": "http://www.serebii.net/pokemongo/pokemon/064.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "1.30 m",
+        "weight": "56.5 kg",
+        "candy": "100 캐이시 캔디",
+        "egg": null,
+        "multipliers": 1.4,
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "063",
+                "name": "캐이시"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "065",
+                "name": "후딘"
+            }
+        ],
+        "description": "윤겔라가 옆에 있으면 TV에 이상한 그림자가 비친다. 그것을 보면 불행해진다고 전해진다.",
+        "category": "초능력포켓몬"
+    },
+    "65": {
+        "id": 65,
+        "num": "065",
+        "name": "후딘",
+        "img": "http://www.serebii.net/pokemongo/pokemon/065.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "1.50 m",
+        "weight": "48.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "063",
+                "name": "캐이시"
+            },
+            {
+                "num": "064",
+                "name": "윤겔라"
+            }
+        ],
+        "description": "태어나서부터 체험한 모든 것을 기억하고 있을 정도의 기억력을 가지고 있다. IQ가 5000이 넘는다.",
+        "category": "초능력포켓몬"
+    },
+    "66": {
+        "id": 66,
+        "num": "066",
+        "name": "알통몬",
+        "img": "http://www.serebii.net/pokemongo/pokemon/066.png",
+        "type": [
+            "격투"
+        ],
+        "height": "0.79 m",
+        "weight": "19.5 kg",
+        "candy": "25 알통몬 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.64,
+            1.65
+        ],
+        "weaknesses": [
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "next_evolution": [
+            {
+                "num": "067",
+                "name": "근육몬"
+            },
+            {
+                "num": "068",
+                "name": "괴력몬"
+            }
+        ],
+        "description": "데구리를 수없이 들었다 놨다 하며 전신의 근육을 단련한다. 모든 격투기를 사용한다.",
+        "category": "괴력포켓몬"
+    },
+    "67": {
+        "id": 67,
+        "num": "067",
+        "name": "근육몬",
+        "img": "http://www.serebii.net/pokemongo/pokemon/067.png",
+        "type": [
+            "격투"
+        ],
+        "height": "1.50 m",
+        "weight": "70.5 kg",
+        "candy": "100 알통몬 캔디",
+        "egg": null,
+        "multipliers": 1.7,
+        "weaknesses": [
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "prev_evolution": [
+            {
+                "num": "066",
+                "name": "알통몬"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "068",
+                "name": "괴력몬"
+            }
+        ],
+        "description": "근육몬의 끝없는 파워는 매우 위험하므로 힘을 제어하는 벨트를 차고 있다.",
+        "category": "괴력포켓몬"
+    },
+    "68": {
+        "id": 68,
+        "num": "068",
+        "name": "괴력몬",
+        "img": "http://www.serebii.net/pokemongo/pokemon/068.png",
+        "type": [
+            "격투"
+        ],
+        "height": "1.60 m",
+        "weight": "130.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "prev_evolution": [
+            {
+                "num": "066",
+                "name": "알통몬"
+            },
+            {
+                "num": "067",
+                "name": "근육몬"
+            }
+        ],
+        "description": "4개의 팔을 눈에 보이지 않을 정도로 빠르게 움직여 2초간 1000발의 펀치를 날린다.",
+        "category": "괴력포켓몬"
+    },
+    "69": {
+        "id": 69,
+        "num": "069",
+        "name": "모다피",
+        "img": "http://www.serebii.net/pokemongo/pokemon/069.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "0.71 m",
+        "weight": "4.0 kg",
+        "candy": "25 모다피 캔디",
+        "egg": "5 km",
+        "multipliers": 1.57,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "070",
+                "name": "우츠동"
+            },
+            {
+                "num": "071",
+                "name": "우츠보트"
+            }
+        ],
+        "description": "고온다습한 땅을 좋아한다. 덩굴을 뻗어서 먹이를 잡을 때의 움직임은 매우 재빠르다.",
+        "category": "꽃포켓몬"
+    },
+    "70": {
+        "id": 70,
+        "num": "070",
+        "name": "우츠동",
+        "img": "http://www.serebii.net/pokemongo/pokemon/070.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "0.99 m",
+        "weight": "6.4 kg",
+        "candy": "100 모다피 캔디",
+        "egg": null,
+        "multipliers": 1.59,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "069",
+                "name": "모다피"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "071",
+                "name": "우츠보트"
+            }
+        ],
+        "description": "식물과 똑 닮은 포켓몬이다. 방심해서 가까이 다가온 먹이에게 독가루를 뿌려서 잡는다.",
+        "category": "파리잡이포켓몬"
+    },
+    "71": {
+        "id": 71,
+        "num": "071",
+        "name": "우츠보트",
+        "img": "http://www.serebii.net/pokemongo/pokemon/071.png",
+        "type": [
+            "풀",
+            "독"
+        ],
+        "height": "1.70 m",
+        "weight": "15.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "비행",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "069",
+                "name": "모다피"
+            },
+            {
+                "num": "070",
+                "name": "우츠동"
+            }
+        ],
+        "description": "꿀 같은 향기의 액체를 입에 모아 두고 있지만 그것은 무엇이든 녹이는 용해액이다.",
+        "category": "파리잡이포켓몬"
+    },
+    "72": {
+        "id": 72,
+        "num": "072",
+        "name": "왕눈해",
+        "img": "http://www.serebii.net/pokemongo/pokemon/072.png",
+        "type": [
+            "물",
+            "독"
+        ],
+        "height": "0.89 m",
+        "weight": "45.5 kg",
+        "candy": "50 왕눈해 캔디",
+        "egg": "5 km",
+        "multipliers": 2.52,
+        "weaknesses": [
+            "전기",
+            "땅",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "073",
+                "name": "독파리"
+            }
+        ],
+        "description": "몸 대부분이 수분이다. 수정 같은 눈에서 이상한 빔을 발사한다.",
+        "category": "해파리포켓몬"
+    },
+    "73": {
+        "id": 73,
+        "num": "073",
+        "name": "독파리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/073.png",
+        "type": [
+            "물",
+            "독"
+        ],
+        "height": "1.60 m",
+        "weight": "55.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "072",
+                "name": "왕눈해"
+            }
+        ],
+        "description": "80개의 촉수를 가지고 있다. 먹이를 붙잡으면 독으로 인해 약해질 때까지 절대 놓치지 않는다.",
+        "category": "해파리포켓몬"
+    },
+    "74": {
+        "id": 74,
+        "num": "074",
+        "name": "꼬마돌",
+        "img": "http://www.serebii.net/pokemongo/pokemon/074.png",
+        "type": [
+            "바위",
+            "땅"
+        ],
+        "height": "0.41 m",
+        "weight": "20.0 kg",
+        "candy": "25 꼬마돌 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            1.75,
+            1.76
+        ],
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음",
+            "격투",
+            "땅",
+            "강철"
+        ],
+        "next_evolution": [
+            {
+                "num": "075",
+                "name": "데구리"
+            },
+            {
+                "num": "076",
+                "name": "딱구리"
+            }
+        ],
+        "description": "산길에 많이 서식한다. 몸의 절반을 땅에 묻고 등산하는 사람들의 모습을 바라본다.",
+        "category": "암석포켓몬"
+    },
+    "75": {
+        "id": 75,
+        "num": "075",
+        "name": "데구리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/075.png",
+        "type": [
+            "바위",
+            "땅"
+        ],
+        "height": "0.99 m",
+        "weight": "105.0 kg",
+        "candy": "100 꼬마돌 캔디",
+        "egg": null,
+        "multipliers": [
+            1.64,
+            1.72
+        ],
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음",
+            "격투",
+            "땅",
+            "강철"
+        ],
+        "prev_evolution": [
+            {
+                "num": "074",
+                "name": "꼬마돌"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "076",
+                "name": "딱구리"
+            }
+        ],
+        "description": "험한 절벽의 중턱에 몇 개의 구멍이 보인다면 그곳은 데구리의 거처이다.",
+        "category": "암석포켓몬"
+    },
+    "76": {
+        "id": 76,
+        "num": "076",
+        "name": "딱구리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/076.png",
+        "type": [
+            "바위",
+            "땅"
+        ],
+        "height": "1.40 m",
+        "weight": "300.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음",
+            "격투",
+            "땅",
+            "강철"
+        ],
+        "prev_evolution": [
+            {
+                "num": "074",
+                "name": "꼬마돌"
+            },
+            {
+                "num": "075",
+                "name": "데구리"
+            }
+        ],
+        "description": "1년에 1번 탈피한다. 암석 같은 단단한 몸은 다이너마이트로도 상처를 입힐 수 없다.",
+        "category": "메가톤포켓몬"
+    },
+    "77": {
+        "id": 77,
+        "num": "077",
+        "name": "포니타",
+        "img": "http://www.serebii.net/pokemongo/pokemon/077.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "0.99 m",
+        "weight": "30.0 kg",
+        "candy": "50 포니타 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.48,
+            1.5
+        ],
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "078",
+                "name": "날쌩마"
+            }
+        ],
+        "description": "태어나서 1시간이 지나면 불꽃의 갈기와 꼬리가 자라나 멋진 모습이 된다.",
+        "category": "불의말포켓몬"
+    },
+    "78": {
+        "id": 78,
+        "num": "078",
+        "name": "날쌩마",
+        "img": "http://www.serebii.net/pokemongo/pokemon/078.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "1.70 m",
+        "weight": "95.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "077",
+                "name": "포니타"
+            }
+        ],
+        "description": "달리는 속도는 시속 240km. 갈기의 불꽃이 세차게 타오르고 화살처럼 달려 나간다.",
+        "category": "불의말포켓몬"
+    },
+    "79": {
+        "id": 79,
+        "num": "079",
+        "name": "야돈",
+        "img": "http://www.serebii.net/pokemongo/pokemon/079.png",
+        "type": [
+            "물",
+            "에스퍼"
+        ],
+        "height": "1.19 m",
+        "weight": "36.0 kg",
+        "candy": "50 야돈 캔디",
+        "egg": "5 km",
+        "multipliers": 2.21,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "next_evolution": [
+            {
+                "num": "080",
+                "name": "야도란"
+            }
+        ],
+        "description": "움직임이 둔하고 멍청하다. 맞아도 5초는 지나야 아픔을 느낄 정도다.",
+        "category": "얼간이포켓몬"
+    },
+    "80": {
+        "id": 80,
+        "num": "080",
+        "name": "야도란",
+        "img": "http://www.serebii.net/pokemongo/pokemon/080.png",
+        "type": [
+            "물",
+            "에스퍼"
+        ],
+        "height": "1.60 m",
+        "weight": "78.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "079",
+                "name": "야돈"
+            }
+        ],
+        "description": "야돈이 바다로 먹이를 잡으러 갔다가 셀러에게 꼬리를 물려 야도란이 되었다.",
+        "category": "기생포켓몬"
+    },
+    "81": {
+        "id": 81,
+        "num": "081",
+        "name": "코일",
+        "img": "http://www.serebii.net/pokemongo/pokemon/081.png",
+        "type": [
+            "전기"
+        ],
+        "height": "0.30 m",
+        "weight": "6.0 kg",
+        "candy": "50 코일 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.16,
+            2.17
+        ],
+        "weaknesses": [
+            "불꽃",
+            "물",
+            "땅"
+        ],
+        "next_evolution": [
+            {
+                "num": "082",
+                "name": "레어코일"
+            }
+        ],
+        "description": "좌우에 있는 유닛에서 나오는 전자파를 이용해 중력을 거슬러 하늘에 떠 있다.",
+        "category": "자석포켓몬"
+    },
+    "82": {
+        "id": 82,
+        "num": "082",
+        "name": "레어코일",
+        "img": "http://www.serebii.net/pokemongo/pokemon/082.png",
+        "type": [
+            "전기"
+        ],
+        "height": "0.99 m",
+        "weight": "60.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "물",
+            "땅"
+        ],
+        "prev_evolution": [
+            {
+                "num": "081",
+                "name": "코일"
+            }
+        ],
+        "description": "3개의 코일은 강한 자력으로 연결되어 있다. 가까이 다가가면 강한 귀울림에 시달리게 된다.",
+        "category": "자석포켓몬"
+    },
+    "83": {
+        "id": 83,
+        "num": "083",
+        "name": "파오리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/083.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "0.79 m",
+        "weight": "15.0 kg",
+        "candy": "없음",
+        "egg": "5 km",
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "description": "파 줄기가 없으면 살 수 없다. 그래서 파 줄기를 노리는 상대와는 목숨을 걸고 싸운다.",
+        "category": "청둥오리포켓몬"
+    },
+    "84": {
+        "id": 84,
+        "num": "084",
+        "name": "두두",
+        "img": "http://www.serebii.net/pokemongo/pokemon/084.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "1.40 m",
+        "weight": "39.2 kg",
+        "candy": "50 두두 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.19,
+            2.24
+        ],
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "next_evolution": [
+            {
+                "num": "085",
+                "name": "두트리오"
+            }
+        ],
+        "description": "두 머리에 각각 존재하는 뇌는 텔레파시 같은 힘으로 의사를 맞춰 나가는 듯하다.",
+        "category": "쌍둥이새포켓몬"
+    },
+    "85": {
+        "id": 85,
+        "num": "085",
+        "name": "두트리오",
+        "img": "http://www.serebii.net/pokemongo/pokemon/085.png",
+        "type": [
+            "노말",
+            "비행"
+        ],
+        "height": "1.80 m",
+        "weight": "85.2 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "084",
+                "name": "두두"
+            }
+        ],
+        "description": "진화할 때 두두의 머리 중 한쪽이 분열되는 희귀종. 시속 60km 이상으로 달린다.",
+        "category": "세쌍둥이새포켓몬"
+    },
+    "86": {
+        "id": 86,
+        "num": "086",
+        "name": "쥬쥬",
+        "img": "http://www.serebii.net/pokemongo/pokemon/086.png",
+        "type": [
+            "물"
+        ],
+        "height": "1.09 m",
+        "weight": "90.0 kg",
+        "candy": "50 쥬쥬 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            1.04,
+            1.96
+        ],
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "087",
+                "name": "쥬레곤"
+            }
+        ],
+        "description": "빙산에 사는 포켓몬이다. 머리의 뾰족하게 돌출된 부분으로 얼음을 깨고 바다를 헤엄친다.",
+        "category": "강치포켓몬"
+    },
+    "87": {
+        "id": 87,
+        "num": "087",
+        "name": "쥬레곤",
+        "img": "http://www.serebii.net/pokemongo/pokemon/087.png",
+        "type": [
+            "물",
+            "얼음"
+        ],
+        "height": "1.70 m",
+        "weight": "120.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "격투",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "086",
+                "name": "쥬쥬"
+            }
+        ],
+        "description": "전신이 새하얀 털로 덮여 있기 때문에 눈 속에서는 천적에게 발견되지 않는다.",
+        "category": "강치포켓몬"
+    },
+    "88": {
+        "id": 88,
+        "num": "088",
+        "name": "질퍽이",
+        "img": "http://www.serebii.net/pokemongo/pokemon/088.png",
+        "type": [
+            "독"
+        ],
+        "height": "0.89 m",
+        "weight": "30.0 kg",
+        "candy": "50 질퍽이 캔디",
+        "egg": "5 km",
+        "multipliers": 2.44,
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "089",
+                "name": "질뻐기"
+            }
+        ],
+        "description": "오물이 포켓몬이 되었다. 더러운 장소에 모여 몸의 세균을 번식시킨다.",
+        "category": "오물포켓몬"
+    },
+    "89": {
+        "id": 89,
+        "num": "089",
+        "name": "질뻐기",
+        "img": "http://www.serebii.net/pokemongo/pokemon/089.png",
+        "type": [
+            "독"
+        ],
+        "height": "1.19 m",
+        "weight": "30.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "088",
+                "name": "질퍽이"
+            }
+        ],
+        "description": "더러운 오물이 온몸에 달라붙었다. 지나간 자리를 건드리기만 해도 독이 퍼져 버린다.",
+        "category": "오물포켓몬"
+    },
+    "90": {
+        "id": 90,
+        "num": "090",
+        "name": "셀러",
+        "img": "http://www.serebii.net/pokemongo/pokemon/090.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.30 m",
+        "weight": "4.0 kg",
+        "candy": "50 셀러 캔디",
+        "egg": "5 km",
+        "multipliers": 2.65,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "091",
+                "name": "파르셀"
+            }
+        ],
+        "description": "다이아몬드보다 단단한 껍데기에 싸여 있지만 속은 의외로 말랑하다.",
+        "category": "두조개포켓몬"
+    },
+    "91": {
+        "id": 91,
+        "num": "091",
+        "name": "파르셀",
+        "img": "http://www.serebii.net/pokemongo/pokemon/091.png",
+        "type": [
+            "물",
+            "얼음"
+        ],
+        "height": "1.50 m",
+        "weight": "132.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "격투",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "090",
+                "name": "셀러"
+            }
+        ],
+        "description": "조수의 흐름이 격한 바다에 서식하는 파르셀의 껍데기에 붙은 가시는 크고 날카롭다.",
+        "category": "두조개포켓몬"
+    },
+    "92": {
+        "id": 92,
+        "num": "092",
+        "name": "고오스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/092.png",
+        "type": [
+            "고스트",
+            "독"
+        ],
+        "height": "1.30 m",
+        "weight": "0.1 kg",
+        "candy": "25 고오스 캔디",
+        "egg": "5 km",
+        "multipliers": 1.78,
+        "weaknesses": [
+            "땅",
+            "에스퍼",
+            "고스트",
+            "악"
+        ],
+        "next_evolution": [
+            {
+                "num": "093",
+                "name": "고우스트"
+            },
+            {
+                "num": "094",
+                "name": "팬텀"
+            }
+        ],
+        "description": "가스로 된 몸으로 휘감은 다음 먹이의 피부를 통해 조금씩 독을 흘려보내어 약하게 만든다.",
+        "category": "가스포켓몬"
+    },
+    "93": {
+        "id": 93,
+        "num": "093",
+        "name": "고우스트",
+        "img": "http://www.serebii.net/pokemongo/pokemon/093.png",
+        "type": [
+            "고스트",
+            "독"
+        ],
+        "height": "1.60 m",
+        "weight": "0.1 kg",
+        "candy": "100 고오스 캔디",
+        "egg": null,
+        "multipliers": [
+            1.56,
+            1.8
+        ],
+        "weaknesses": [
+            "땅",
+            "에스퍼",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "092",
+                "name": "고오스"
+            }
+        ],
+        "next_evolution": [
+            {
+                "num": "094",
+                "name": "팬텀"
+            }
+        ],
+        "description": "어둠을 틈타 가스로 된 손을 뻗쳐 사람의 어깨를 두드리기 좋아한다. 그 손에 닿으면 떨림이 멈추지 않는다.",
+        "category": "가스포켓몬"
+    },
+    "94": {
+        "id": 94,
+        "num": "094",
+        "name": "팬텀",
+        "img": "http://www.serebii.net/pokemongo/pokemon/094.png",
+        "type": [
+            "고스트",
+            "독"
+        ],
+        "height": "1.50 m",
+        "weight": "40.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "땅",
+            "에스퍼",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "092",
+                "name": "고오스"
+            },
+            {
+                "num": "093",
+                "name": "고우스트"
+            }
+        ],
+        "description": "생명을 빼앗기로 정한 먹잇감의 그림자에 숨어들어 꼼짝하지 않고 기회를 노린다.",
+        "category": "그림자포켓몬"
+    },
+    "95": {
+        "id": 95,
+        "num": "095",
+        "name": "롱스톤",
+        "img": "http://www.serebii.net/pokemongo/pokemon/095.png",
+        "type": [
+            "바위",
+            "땅"
+        ],
+        "height": "8.79 m",
+        "weight": "210.0 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음",
+            "격투",
+            "땅",
+            "강철"
+        ],
+        "description": "롱스톤이 땅속을 뚫고 나아가면 땅울림이 들리며 지면이 흔들린다. 이동 속도는 시속 80km.",
+        "category": "돌뱀포켓몬"
+    },
+    "96": {
+        "id": 96,
+        "num": "096",
+        "name": "슬리프",
+        "img": "http://www.serebii.net/pokemongo/pokemon/096.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "0.99 m",
+        "weight": "32.4 kg",
+        "candy": "50 슬리프 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.08,
+            2.09
+        ],
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "next_evolution": [
+            {
+                "num": "097",
+                "name": "슬리퍼"
+            }
+        ],
+        "description": "먹어 치운 꿈은 모두 기억하고 있다. 아이들의 꿈이 맛있기 때문에 어른들의 꿈은 거의 먹지 않는다.",
+        "category": "최면포켓몬"
+    },
+    "97": {
+        "id": 97,
+        "num": "097",
+        "name": "슬리퍼",
+        "img": "http://www.serebii.net/pokemongo/pokemon/097.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "1.60 m",
+        "weight": "75.6 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "096",
+                "name": "슬리프"
+            }
+        ],
+        "description": "상대와 눈이 마주쳤을 때 최면술 등의 다양한 초능력을 사용한다고 전해진다.",
+        "category": "최면포켓몬"
+    },
+    "98": {
+        "id": 98,
+        "num": "098",
+        "name": "크랩",
+        "img": "http://www.serebii.net/pokemongo/pokemon/098.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.41 m",
+        "weight": "6.5 kg",
+        "candy": "50 크랩 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.36,
+            2.4
+        ],
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "099",
+                "name": "킹크랩"
+            }
+        ],
+        "description": "모래 해변에 구멍을 파서 산다. 집게는 싸울 때 떨어져 나가도 다시 자라나 원래대로 돌아온다.",
+        "category": "게포켓몬"
+    },
+    "99": {
+        "id": 99,
+        "num": "099",
+        "name": "킹크랩",
+        "img": "http://www.serebii.net/pokemongo/pokemon/099.png",
+        "type": [
+            "물"
+        ],
+        "height": "1.30 m",
+        "weight": "60.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "098",
+                "name": "크랩"
+            }
+        ],
+        "description": "큰 집게의 파워는 1만 마력이다. 하지만 너무 무거워서 목표물을 잡는 것이 서투르다.",
+        "category": "집게포켓몬"
+    },
+    "100": {
+        "id": 100,
+        "num": "100",
+        "name": "찌리리공",
+        "img": "http://www.serebii.net/pokemongo/pokemon/100.png",
+        "type": [
+            "전기"
+        ],
+        "height": "0.51 m",
+        "weight": "10.4 kg",
+        "candy": "50 찌리리공 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.01,
+            2.02
+        ],
+        "weaknesses": [
+            "땅"
+        ],
+        "next_evolution": [
+            {
+                "num": "101",
+                "name": "붐볼"
+            }
+        ],
+        "description": "굴러서 이동하기 때문에 땅이 울퉁불퉁하면 충격으로 폭발해 버린다.",
+        "category": "볼포켓몬"
+    },
+    "101": {
+        "id": 101,
+        "num": "101",
+        "name": "붐볼",
+        "img": "http://www.serebii.net/pokemongo/pokemon/101.png",
+        "type": [
+            "전기"
+        ],
+        "height": "1.19 m",
+        "weight": "66.6 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "땅"
+        ],
+        "prev_evolution": [
+            {
+                "num": "100",
+                "name": "찌리리공"
+            }
+        ],
+        "description": "전기 에너지를 모을수록 고속으로 이동할 수 있게 되나 그만큼 폭발하기도 쉬워진다.",
+        "category": "볼포켓몬"
+    },
+    "102": {
+        "id": 102,
+        "num": "102",
+        "name": "아라리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/102.png",
+        "type": [
+            "풀",
+            "에스퍼"
+        ],
+        "height": "0.41 m",
+        "weight": "2.5 kg",
+        "candy": "50 아라리 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.7,
+            3.18
+        ],
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "독",
+            "비행",
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "next_evolution": [
+            {
+                "num": "103",
+                "name": "나시"
+            }
+        ],
+        "description": "텔레파시로 대화를 하기 때문에 아라리를 갈라놓으려 해도 바로 모여들어 6마리가 된다.",
+        "category": "알포켓몬"
+    },
+    "103": {
+        "id": 103,
+        "num": "103",
+        "name": "나시",
+        "img": "http://www.serebii.net/pokemongo/pokemon/103.png",
+        "type": [
+            "풀",
+            "에스퍼"
+        ],
+        "height": "2.01 m",
+        "weight": "120.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "독",
+            "비행",
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "102",
+                "name": "아라리"
+            }
+        ],
+        "description": "걸어 다니는 열대 우림이라고 불린다. 크게 자란 머리 중 하나가 땅에 떨어지면 아라리가 된다.",
+        "category": "야자열매포켓몬"
+    },
+    "104": {
+        "id": 104,
+        "num": "104",
+        "name": "탕구리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/104.png",
+        "type": [
+            "땅"
+        ],
+        "height": "0.41 m",
+        "weight": "6.5 kg",
+        "candy": "50 탕구리 캔디",
+        "egg": "5 km",
+        "multipliers": 1.67,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음"
+        ],
+        "next_evolution": [
+            {
+                "num": "105",
+                "name": "텅구리"
+            }
+        ],
+        "description": "사별한 어머니를 생각하며 울 때에는 머리에 쓴 뼈가 달각달각 소리를 낸다.",
+        "category": "고독포켓몬"
+    },
+    "105": {
+        "id": 105,
+        "num": "105",
+        "name": "텅구리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/105.png",
+        "type": [
+            "땅"
+        ],
+        "height": "0.99 m",
+        "weight": "45.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음"
+        ],
+        "prev_evolution": [
+            {
+                "num": "104",
+                "name": "탕구리"
+            }
+        ],
+        "description": "태어날 때부터 항상 지니고 있는 뼈를 자유로이 사용한다. 성격은 난폭하다.",
+        "category": "뼈다귀포켓몬"
+    },
+    "106": {
+        "id": 106,
+        "num": "106",
+        "name": "시라소몬",
+        "img": "http://www.serebii.net/pokemongo/pokemon/106.png",
+        "type": [
+            "격투"
+        ],
+        "height": "1.50 m",
+        "weight": "49.8 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "description": "다리가 두 배 길이로 늘어난다. 처음 싸운 상대는 그 길이에 놀란다.",
+        "category": "킥포켓몬"
+    },
+    "107": {
+        "id": 107,
+        "num": "107",
+        "name": "홍수몬",
+        "img": "http://www.serebii.net/pokemongo/pokemon/107.png",
+        "type": [
+            "격투"
+        ],
+        "height": "1.40 m",
+        "weight": "50.2 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "비행",
+            "에스퍼",
+            "페어리"
+        ],
+        "description": "팔을 비틀며 날리는 펀치는 콘크리트도 부스러뜨린다. 3분 싸우면 잠시 쉰다.",
+        "category": "펀치포켓몬"
+    },
+    "108": {
+        "id": 108,
+        "num": "108",
+        "name": "내루미",
+        "img": "http://www.serebii.net/pokemongo/pokemon/108.png",
+        "type": [
+            "노말"
+        ],
+        "height": "1.19 m",
+        "weight": "65.5 kg",
+        "candy": "없음",
+        "egg": "5 km",
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "description": "손 대신 신장의 2배로 늘어나는 혓바닥을 사용한다. 끈적끈적한 타액이 무엇이든 달라붙게 한다.",
+        "category": "핥기포켓몬"
+    },
+    "109": {
+        "id": 109,
+        "num": "109",
+        "name": "또가스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/109.png",
+        "type": [
+            "독"
+        ],
+        "height": "0.61 m",
+        "weight": "1.0 kg",
+        "candy": "50 또가스 캔디",
+        "egg": "5 km",
+        "multipliers": 1.11,
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "next_evolution": [
+            {
+                "num": "110",
+                "name": "또도가스"
+            }
+        ],
+        "description": "공기보다도 가벼운 가스를 몸에 모아서 떠 있다. 가스는 냄새나는 데다가 폭발도 한다.",
+        "category": "독가스포켓몬"
+    },
+    "110": {
+        "id": 110,
+        "num": "110",
+        "name": "또도가스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/110.png",
+        "type": [
+            "독"
+        ],
+        "height": "1.19 m",
+        "weight": "9.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "땅",
+            "에스퍼"
+        ],
+        "prev_evolution": [
+            {
+                "num": "109",
+                "name": "또가스"
+            }
+        ],
+        "description": "쓰레기에서 발생한 가스를 먹고 자라난다. 극히 드물게 3개가 이어진 또도가스가 발견된다.",
+        "category": "독가스포켓몬"
+    },
+    "111": {
+        "id": 111,
+        "num": "111",
+        "name": "뿔카노",
+        "img": "http://www.serebii.net/pokemongo/pokemon/111.png",
+        "type": [
+            "땅",
+            "바위"
+        ],
+        "height": "0.99 m",
+        "weight": "115.0 kg",
+        "candy": "50 뿔카노 캔디",
+        "egg": "5 km",
+        "multipliers": 1.91,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음",
+            "격투",
+            "땅",
+            "강철"
+        ],
+        "next_evolution": [
+            {
+                "num": "112",
+                "name": "코뿌리"
+            }
+        ],
+        "description": "몸이 단단한 피부로 덮여 있다. 몸통박치기로 빌딩도 쓰러뜨린다. 안타깝게도 머리는 나쁘다.",
+        "category": "뿔포켓몬"
+    },
+    "112": {
+        "id": 112,
+        "num": "112",
+        "name": "코뿌리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/112.png",
+        "type": [
+            "땅",
+            "바위"
+        ],
+        "height": "1.91 m",
+        "weight": "120.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "풀",
+            "얼음",
+            "격투",
+            "땅",
+            "강철"
+        ],
+        "prev_evolution": [
+            {
+                "num": "111",
+                "name": "뿔카노"
+            }
+        ],
+        "description": "뒷발로 서게 되어 뇌가 커졌다. 드릴로 된 뿔로 바위를 뚫어 터널을 판다.",
+        "category": "드릴포켓몬"
+    },
+    "113": {
+        "id": 113,
+        "num": "113",
+        "name": "럭키",
+        "img": "http://www.serebii.net/pokemongo/pokemon/113.png",
+        "type": [
+            "노말"
+        ],
+        "height": "1.09 m",
+        "weight": "34.6 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "description": "상처 입은 포켓몬이나 사람이 있으면 영양 만점의 알을 낳아 나눠 주는 상냥한 포켓몬이다.",
+        "category": "알포켓몬"
+    },
+    "114": {
+        "id": 114,
+        "num": "114",
+        "name": "덩쿠리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/114.png",
+        "type": [
+            "풀"
+        ],
+        "height": "0.99 m",
+        "weight": "35.0 kg",
+        "candy": "없음",
+        "egg": "5 km",
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "얼음",
+            "독",
+            "비행",
+            "벌레"
+        ],
+        "description": "파란 덩굴로 덮여 있다. 덩굴에 숨겨져 있는 얼굴을 본 사람은 아직 없다.",
+        "category": "넝쿨포켓몬"
+    },
+    "115": {
+        "id": 115,
+        "num": "115",
+        "name": "캥카",
+        "img": "http://www.serebii.net/pokemongo/pokemon/115.png",
+        "type": [
+            "노말"
+        ],
+        "height": "2.21 m",
+        "weight": "80.0 kg",
+        "candy": "없음",
+        "egg": "5 km",
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "description": "배의 주머니에서 새끼를 키운다. 안전할 때만 새끼를 주머니에서 꺼내어 놀게 한다.",
+        "category": "가족포켓몬"
+    },
+    "116": {
+        "id": 116,
+        "num": "116",
+        "name": "쏘드라",
+        "img": "http://www.serebii.net/pokemongo/pokemon/116.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.41 m",
+        "weight": "8.0 kg",
+        "candy": "50 쏘드라 캔디",
+        "egg": "5 km",
+        "multipliers": 2.23,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "117",
+                "name": "시드라"
+            }
+        ],
+        "description": "산호의 그늘에 거처를 만든다. 위험을 느끼면 입에서 새까만 먹물을 내뿜고 도망간다.",
+        "category": "드래곤포켓몬"
+    },
+    "117": {
+        "id": 117,
+        "num": "117",
+        "name": "시드라",
+        "img": "http://www.serebii.net/pokemongo/pokemon/117.png",
+        "type": [
+            "물"
+        ],
+        "height": "1.19 m",
+        "weight": "25.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "116",
+                "name": "쏘드라"
+            }
+        ],
+        "description": "가시가 상대로부터 몸을 지킨다. 지느러미와 뼈가 한약의 재료로써 귀하게 쓰인다.",
+        "category": "드래곤포켓몬"
+    },
+    "118": {
+        "id": 118,
+        "num": "118",
+        "name": "콘치",
+        "img": "http://www.serebii.net/pokemongo/pokemon/118.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.61 m",
+        "weight": "15.0 kg",
+        "candy": "50 콘치 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.15,
+            2.2
+        ],
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "119",
+                "name": "왕콘치"
+            }
+        ],
+        "description": "꼬리지느러미를 드레스같이 흔들며 우아하게 헤엄치는 모습은 마치 수중의 여왕 같다.",
+        "category": "금붕어포켓몬"
+    },
+    "119": {
+        "id": 119,
+        "num": "119",
+        "name": "왕콘치",
+        "img": "http://www.serebii.net/pokemongo/pokemon/119.png",
+        "type": [
+            "물"
+        ],
+        "height": "1.30 m",
+        "weight": "39.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "118",
+                "name": "콘치"
+            }
+        ],
+        "description": "머리의 뿔로 강바닥에 있는 돌을 파내어 둥지를 만든다. 알을 목숨 걸고 지킨다.",
+        "category": "금붕어포켓몬"
+    },
+    "120": {
+        "id": 120,
+        "num": "120",
+        "name": "별가사리",
+        "img": "http://www.serebii.net/pokemongo/pokemon/120.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.79 m",
+        "weight": "34.5 kg",
+        "candy": "50 별가사리 캔디",
+        "egg": "5 km",
+        "multipliers": [
+            2.38,
+            2.41
+        ],
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "121",
+                "name": "아쿠스타"
+            }
+        ],
+        "description": "빨간 핵이 있는 한, 몸이 조각나도 바로 재생한다. 한밤중에 핵이 반짝거린다.",
+        "category": "별포켓몬"
+    },
+    "121": {
+        "id": 121,
+        "num": "121",
+        "name": "아쿠스타",
+        "img": "http://www.serebii.net/pokemongo/pokemon/121.png",
+        "type": [
+            "물",
+            "에스퍼"
+        ],
+        "height": "1.09 m",
+        "weight": "80.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "prev_evolution": [
+            {
+                "num": "121",
+                "name": "아쿠스타"
+            }
+        ],
+        "description": "몸의 중심에 있는 빨간 핵에서 밤하늘을 향해 알 수 없는 전파를 발신한다.",
+        "category": "수수께끼포켓몬"
+    },
+    "122": {
+        "id": 122,
+        "num": "122",
+        "name": "마임맨",
+        "img": "http://www.serebii.net/pokemongo/pokemon/122.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "1.30 m",
+        "weight": "54.5 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "description": "팬터마임의 달인이다. 손짓 발짓으로 만든 벽은 이윽고 진짜 벽이 된다.",
+        "category": "배리어포켓몬"
+    },
+    "123": {
+        "id": 123,
+        "num": "123",
+        "name": "스라크",
+        "img": "http://www.serebii.net/pokemongo/pokemon/123.png",
+        "type": [
+            "벌레",
+            "비행"
+        ],
+        "height": "1.50 m",
+        "weight": "56.0 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "전기",
+            "얼음",
+            "비행",
+            "바위"
+        ],
+        "description": "아주 예리한 낫을 이용해 풀숲을 베며 나아간다. 매우 빠른 움직임에 눈이 따라가지 못한다.",
+        "category": "버마재비포켓몬"
+    },
+    "124": {
+        "id": 124,
+        "num": "124",
+        "name": "루주라",
+        "img": "http://www.serebii.net/pokemongo/pokemon/124.png",
+        "type": [
+            "얼음",
+            "에스퍼"
+        ],
+        "height": "1.40 m",
+        "weight": "40.6 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "벌레",
+            "바위",
+            "고스트",
+            "악",
+            "강철"
+        ],
+        "description": "울음소리는 마치 인간의 말처럼 들리지만 의미는 전혀 이해할 수 없다.",
+        "category": "인간형태포켓몬"
+    },
+    "125": {
+        "id": 125,
+        "num": "125",
+        "name": "에레브",
+        "img": "http://www.serebii.net/pokemongo/pokemon/125.png",
+        "type": [
+            "전기"
+        ],
+        "height": "1.09 m",
+        "weight": "30.0 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "땅"
+        ],
+        "description": "정전이 일어나는 원인의 절반은 에레브가 발전소에 나타나 전기를 먹어 버린 탓이다.",
+        "category": "전기포켓몬"
+    },
+    "126": {
+        "id": 126,
+        "num": "126",
+        "name": "마그마",
+        "img": "http://www.serebii.net/pokemongo/pokemon/126.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "1.30 m",
+        "weight": "44.5 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "description": "화산의 분화구에서 태어나 자랐다. 태양과도 같은 불꽃의 일렁임이 전신을 감싼다.",
+        "category": "불뿜기포켓몬"
+    },
+    "127": {
+        "id": 127,
+        "num": "127",
+        "name": "쁘사이저",
+        "img": "http://www.serebii.net/pokemongo/pokemon/127.png",
+        "type": [
+            "벌레"
+        ],
+        "height": "1.50 m",
+        "weight": "55.0 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "비행",
+            "바위"
+        ],
+        "description": "2개의 뿔 사이에 먹이를 끼우고 조각날 때까지 놓지 않는다. 조각나지 않으면 저편으로 세게 내던진다.",
+        "category": "뿔집게포켓몬"
+    },
+    "128": {
+        "id": 128,
+        "num": "128",
+        "name": "켄타로스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/128.png",
+        "type": [
+            "노말"
+        ],
+        "height": "1.40 m",
+        "weight": "88.4 kg",
+        "candy": "없음",
+        "egg": "5 km",
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "description": "노리는 먹이를 포착하면 일직선으로 돌진한다. 난폭한 성격으로 유명하다.",
+        "category": "성난소포켓몬"
+    },
+    "129": {
+        "id": 129,
+        "num": "129",
+        "name": "잉어킹",
+        "img": "http://www.serebii.net/pokemongo/pokemon/129.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.89 m",
+        "weight": "10.0 kg",
+        "candy": "400 잉어킹 캔디",
+        "egg": "2 km",
+        "multipliers": [
+            10.1,
+            11.8
+        ],
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "next_evolution": [
+            {
+                "num": "130",
+                "name": "갸라도스"
+            }
+        ],
+        "description": "힘없는 한심한 포켓몬이다. 가끔 높이 뛰어오르지만 2m를 겨우 넘기는 게 고작이다.",
+        "category": "물고기포켓몬"
+    },
+    "130": {
+        "id": 130,
+        "num": "130",
+        "name": "갸라도스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/130.png",
+        "type": [
+            "물",
+            "비행"
+        ],
+        "height": "6.50 m",
+        "weight": "235.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "129",
+                "name": "잉어킹"
+            }
+        ],
+        "description": "한번 모습을 나타내면 주변 전체를 태워 버리지 않고는 분노가 가라앉지 않는다고 전해진다.",
+        "category": "흉악포켓몬"
+    },
+    "131": {
+        "id": 131,
+        "num": "131",
+        "name": "라프라스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/131.png",
+        "type": [
+            "물",
+            "얼음"
+        ],
+        "height": "2.49 m",
+        "weight": "220.0 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "격투",
+            "바위"
+        ],
+        "description": "사람이나 포켓몬을 등에 태워 바다를 건너는 것을 매우 좋아한다. 사람의 말을 이해할 수 있다.",
+        "category": "탈것포켓몬"
+    },
+    "132": {
+        "id": 132,
+        "num": "132",
+        "name": "메타몽",
+        "img": "http://www.serebii.net/pokemongo/pokemon/132.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.30 m",
+        "weight": "4.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "description": "변신은 완벽하지만 웃는 바람에 힘이 빠지면 변신이 풀려 버리고 만다.",
+        "category": "변신포켓몬"
+    },
+    "133": {
+        "id": 133,
+        "num": "133",
+        "name": "이브이",
+        "img": "http://www.serebii.net/pokemongo/pokemon/133.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.30 m",
+        "weight": "6.5 kg",
+        "candy": "25 이브이 캔디 (Evolution decided at random. Or, for first evolution, rename Eevee: Rainer => Vaporeon, Sparky => Jolteon, Pyro => Flareon)",
+        "egg": "10 km",
+        "multipliers": [
+            2.02,
+            2.64
+        ],
+        "weaknesses": [
+            "격투"
+        ],
+        "next_evolution": [
+            {
+                "num": "134",
+                "name": "샤미드"
+            },
+            {
+                "num": "135",
+                "name": "쥬피썬더"
+            },
+            {
+                "num": "136",
+                "name": "부스터"
+            }
+        ],
+        "description": "환경 변화에 곧바로 적응할 수 있도록 여러 형태로 진화할 수 있는 가능성을 가지고 있다.",
+        "category": "진화포켓몬"
+    },
+    "134": {
+        "id": 134,
+        "num": "134",
+        "name": "샤미드",
+        "img": "http://www.serebii.net/pokemongo/pokemon/134.png",
+        "type": [
+            "물"
+        ],
+        "height": "0.99 m",
+        "weight": "29.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀"
+        ],
+        "prev_evolution": [
+            {
+                "num": "133",
+                "name": "이브이"
+            }
+        ],
+        "description": "물가에 살지만 꼬리에 물고기처럼 지느러미가 남아 있어서 인어로 착각하는 사람도 있다.",
+        "category": "거품뿜기포켓몬"
+    },
+    "135": {
+        "id": 135,
+        "num": "135",
+        "name": "쥬피썬더",
+        "img": "http://www.serebii.net/pokemongo/pokemon/135.png",
+        "type": [
+            "전기"
+        ],
+        "height": "0.79 m",
+        "weight": "24.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "땅"
+        ],
+        "prev_evolution": [
+            {
+                "num": "133",
+                "name": "이브이"
+            }
+        ],
+        "description": "세포가 내고 있는 약한 전기를 하나로 모아서 강력한 전기를 발산한다.",
+        "category": "번개포켓몬"
+    },
+    "136": {
+        "id": 136,
+        "num": "136",
+        "name": "부스터",
+        "img": "http://www.serebii.net/pokemongo/pokemon/136.png",
+        "type": [
+            "불꽃"
+        ],
+        "height": "0.89 m",
+        "weight": "25.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "땅",
+            "바위"
+        ],
+        "prev_evolution": [
+            {
+                "num": "133",
+                "name": "이브이"
+            }
+        ],
+        "description": "들이마신 공기를 체내의 불꽃 주머니에 보내 1700도의 불꽃으로 내뿜는다.",
+        "category": "불꽃포켓몬"
+    },
+    "137": {
+        "id": 137,
+        "num": "137",
+        "name": "폴리곤",
+        "img": "http://www.serebii.net/pokemongo/pokemon/137.png",
+        "type": [
+            "노말"
+        ],
+        "height": "0.79 m",
+        "weight": "36.5 kg",
+        "candy": "없음",
+        "egg": "5 km",
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "description": "세계에서 처음으로 인공적으로 만들어 낸 포켓몬이다. 전자 공간을 이동할 수 있다.",
+        "category": "가상포켓몬"
+    },
+    "138": {
+        "id": 138,
+        "num": "138",
+        "name": "암나이트",
+        "img": "http://www.serebii.net/pokemongo/pokemon/138.png",
+        "type": [
+            "바위",
+            "물"
+        ],
+        "height": "0.41 m",
+        "weight": "7.5 kg",
+        "candy": "50 암나이트 캔디",
+        "egg": "10 km",
+        "multipliers": 2.12,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "격투",
+            "땅"
+        ],
+        "next_evolution": [
+            {
+                "num": "139",
+                "name": "암스타"
+            }
+        ],
+        "description": "현대의 우수한 과학 기술로 화석에서 부활한 포켓몬이다. 고대의 바다를 헤엄치고 있었다.",
+        "category": "소용돌이포켓몬"
+    },
+    "139": {
+        "id": 139,
+        "num": "139",
+        "name": "암스타",
+        "img": "http://www.serebii.net/pokemongo/pokemon/139.png",
+        "type": [
+            "바위",
+            "물"
+        ],
+        "height": "0.99 m",
+        "weight": "35.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "격투",
+            "땅"
+        ],
+        "prev_evolution": [
+            {
+                "num": "138",
+                "name": "암나이트"
+            }
+        ],
+        "description": "나선형의 껍질이 너무 커져 버린 것이 원인으로 멸종했다고 여겨지고 있다.",
+        "category": "소용돌이포켓몬"
+    },
+    "140": {
+        "id": 140,
+        "num": "140",
+        "name": "투구",
+        "img": "http://www.serebii.net/pokemongo/pokemon/140.png",
+        "type": [
+            "바위",
+            "물"
+        ],
+        "height": "0.51 m",
+        "weight": "11.5 kg",
+        "candy": "50 투구 캔디",
+        "egg": "10 km",
+        "multipliers": [
+            1.97,
+            2.37
+        ],
+        "weaknesses": [
+            "전기",
+            "풀",
+            "격투",
+            "땅"
+        ],
+        "next_evolution": [
+            {
+                "num": "141",
+                "name": "투구푸스"
+            }
+        ],
+        "description": "3억 년 전에 모래 해변에서 살고 있었던 것으로 추측된다. 단단한 껍질이 몸을 보호한다.",
+        "category": "껍질포켓몬"
+    },
+    "141": {
+        "id": 141,
+        "num": "141",
+        "name": "투구푸스",
+        "img": "http://www.serebii.net/pokemongo/pokemon/141.png",
+        "type": [
+            "바위",
+            "물"
+        ],
+        "height": "1.30 m",
+        "weight": "40.5 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "전기",
+            "풀",
+            "격투",
+            "땅"
+        ],
+        "prev_evolution": [
+            {
+                "num": "140",
+                "name": "투구"
+            }
+        ],
+        "description": "투구푸스의 먹이가 육상 생활을 시작했기 때문에 투구푸스 역시 육지에 올라온 것으로 추측된다.",
+        "category": "껍질포켓몬"
+    },
+    "142": {
+        "id": 142,
+        "num": "142",
+        "name": "프테라",
+        "img": "http://www.serebii.net/pokemongo/pokemon/142.png",
+        "type": [
+            "바위",
+            "비행"
+        ],
+        "height": "1.80 m",
+        "weight": "59.0 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "전기",
+            "얼음",
+            "바위",
+            "강철"
+        ],
+        "description": "공룡 시대의 넓은 하늘을 날아다녔던 포켓몬이다. 톱 같은 이빨을 가지고 있다.",
+        "category": "화석포켓몬"
+    },
+    "143": {
+        "id": 143,
+        "num": "143",
+        "name": "잠만보",
+        "img": "http://www.serebii.net/pokemongo/pokemon/143.png",
+        "type": [
+            "노말"
+        ],
+        "height": "2.11 m",
+        "weight": "460.0 kg",
+        "candy": "없음",
+        "egg": "10 km",
+        "multipliers": null,
+        "weaknesses": [
+            "격투"
+        ],
+        "description": "곰팡이가 피어 있거나 상했어도 괜찮다. 잠만보의 위는 무엇이든 소화시킬 수 있다.",
+        "category": "졸음포켓몬"
+    },
+    "144": {
+        "id": 144,
+        "num": "144",
+        "name": "프리져",
+        "img": "http://www.serebii.net/pokemongo/pokemon/144.png",
+        "type": [
+            "얼음",
+            "비행"
+        ],
+        "height": "1.70 m",
+        "weight": "55.4 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "불꽃",
+            "전기",
+            "바위",
+            "강철"
+        ],
+        "description": "전설의 새포켓몬이다. 공기 중의 수분을 얼려 눈보라를 만들어 낼 수 있다.",
+        "category": "냉동포켓몬"
+    },
+    "145": {
+        "id": 145,
+        "num": "145",
+        "name": "썬더",
+        "img": "http://www.serebii.net/pokemongo/pokemon/145.png",
+        "type": [
+            "전기",
+            "비행"
+        ],
+        "height": "1.60 m",
+        "weight": "52.6 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "얼음",
+            "바위"
+        ],
+        "description": "번개 구름 안에 있다고 전해지는 전설의 포켓몬이다. 번개를 자유로이 조종한다.",
+        "category": "전기포켓몬"
+    },
+    "146": {
+        "id": 146,
+        "num": "146",
+        "name": "파이어",
+        "img": "http://www.serebii.net/pokemongo/pokemon/146.png",
+        "type": [
+            "불꽃",
+            "비행"
+        ],
+        "height": "2.01 m",
+        "weight": "60.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "물",
+            "전기",
+            "바위"
+        ],
+        "description": "전설의 새포켓몬 중의 1마리다. 파이어가 모습을 보이면 봄이 찾아온다고 전해진다.",
+        "category": "화염포켓몬"
+    },
+    "147": {
+        "id": 147,
+        "num": "147",
+        "name": "미뇽",
+        "img": "http://www.serebii.net/pokemongo/pokemon/147.png",
+        "type": [
+            "드래곤"
+        ],
+        "height": "1.80 m",
+        "weight": "3.3 kg",
+        "candy": "25 미뇽 캔디",
+        "egg": "10 km",
+        "multipliers": [
+            1.83,
+            1.84
+        ],
+        "weaknesses": [
+            "얼음",
+            "드래곤",
+            "페어리"
+        ],
+        "next_evolution": [
+            {
+                "num": "148",
+                "name": "신뇽"
+            },
+            {
+                "num": "149",
+                "name": "망나뇽"
+            }
+        ],
+        "description": "세차게 떨어지는 폭포의 보호를 받으며 탈피를 거듭해 점점 크게 자란다.",
+        "category": "드래곤포켓몬"
+    },
+    "148": {
+        "id": 148,
+        "num": "148",
+        "name": "신뇽",
+        "img": "http://www.serebii.net/pokemongo/pokemon/148.png",
+        "type": [
+            "드래곤"
+        ],
+        "height": "3.99 m",
+        "weight": "16.5 kg",
+        "candy": "100 Dratini 캔디",
+        "egg": null,
+        "multipliers": 2.05,
+        "weaknesses": [
+            "얼음",
+            "드래곤",
+            "페어리"
+        ],
+        "next_evolution": [
+            {
+                "num": "149",
+                "name": "망나뇽"
+            }
+        ],
+        "description": "전신에서 오라를 발산하면 주변 날씨가 순식간에 변한다고 한다.",
+        "category": "드래곤포켓몬"
+    },
+    "149": {
+        "id": 149,
+        "num": "149",
+        "name": "망나뇽",
+        "img": "http://www.serebii.net/pokemongo/pokemon/149.png",
+        "type": [
+            "드래곤",
+            "비행"
+        ],
+        "height": "2.21 m",
+        "weight": "210.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "얼음",
+            "바위",
+            "드래곤",
+            "페어리"
+        ],
+        "prev_evolution": [
+            {
+                "num": "148",
+                "name": "신뇽"
+            }
+        ],
+        "description": "드넓은 바다 어딘가에는 망나뇽만이 모여 사는 섬이 있다고 한다.",
+        "category": "드래곤포켓몬"
+    },
+    "150": {
+        "id": 150,
+        "num": "150",
+        "name": "뮤츠",
+        "img": "http://www.serebii.net/pokemongo/pokemon/150.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "2.01 m",
+        "weight": "122.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "description": "뮤의 유전자를 재구성해서 만들어졌다. 포켓몬 중에서 가장 난폭한 마음을 가지고 있다고 한다.",
+        "category": "유전자포켓몬"
+    },
+    "151": {
+        "id": 151,
+        "num": "151",
+        "name": "뮤",
+        "img": "http://www.serebii.net/pokemongo/pokemon/151.png",
+        "type": [
+            "에스퍼"
+        ],
+        "height": "0.41 m",
+        "weight": "4.0 kg",
+        "candy": "없음",
+        "egg": null,
+        "multipliers": null,
+        "weaknesses": [
+            "벌레",
+            "고스트",
+            "악"
+        ],
+        "description": "모든 기술을 사용하기 때문에 포켓몬의 조상이라고 생각하는 학자가 많다.",
+        "category": "신종포켓몬"
+    }
+}
