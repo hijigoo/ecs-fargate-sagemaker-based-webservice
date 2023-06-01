@@ -11,7 +11,7 @@ from dex_util import *
 app = FastAPI()
 
 origins = [
-    "http://app-web-alb-440880009.us-west-2.elb.amazonaws.com"
+    "*"
 ]
 
 app.add_middleware(

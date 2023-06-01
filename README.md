@@ -234,6 +234,9 @@ Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 
 
 <img width="1024" alt="5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0cb17fbf-abdc-4b72-8fbf-bce70411b594">
 
+## Boto3 를 이용하여 Amazon SageMaker 엔드포인트 호출
+[코드 입력]
+
 ## Task definitions 구성
 Task definition 을 구성하기 전에 Task 에서 Amazon SageMaker Endpoint 를 호출하기 위한 역할을 먼저 생성합니다. Identity and Access Management(IAM) 콘솔로 이동합니다. 왼쪽 메뉴에서 Roles 를 선택하고 Create role 버튼을 눌러서 역할 생성을 시작합니다.
 
@@ -368,16 +371,20 @@ CI/CD 를 구성하기 위해서 CodeCommit 와 CodeBuild 를 먼저 구성하�
 ## AWS CodeCommit 레파지토리 구성
 CodeCommit 레파지토리를 생성하고 다운 받았던 web 과 app 프로젝트 코드를 새로 생성한 레파지토리에 푸시합니다. 먼저 AWS CodeCommit 콘솔리 이동 후 Create repository 버튼을 눌러서 생성을 시작합니다. 
 
-[그림 commit-1]
+<img width="1024" alt="commit-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/26beeddc-7b68-4dd6-be76-7ce72c24957f">
 
-Repository name 은 app-web 으로 입력하고 Create 버튼을 눌러서 레파지토리 생성을 완료합니다.
+Repository name 은 app-web 으로 입력하고 Create 버튼을 눌러서 레파지토리 생성을 완료합니다. 그리고 가이드에 따라서 빈 레파지토리를 클론합니다.
 
-[그림 commit-2]
+<img width="1024" alt="commit-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/25b49439-3701-4a5b-bbe7-4a639b91d74b">
+<img width="1024" alt="commit-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2866e7f7-715c-4d61-b4ea-3c5aadc61a0d">
 
-생성을 완료하면 Clone URL 을 눌러서 버튼을 펼치고 Clone HTTPS 을 눌러서 레파지토리 URL 을 복사합니다.
+기존 사용하던 web 프로젝트 폴더 안의 내용을 모두 복사해서 클론한 app-web 폴더에 붙여넣고 코드를 푸시합니다. 푸시가 완료되면 다음과 같이 확인할 수 있습니다.
 
-[그림 commit-3]
+<img width="1024" alt="commit-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1c450d66-c743-4d14-987e-27f684c54459">
 
+WAS 프로젝트 코드도 위와 동일한 방법으로 진행합니다. Repository name 은 app-was 로 입력합니다. 완료가 되면 아래와 같이 두 개의 레파지토리에 코드가 모두 업로드 된 것을 확인할 수 있습니다.
+
+<img width="1024" alt="commit-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7ee7f841-f258-4080-bf6f-bc610472f116">
 
 
 
