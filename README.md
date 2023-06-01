@@ -389,82 +389,8 @@ WAS 프로젝트 코드도 위와 동일한 방법으로 진행합니다. Reposi
 <img width="1024" alt="commit-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7ee7f841-f258-4080-bf6f-bc610472f116">
 
 
-## AWS CodeBuild 구성
-코드를 빌드하기 위해서 AWS CodeBuild 를 구성합니다. 여기서 빌드는 압축을 의미하며 빌드가 완료된 파일은 Amazon S3 에 저장됩니다. 먼저 빌드한 파일을 저장하기 위해서 Amazon S3 에 bucket 을 생성합니다. Amazon S3 콘솔로 이동 후 Create bucket 버튼을 누르고 버킷 생성을 시작합니다.
-
-<img width="1024" alt="build-s3-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/01229a8f-42c2-4cc1-9648-0aaeb3ab79f9">
-
-
-Bucket name 에는 app-pipeline-{yourname} 을 입력합니다. {yourname} 에는 사용할 값을 넣으면 됩니다. 이번 글에서는 app-pipeline-0410 을 입력했습니다. AWS Region 은 사용중인 리전을 입력합니다. Create bucket 을 눌러서 버킷생성을 완료합니다. 
-
-<img width="1024" alt="build-s3-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6259005e-56f6-47e0-a7eb-31840b69a9f1">
-
-생성하면 다음과 같이 생성된 버킷을 확인할 수 있습니다.
-
-<img width="1024" alt="build-s3-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/cbf8757b-af45-4758-838e-4e341d6a7c1e">
-
-이제 AWS CodeBuild 콘솔로 이동 후 Create build project 버튼을 눌러서 생성을 시작합니다. 
-
-<img width="1024" alt="build-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f939f034-bebe-49be-99f5-bbaf5e56c7cf">
-
-Project configuration 에서 Project name 입력 칸에 appWebBuild 를 입력합니다. 그리고 아래 Source 에서 Source provider 는 AWS CodeCommit 을 선택하고 Repository 는 app-web 을 선택합니다. Reference type 는 Branch 를 선택하고 Branch 는 main 을 선택합니다.
-
-<img width="1024" alt="build-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/501043b3-b7e7-4158-8670-b396a6cdf9ab">
-<img width="1024" alt="build-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/cebf8c72-e452-45db-9e1c-53a9ce89aaf7">
-
-Environment 에서 Operating system 은 Amazon Linux2 를 선택하고 Runtime(s) 은 Standard 를 선택하고 Image 는 aws/codebuild/amazonlinux2-aarch64-standard:4.0 를 선택합니다. Privileged 는 체크합니다.
-
-<img width="1024" alt="build-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f977375b-0a69-40a2-ba6c-4f1574245372">
-
-Buildspec 에서 Insert build commands 를 선택합니다. Switch to editor 버튼을 눌러서 에디터 창을 오픈하고 아래 코드를 입력합니다. ECR_URI 값으로는 앞서 생성한 app-web 의 ECR 주소로 변경합니다.
-
-```
-version: 0.2
-
-phases:
-  pre_build:
-    commands:
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - ECR_URI=933988069619.dkr.ecr.us-west-2.amazonaws.com/app-web
-      - IMAGE_TAG=${COMMIT_HASH:=latest}
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ECR_URI
-  build:
-    commands:
-      - echo Building the Docker image...
-      - docker build -t app-web .
-      - docker tag app-web:latest $ECR_URI:latest
-  post_build:
-    commands:
-      - echo Pushing the Docker image...
-      - docker push $ECR_URI:latest
-      - printf '[{"name":"app-web","imageUri":"%s"}]' $ECR_URI:$IMAGE_TAG > imagedefinitions.json
-artifacts:
-    files: imagedefinitions.json
-```
-
-<img width="1024" alt="build-4 5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a5998147-ac2c-4655-b87a-5ee90f6114eb">
-
-Artifacts 에서 Type 으로 Amazon S3 를 선택하고 Bucket 에는 앞서 생성한 버킷을 선택합니다. Name 은 app-web-artifact 으로 하고 Artifacts packaging 는 Zip 을 선택합니다. Create build project 버튼을 눌러서 생성을 완료합니다. 
-
-<img width="1024" alt="build-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/ebbbe718-ad60-4253-9db7-221d42112a39">
-
-
-#########
-[Service role 에 권한 추가 설명 추가 필요]
-#########
-
-
-생성이 완료된 후 Start build 를 눌러서 빌드가 되는지 확인합니다. 빌드가 성공하면 다음과 같이 Status 가 Succeeded 된 것을 확인할 수 있습니다.
-
-<img width="1024" alt="build-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/98d0d724-a8bd-4007-95ba-40349cc8a68b">
-
-위와 동일한 방식으로 appWasBuild 도 구성합니다. 모두 완료하면 아래와 같이 두 개의 빌드 프로젝트가 생성된 것을 확인할 수 있습니다.
-
-<img width="1024" alt="build-8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/81477d0b-4fa0-4a54-b90f-10fd5c92043e">
-
-
 ## AWS CodePipeline 구성
+
 Amazon CodePipeline 콘솔로 이동 후 Create pipeline 버튼을 눌러서 구성을 시작합니다. 
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/07d920af-1d60-4df5-ad86-6ac263506090">
@@ -477,11 +403,57 @@ Source provider 으로 AWS CodeCommit 을 선택하고 Repository name 은 app-w
 
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7c82fd3b-653b-483c-9ed9-17540294a089">
 
-Build provider 으로 AWS CodeBuild 를 선택하고 Project name 으로 app-web-build 를 선택합니다. Next 버튼을 눌러서 다음 단계를 진행합니다. 
+Build provider 으로 AWS CodeBuild 를 선택하고 Project name 아래 있는 Create project 버튼을 눌러서 빌드 프로젝트 생성을 시작합니다. 
 
-<img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a5354808-c15b-43f2-81ab-d204d0a46e8a">
+<img width="1024" alt="build2-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/914d6c08-eaea-4f31-b7f6-17a1210871a0">
 
-Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsCluster 를 선택합니다. Service name 으로 app-web-service 을 선택합니다. Next 버튼을 눌러서 다음 단계를 진행합니다. 리뷰를 마친 뒤 Create pipeline 버튼을 눌러서 구성을 완료합니다. 
+팝업으로 뜬 창에서 Project name 으로 appWebBuild 을 입력합니다. Environment 에서 Operating system 은 Amazon Linux2 를 선택하고 Runtime(s) 은 Standard 를 선택하고 Image 는 aws/codebuild/amazonlinux2-aarch64-standard:5.0 를 선택합니다. Privileged 는 체크합니다. 나머지는 그대로 유지합니다.
+
+<img width="1024" alt="build2-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/3f970514-809f-416c-a9af-0ebf9cfd681b">
+
+Buildspec 에서 Insert build commands 를 선택합니다. Switch to editor 버튼을 눌러서 에디터 창을 오픈합니다. 아래 코드에서 ECR_URI 값을 앞서 생성한 app-web 의 ECR 주소로 변경하고 전체 복사하여 붙여 넣습니다. 아래로 스크롤을 내린 뒤 CloudWatch logs - optional 체크를 해제합니다. 입력을 모두 마치면 Continue to CodePipeline 버튼을 눌러서 빌드 프로젝트 생성을 완료하고 팝업을 닫습니다. 
+
+```
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - ECR_URI=933988069619.dkr.ecr.us-west-2.amazonaws.com/app-web
+      - IMAGE_TAG=latest
+      - echo Logging in to Amazon ECR...
+      - aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin $ECR_URI
+  build:
+    commands:
+      - echo Building the Docker image...
+      - docker build -t app-web .
+      - docker tag app-web:latest $ECR_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Pushing the Docker image...
+      - docker push $ECR_URI:latest
+      - printf '[{"name":"app-web","imageUri":"%s"}]' $ECR_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+    files: imagedefinitions.json
+```
+
+<img width="1024" alt="build2-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/68f97391-2685-4e43-858d-5b454f9d5023">
+
+Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsCluster 를 선택합니다. Service name 으로 app-web-service 을 선택합니다. Next 버튼을 눌러서 다음 리뷰를 진행합니다. 리뷰를 마친 뒤 Create pipeline 버튼을 눌러서 구성을 완료합니다. 
+
+
+<img width="1024" alt="build2-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/049285b0-a9b3-40f8-a0c2-d397dd5a9043">
+
+빌드 과정에서 ECR 에 로그인이 필요하기 때문에 정책을 추가해야합니다. Identity and Access Management(IAM) 콘솔로 이동합니다. 왼쪽 메뉴에서 Roles 를 선택하고 codebuild-appWebBuild-service-role 을 검색해서 선택합니다. Add permissions 버튼을 누르고 Attach policies 를 선택합니다. AmazonEC2ContainerRegistryPowerUser 를 검색하고 체크하고 Add permissions 버튼을 눌러서 정책을 추가합니다. 추가가 완료되면 다음과 같이 두 개의 정책이 있는 것을 확인할 수 있습니다.
+
+<img width="1024" alt="build2-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/4a47f6cc-56d6-4c3c-bde6-f652ae7602a4">
+
+다시 파이프라인으로 돌아가서 Release change 버튼을 선택해서 파이프라인을 실행합니다. main 브랜치에 코드가 업데이트 되어도 자동으로 파이프라인이 실행됩니다.
+
+<img width="450" alt="build2-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c4e2a5c5-fca8-42e8-81cc-258dc54ebddb">
+<img width="450" alt="build2-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/314eadf8-a21e-4abd-89b2-3b95f62eb38d">
+
+동일한 방식으로 app-was 를 위한 파이프라인을 생성합니다. 생성할 때 사용되는 값들은 web 대신 was 로 변경합니다. Buildspec 에 있는 코드도 was 에 맞게 수정합니다. 구성이 완료되면 아래와 같이 두 개의 파이프라인이 생성된 것을 확인할 수 있습니다.
 
 
 
