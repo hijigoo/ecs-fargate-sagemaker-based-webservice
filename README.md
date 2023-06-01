@@ -465,6 +465,23 @@ Artifacts 에서 Type 으로 Amazon S3 를 선택하고 Bucket 에는 앞서 생
 
 
 ## AWS CodePipeline 구성
+Amazon CodePipeline 콘솔로 이동 후 Create pipeline 버튼을 눌러서 구성을 시작합니다. 
+
+<img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/07d920af-1d60-4df5-ad86-6ac263506090">
+
+Pipeline name 값으로 app-web-pipeline 을 입력하고 Next 버튼을 눌러서 다음 단계를 진행합니다.
+
+<img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/ae729821-a4b8-4925-9068-34c89bc1327a">
+
+Source provider 으로 AWS CodeCommit 을 선택하고 Repository name 은 app-web 을 선택합니다. Branch name 은 main 을 선택합니다. Next 버튼을 눌러서 다음 단계를 진행합니다. 
+
+<img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7c82fd3b-653b-483c-9ed9-17540294a089">
+
+Build provider 으로 AWS CodeBuild 를 선택하고 Project name 으로 app-web-build 를 선택합니다. Next 버튼을 눌러서 다음 단계를 진행합니다. 
+
+<img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a5354808-c15b-43f2-81ab-d204d0a46e8a">
+
+Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsCluster 를 선택합니다. Service name 으로 app-web-service 을 선택합니다. Next 버튼을 눌러서 다음 단계를 진행합니다. 리뷰를 마친 뒤 Create pipeline 버튼을 눌러서 구성을 완료합니다. 
 
 
 
