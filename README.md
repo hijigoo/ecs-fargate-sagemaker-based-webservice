@@ -407,7 +407,7 @@ Build provider 으로 AWS CodeBuild 를 선택하고 Project name 아래 있는 
 
 <img width="1024" alt="build2-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/914d6c08-eaea-4f31-b7f6-17a1210871a0">
 
-팝업으로 뜬 창에서 Project name 으로 appWebBuild 을 입력합니다. Environment 에서 Operating system 은 Amazon Linux2 를 선택하고 Runtime(s) 은 Standard 를 선택하고 Image 는 aws/codebuild/amazonlinux2-aarch64-standard:5.0 를 선택합니다. Privileged 는 체크합니다. 나머지는 그대로 유지합니다.
+팝업으로 뜬 창에서 Project name 으로 appWebBuild 을 입력합니다. Environment 에서 Operating system 은 Amazon Linux2 를 선택하고 Runtime(s) 은 Standard 를 선택하고 Image 는 aws/codebuild/amazonlinux2-aarch64-standard:4.0 를 선택합니다. Privileged 는 체크합니다. 나머지는 그대로 유지합니다.
 
 <img width="1024" alt="build2-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/3f970514-809f-416c-a9af-0ebf9cfd681b">
 
@@ -455,7 +455,7 @@ Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsClu
 
 동일한 방식으로 app-was 를 위한 파이프라인을 생성합니다. 생성할 때 사용되는 값들은 web 대신 was 로 변경합니다. Buildspec 에 있는 코드도 was 에 맞게 수정합니다. 구성이 완료되면 아래와 같이 두 개의 파이프라인이 생성된 것을 확인할 수 있습니다.
 
-
+<img width="1024" alt="build-9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/333195e1-f780-4a08-8283-31d0a1bec8d7">
 
 # Amazon SageMaker 학습 환경 구성
 
