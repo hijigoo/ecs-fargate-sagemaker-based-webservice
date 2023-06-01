@@ -17,7 +17,7 @@ router.get("/version", function (req, res) {
 
 // Redirect
 const request = require('request');
-BASE_URL = "http://app-was-alb-1501545287.us-west-2.elb.amazonaws.com"
+BASE_URL = "http://internal-app-was-alb-1863869934.us-west-2.elb.amazonaws.com"
 
 CLASSIFIY_IMAGE = "/classify/image"
 HEALTH = "/health"

@@ -10,4 +10,4 @@ COPY ./app /code/app
 
 ENV PYTHONPATH "${PYTHONPATH}:/code/app"
 
-CMD ["gunicorn", "--timeout", "300", "app.main:app", "--workers", "8", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8081"]
+CMD ["gunicorn", "--timeout", "300", "app.main:app", "--workers", "1", "--worker-class", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8081"]
