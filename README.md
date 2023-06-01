@@ -363,6 +363,27 @@ Services 탭에서 app-was-service 를 선택하고 Tasks 탭에 선택해서 �
 [추가 필요]
 
 # AWS CodePipeline 을 이용한 CI/CD 구성
+CI/CD 를 구성하기 위해서 CodeCommit 와 CodeBuild 를 먼저 구성하고 CodePipeline 과 연결합니다.
+
+## AWS CodeCommit 레파지토리 구성
+CodeCommit 레파지토리를 생성하고 다운 받았던 web 과 app 프로젝트 코드를 새로 생성한 레파지토리에 푸시합니다. 먼저 AWS CodeCommit 콘솔리 이동 후 Create repository 버튼을 눌러서 생성을 시작합니다. 
+
+[그림 commit-1]
+
+Repository name 은 app-web 으로 입력하고 Create 버튼을 눌러서 레파지토리 생성을 완료합니다.
+
+[그림 commit-2]
+
+생성을 완료하면 Clone URL 을 눌러서 버튼을 펼치고 Clone HTTPS 을 눌러서 레파지토리 URL 을 복사합니다.
+
+[그림 commit-3]
+
+
+
+
+## AWS CodeBuild 구성
+
+## AWS CodePipeline 구성
 
 
 # Amazon SageMaker 학습 환경 구성
