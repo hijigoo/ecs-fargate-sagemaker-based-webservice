@@ -11,7 +11,7 @@ phases:
     commands:
       - echo Building the Docker image...
       - docker build -t app-was .
-     - docker tag app-was:latest $ECR_URI:$IMAGE_TAG
+      - docker tag app-was:latest $ECR_URI:$IMAGE_TAG
   post_build:
     commands:
       - echo Pushing the Docker image...
