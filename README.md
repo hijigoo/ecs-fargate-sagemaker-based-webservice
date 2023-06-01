@@ -448,7 +448,7 @@ Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsClu
 
 <img width="1024" alt="build2-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/4a47f6cc-56d6-4c3c-bde6-f652ae7602a4">
 
-다시 파이프라인으로 돌아가서 Release change 버튼을 선택해서 파이프라인을 실행합니다. main 브랜치에 코드가 업데이트 되어도 자동으로 파이프라인이 실행됩니다.
+다시 파이프라인으로 돌아가서 Release change 버튼을 선택해서 파이프라인을 실행합니다. 
 
 <img width="450" alt="build2-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c4e2a5c5-fca8-42e8-81cc-258dc54ebddb">
 <img width="450" alt="build2-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/314eadf8-a21e-4abd-89b2-3b95f62eb38d">

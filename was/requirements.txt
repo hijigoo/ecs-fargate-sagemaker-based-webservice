@@ -5,8 +5,7 @@ boto3
 numpy
 python-multipart
 keras
-tensorflow
+tensorflow==2.12.0
 pillow
-beautifulsoup4
 slowapi
 gunicorn
