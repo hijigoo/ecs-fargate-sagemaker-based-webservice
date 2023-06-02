@@ -457,10 +457,39 @@ Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsClu
 
 <img width="1024" alt="build-9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/333195e1-f780-4a08-8283-31d0a1bec8d7">
 
-# Amazon SageMaker 학습 환경 구성
+# Amazon SageMaker Studio 생성
+기계 학습 모델을 학습하고 배포하는 환경을 구성하기 위해서 웹 기반 통합 개발 환경(IDE)인 Amazon SageMaker Studio 를 이용합니다. Amazon SageMaker 콘솔로 이동 후 왼쪽 메뉴에서 Domains 를 선택 하고 Create Domain 버튼을 눌러서 도메인 생성을 시작합니다.
 
-# Amazon SageMaker 배포 환경 구성
+[그림1]
+
+Quick setup (1 min) 을 선택하고 Domain 이름으로 app 을 입력합니다. 나머지 설정은 그대로 유지하고 Submit 버튼을 눌러서 Domain 을 생성합니다.
+
+[그림2]
+
+도메인이 생성되면 도메인 이름을 선택해서 들어간 다음에 생성된 사용자 오른쪽에 있는 Launch 버튼을 펼쳐서 Studio 에 접속합니다.
+
+[그림3]
+
+접속하면 다음과 같은 화면을 볼 수 있습니다.
+
+[그림4]
 
 # Amazon SagemMaker Pipeline 을 이용한 CI/CD 구성
+
+## 학습 단계 생성
+
+[학습 데이터 준비] [재작성 필요] Amazon S3 에 학습 데이터를 업로드 합니다.S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운받은 파일을 모두 업로드 합니다. 이번 글에서는 app-ml-dataset-0410 으로 생성했습니다. 버킷에 접속해서 다운로드 받은 폴더를 통채로 업로드합니다. 
+
+https://www.kaggle.com/datasets/l3llff/flowers
+
+train.py 코드 업로드 + 학습 진행 + 결과 확인
+[학습 진행]
+
+## 모델 등록 단계 생성
+
+## 배포 단계 생성
+[Amazon SageMaker Endpoint 생성]
+
+## 전체 파이프라인 코드
 
 # 결론
