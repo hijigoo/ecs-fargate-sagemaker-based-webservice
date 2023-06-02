@@ -460,30 +460,39 @@ Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsClu
 # Amazon SageMaker Studio 생성
 기계 학습 모델을 학습하고 배포하는 환경을 구성하기 위해서 웹 기반 통합 개발 환경(IDE)인 Amazon SageMaker Studio 를 이용합니다. Amazon SageMaker 콘솔로 이동 후 왼쪽 메뉴에서 Domains 를 선택 하고 Create Domain 버튼을 눌러서 도메인 생성을 시작합니다.
 
-[그림1]
+<img width="1024" alt="studio-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/9aae352b-626b-4016-ac99-9f223e30f059">
 
-Quick setup (1 min) 을 선택하고 Domain 이름으로 app 을 입력합니다. 나머지 설정은 그대로 유지하고 Submit 버튼을 눌러서 Domain 을 생성합니다.
+Quick setup (1 min) 을 선택하고 Name 으로 app-sagemaker-studio 을 입력하고 Execution role 은 Create a new role 을 선택합니다. 팝업으로 뜬 창에서 Any S3 bucket 을 선택하고 나머지는 그대로 두고 Create role 버튼을 눌러서 롤을 생성합니다. 그리고 나머지 설정은 그대로 유지하고 Submit 버튼을 눌러서 Domain 을 생성합니다. 
 
-[그림2]
+<img width="1024" alt="studio-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2357af63-d516-4490-b947-fa0a875bf763">
+<img width="1024" alt="studio-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1e8b27e9-d773-4958-89f0-13264336d774">
 
 도메인이 생성되면 도메인 이름을 선택해서 들어간 다음에 생성된 사용자 오른쪽에 있는 Launch 버튼을 펼쳐서 Studio 에 접속합니다.
 
-[그림3]
+<img width="1024" alt="studio-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/024e3c39-1440-4127-a4db-d3f72070c160">
 
-접속하면 다음과 같은 화면을 볼 수 있습니다.
 
-[그림4]
-
-# Amazon SagemMaker Pipeline 을 이용한 CI/CD 구성
+# Amazon SagemMaker Pipeline 을 이용한 모델 학습 및 배포 자동화
 
 ## 학습 단계 생성
+Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다운받아서 사용됩니다. 먼저 학습에 필요한 [꽃 학습 데이터](https://www.kaggle.com/datasets/l3llff/flowers)를 다운 받습니다. 그리고 Amazon S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운받은 파일을 모두 업로드 합니다. 여기서는 app-ml-dataset-0410 으로 생성했습니다. 버킷에 접속해서 다운로드 받은 폴더를 통채로 업로드합니다. 
 
-[학습 데이터 준비] [재작성 필요] Amazon S3 에 학습 데이터를 업로드 합니다.S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운받은 파일을 모두 업로드 합니다. 이번 글에서는 app-ml-dataset-0410 으로 생성했습니다. 버킷에 접속해서 다운로드 받은 폴더를 통채로 업로드합니다. 
+[학습1]
 
-https://www.kaggle.com/datasets/l3llff/flowers
+다음으로 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 을 다운 받아서 /src/train.py 경로로 업로드 합니다.
 
-train.py 코드 업로드 + 학습 진행 + 결과 확인
-[학습 진행]
+<img width="1024" alt="train-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/d09fd33a-e5c8-441d-b2a1-96ce8c342304">
+
+다음으로 학습 단계를 생성합니다. 다시 루트 폴더로 나와서 [build-pipelin-train.ipynb](주소 지정 필요) 을 다운 받아서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 팝업에서 모두 기본 값으로 남겨두고 Select 버튼을 눌러서 닫습니다.
+
+<p align='center'>
+    <img width="800" alt="train-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/98067348-feef-4971-8dd3-a4d07fe6925c">
+    <img width="800" alt="train-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e8a4a960-c36e-42eb-a462-e96c87aa3323">
+</p>
+
+
+파일에서 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 과정을 단순화 하기 위해서 학습 데이터와 테스트 데이터는 같은 데이터를 사용합니다.
+
 
 ## 모델 등록 단계 생성
 
