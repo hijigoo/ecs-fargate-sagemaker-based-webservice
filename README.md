@@ -467,6 +467,10 @@ Quick setup (1 min) 을 선택하고 Name 으로 app-sagemaker-studio 을 입력
 <img width="1024" alt="studio-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2357af63-d516-4490-b947-fa0a875bf763">
 <img width="1024" alt="studio-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1e8b27e9-d773-4958-89f0-13264336d774">
 
+도메인 생성시 뜨는 팝업에서 vpc 는 app-vpc 를 선택하고 subnet 은 public subnet 하나를 선택합니다. 
+
+<img width="970" alt="studio-3 5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/97af258a-1867-420c-acb6-4424a29f6734">
+
 도메인이 생성되면 도메인 이름을 선택해서 들어간 다음에 생성된 사용자 오른쪽에 있는 Launch 버튼을 펼쳐서 Studio 에 접속합니다.
 
 <img width="1024" alt="studio-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/024e3c39-1440-4127-a4db-d3f72070c160">
@@ -475,23 +479,64 @@ Quick setup (1 min) 을 선택하고 Name 으로 app-sagemaker-studio 을 입력
 # Amazon SagemMaker Pipeline 을 이용한 모델 학습 및 배포 자동화
 
 ## 학습 단계 생성
-Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다운받아서 사용됩니다. 먼저 학습에 필요한 [꽃 학습 데이터](https://www.kaggle.com/datasets/l3llff/flowers)를 다운 받습니다. 그리고 Amazon S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운받은 파일을 모두 업로드 합니다. 여기서는 app-ml-dataset-0410 으로 생성했습니다. 버킷에 접속해서 다운로드 받은 폴더를 통채로 업로드합니다. 
+Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다운받아서 사용됩니다. 먼저 학습에 필요한 [꽃 학습 데이터](https://www.kaggle.com/datasets/l3llff/flowers)를 다운 받습니다. 그리고 Amazon S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운받은 파일 중 'astilbe', 'bellflower', 'black_eyed_susan' 를 업로드 합니다. 여기서는 app-ml-dataset-0410 으로 생성했습니다. 버킷에 접속해서 다운로드 받은 폴더를 전부 업로드합니다. 다음 그림과 같이 astilbe 의 경로는 /app-ml-dataset-0410/flowers/astilbe 가 됩니다.
 
-[학습1]
+<img width="1024" alt="data-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0a4b372a-a5e6-4184-adaf-2e304383f026">
 
-다음으로 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 을 다운 받아서 /src/train.py 경로로 업로드 합니다.
+다음으로 학습 단계에 필요한 코드를 다운받고 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 파일과 [flower.py](주소지정 필요) 을 다운 받아서 /src/train.py 경로와 src/train.py 경로에 각각 업로드 합니다.
 
-<img width="1024" alt="train-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/d09fd33a-e5c8-441d-b2a1-96ce8c342304">
+<img width="800" alt="train-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/aa15494c-fdaa-4f46-b522-c91d3779da71">
 
-다음으로 학습 단계를 생성합니다. 다시 루트 폴더로 나와서 [build-pipelin-train.ipynb](주소 지정 필요) 을 다운 받아서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 팝업에서 모두 기본 값으로 남겨두고 Select 버튼을 눌러서 닫습니다.
+이제 앞서 올린 train.py 을 이용해서 학습 단계를 생성하고 학습 단계만 있는 파이프라인을 구성합니다. 이를 위해서 다시 루트 폴더로 나와서 [build-pipelin-train.ipynb](주소 지정 필요) 을 다운 받아서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image 를 TensorFlow 2.12.0 Python 3.10 CPU Optimized 로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 여기서 구성하는 환경은 학습 환경이 아닌 파이프라인 생성을 위한 환경이기 때문에 GPU 를 사용하지 않습니다.
 
-<p align='center'>
-    <img width="800" alt="train-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/98067348-feef-4971-8dd3-a4d07fe6925c">
-    <img width="800" alt="train-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e8a4a960-c36e-42eb-a462-e96c87aa3323">
-</p>
+<img width="1024" alt="train-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c6148994-c3b7-4896-915b-ae0e6574ed5a">
+
+파일에서 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 과정을 단순화 하기 위해서 학습 데이터와 테스트 데이터는 같은 데이터를 사용합니다. 다음 코드는 학습되는 컴퓨팅 환경을 구성하는 부분으로 학습 모델에 따라 다르게 설정할 수 있습니다.
+
+```
+tf_estimator=TensorFlow(
+    source_dir='src',
+    entry_point='train.py',
+    dependencies=[],
+    instance_count=1,
+    instance_type='ml.p3.2xlarge',
+    framework_version='2.11.0',
+    role=role,
+    hyperparameters=hyperparameters,
+    sagemaker_session=sagemaker_session,
+    compiler_config=TrainingCompilerConfig(),
+    py_version="py39",
+    disable_profiler=True,
+    metric_definitions=[
+        {"Name": "training_loss", "Regex": "loss: ([0-9.]*?) "},
+        {"Name": "training_accuracy", "Regex": "accuracy: ([0-9.]*?) "},
+        {"Name": "validation_loss", "Regex": "val_loss: ([0-9.]*?) "},
+        {"Name": "validation_accuracy", "Regex": "val_accuracy: ([0-9.]*?)$"}
+    ],
+    base_job_name="app-flower-classifier"
+)
+```
+
+구성을 완료하고 상단에 있는 재생 아이콘 버튼을 눌러서 모든 코드 블럭을 실행해서 파이프라인을 구성하고 생성합니다. 생성된 파이프라인을 확인하기 위해서 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline 이 생성된 것을 확인할 수 있습니다.
+
+<img width="1024" alt="train-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a67826cf-ce7f-4aed-8e63-9c134fee86a1">
 
 
-파일에서 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 과정을 단순화 하기 위해서 학습 데이터와 테스트 데이터는 같은 데이터를 사용합니다.
+AppMlPipeline 을 선택해서 들어간 다음 Graph 탭으로 이동하면 Train 스탭이 생긴 것을 확인할 수 있습니다.
+
+<img width="1024" alt="train-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/411dbc6e-b396-4728-8307-fa6a365bcd67">
+
+
+이제 오른쪽 위에 있는 Create execution 을 눌러서 파이프라인을 시작합니다. 필요한 값들을 입력하고 Start 버튼을 눌러서 실행합니다. 
+
+<img width="1024" alt="train-8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/411dbc6e-b396-4728-8307-fa6a365bcd67">
+
+<img width="1024" alt="train-9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/33d7ddb4-03c4-4b7c-a5c0-2605f4e0c205">
+
+학습이 완료되면 다음과 같이 초록색으로 표시되며 Output 탭에서 학습 결과를 확인할 수 있습니다. 
+
+<img width="1024" alt="train-10" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/13573914-4fc6-4662-bf17-e2e212d7e6cc">
+
 
 
 ## 모델 등록 단계 생성
