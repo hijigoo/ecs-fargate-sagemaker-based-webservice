@@ -53,7 +53,7 @@ def prepare_datasets(data_type="train"):
 
             img_data = img_to_array(img, data_format="channels_last")            
             img_data = image_normalization(img_data)
-            img_label = label_dict[pokemon]
+            img_label = label_dict[flower]
 
             image_data.append(img_data)
             labels.append(img_label)
