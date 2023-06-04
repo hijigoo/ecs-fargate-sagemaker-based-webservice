@@ -513,25 +513,18 @@ tf_estimator=TensorFlow(
         {"Name": "validation_loss", "Regex": "val_loss: ([0-9.]*?) "},
         {"Name": "validation_accuracy", "Regex": "val_accuracy: ([0-9.]*?)$"}
     ],
-    base_job_name="app-flower-classifier"
+    base_job_name="app-flower-classifier-train"
 )
 ```
 
-구성을 완료하고 상단에 있는 재생 아이콘 버튼을 눌러서 모든 코드 블럭을 실행해서 파이프라인을 구성하고 생성합니다. 생성된 파이프라인을 확인하기 위해서 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline 이 생성된 것을 확인할 수 있습니다.
+구성을 완료하고 상단에 있는 재생 아이콘 버튼을 눌러서 모든 코드 블럭을 실행해서 파이프라인을 구성하고 생성합니다. 생성된 파이프라인을 확인하기 위해서 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Train 이 생성된 것을 확인할 수 있습니다.
 
-<img width="1024" alt="train-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a67826cf-ce7f-4aed-8e63-9c134fee86a1">
+<img width="1024" alt="train-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/b80267e1-0b79-4257-bb7a-46b586fc4bef">
 
+AppMlPipeline 을 선택해서 들어간 다음 Graph 탭으로 이동하면 Train 스탭이 생긴 것을 확인할 수 있습니다. 이제 오른쪽 위에 있는 Create execution 을 눌러서 파이프라인을 시작합니다. 필요한 값들을 입력하고 Start 버튼을 눌러서 실행합니다. 
 
-AppMlPipeline 을 선택해서 들어간 다음 Graph 탭으로 이동하면 Train 스탭이 생긴 것을 확인할 수 있습니다.
-
-<img width="1024" alt="train-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/411dbc6e-b396-4728-8307-fa6a365bcd67">
-
-
-이제 오른쪽 위에 있는 Create execution 을 눌러서 파이프라인을 시작합니다. 필요한 값들을 입력하고 Start 버튼을 눌러서 실행합니다. 
-
-<img width="1024" alt="train-8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/411dbc6e-b396-4728-8307-fa6a365bcd67">
-
-<img width="1024" alt="train-9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/33d7ddb4-03c4-4b7c-a5c0-2605f4e0c205">
+<img width="1024" alt="train-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/ab51e076-346e-43d1-864c-ef72c24a5c79">
+<img width="1024" alt="train-8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/b556304e-baf4-4d0f-8d6c-f0b098888e52">
 
 학습이 완료되면 다음과 같이 초록색으로 표시되며 Output 탭에서 학습 결과를 확인할 수 있습니다. 
 
