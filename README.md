@@ -487,7 +487,7 @@ Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다
 
 <img width="800" alt="train-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/aa15494c-fdaa-4f46-b522-c91d3779da71">
 
-이제 앞서 올린 train.py 을 이용해서 학습 단계를 생성하고 학습 단계만 있는 파이프라인을 구성합니다. 이를 위해서 다시 루트 폴더로 나와서 [build-pipelin-train.ipynb](주소 지정 필요) 을 다운 받아서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image 를 TensorFlow 2.12.0 Python 3.10 CPU Optimized 로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 여기서 구성하는 환경은 학습 환경이 아닌 파이프라인 생성을 위한 환경이기 때문에 GPU 를 사용하지 않습니다.
+이제 앞서 올린 train.py 을 이용해서 학습 단계를 생성하고 학습 단계만 있는 파이프라인을 구성합니다. 이를 위해서 [build-pipelin-train.ipynb](주소 지정 필요) 을 다운 받고 SageMaker Studio 에서 루트 폴더로 나와서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image 를 TensorFlow 2.12.0 Python 3.10 CPU Optimized 로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 여기서 구성하는 환경은 학습 환경이 아닌 파이프라인 생성을 위한 환경이기 때문에 GPU 를 사용하지 않습니다.
 
 <img width="1024" alt="train-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c6148994-c3b7-4896-915b-ae0e6574ed5a">
 
@@ -521,7 +521,7 @@ tf_estimator=TensorFlow(
 
 <img width="1024" alt="train-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/b80267e1-0b79-4257-bb7a-46b586fc4bef">
 
-AppMlPipeline 을 선택해서 들어간 다음 Graph 탭으로 이동하면 Train 스탭이 생긴 것을 확인할 수 있습니다. 이제 오른쪽 위에 있는 Create execution 을 눌러서 파이프라인을 시작합니다. 필요한 값들을 입력하고 Start 버튼을 눌러서 실행합니다. 
+AppMlPipeline-Train 을 선택해서 들어간 다음 Graph 탭으로 이동하면 Train 스탭이 생긴 것을 확인할 수 있습니다. 이제 오른쪽 위에 있는 Create execution 을 눌러서 파이프라인을 시작합니다. 필요한 값들을 입력하고 Start 버튼을 눌러서 실행합니다. 
 
 <img width="1024" alt="train-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/ab51e076-346e-43d1-864c-ef72c24a5c79">
 <img width="1024" alt="train-8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/b556304e-baf4-4d0f-8d6c-f0b098888e52">
@@ -533,6 +533,51 @@ AppMlPipeline 을 선택해서 들어간 다음 Graph 탭으로 이동하면 Tra
 
 
 ## 모델 등록 단계 생성
+다음으로 모델 등록 단계가 추가된 파일을 다운받고 업로드합니다. 이를 위해서 모델 생성 단계 [build-pipelin-model.ipynb](주소 지정 필요) 을 다운 받고 SageMaker Studio 에서 루트 폴더로 나와서 /build-pipelin-model.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image 를 TensorFlow 2.12.0 Python 3.10 CPU Optimized 로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 추가된 단계는 다음과 같습니다.
+
+```
+# 4. Create Model
+
+from sagemaker.model import Model
+from sagemaker.inputs import CreateModelInput
+from sagemaker.workflow.steps import CreateModelStep
+
+model = Model(
+    image_uri="763104351884.dkr.ecr.ap-northeast-2.amazonaws.com/tensorflow-inference:2.11.0-cpu", 
+    model_data=step_train.properties.ModelArtifacts.S3ModelArtifacts,
+    sagemaker_session=sagemaker_session,
+    predictor_cls=sagemaker.predictor.RealTimePredictor,
+    role=role
+)
+
+
+inputs = CreateModelInput(
+    instance_type="ml.m5.large",
+)
+
+step_create_model = CreateModelStep(
+    name="CreateModel",
+    model=model,
+    inputs=inputs,
+)
+```
+
+학습 단계에서 했던 과정과 동일하게 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Model 이 생성된 것을 확인할 수 있습니다.
+
+<img width="1024" alt="model-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/31d17cee-ff76-4511-8c49-b3d64701e9ca">
+
+AppMlPipeline-Model 을 선택해서 들어간 다음 Graph 탭으로 이동하면 CreateModel 스탭이 추가된 것을 확인할 수 있습니다. 이제 오른쪽 위에 있는 Create execution 을 눌러서 파이프라인을 시작합니다. 필요한 값들을 입력하고 Start 버튼을 눌러서 실행합니다. 
+
+<img width="1024" alt="model-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0729a2f6-40a0-437a-a8db-49824bf6f3f2">
+<img width="1024" alt="model-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/67a9df6b-61cd-4584-9490-b84b49e7764b">
+
+
+파이프라인이 완료되어 학습과 모델이 생성되면 다음과 같은 화면을 볼 수 있습니다.
+
+<img width="1024" alt="model-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e8a04397-61ec-41a2-ab56-4dda56f7255f">
+
+
+
 
 ## 배포 단계 생성
 [Amazon SageMaker Endpoint 생성]
