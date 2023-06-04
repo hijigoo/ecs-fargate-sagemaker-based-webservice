@@ -483,7 +483,7 @@ Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다
 
 <img width="1024" alt="data-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0a4b372a-a5e6-4184-adaf-2e304383f026">
 
-다음으로 학습 단계에 필요한 코드를 다운받고 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 파일과 [flower.py](주소지정 필요) 을 다운 받아서 /src/train.py 경로와 src/train.py 경로에 각각 업로드 합니다.
+다음으로 학습 단계에 필요한 코드를 다운받고 SageMaker Studio 에 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 과 [flower.py](주소지정 필요) 파일 을 다운 받아서 /src/train.py 경로와 src/train.py 경로에 각각 업로드 합니다.
 
 <img width="800" alt="train-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/aa15494c-fdaa-4f46-b522-c91d3779da71">
 
@@ -513,7 +513,7 @@ tf_estimator=TensorFlow(
         {"Name": "validation_loss", "Regex": "val_loss: ([0-9.]*?) "},
         {"Name": "validation_accuracy", "Regex": "val_accuracy: ([0-9.]*?)$"}
     ],
-    base_job_name="app-flower-classifier-train"
+    base_job_name="app-flower-classifier"
 )
 ```
 
@@ -577,10 +577,56 @@ AppMlPipeline-Model 을 선택해서 들어간 다음 Graph 탭으로 이동하�
 <img width="1024" alt="model-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e8a04397-61ec-41a2-ab56-4dda56f7255f">
 
 
-
-
 ## 배포 단계 생성
-[Amazon SageMaker Endpoint 생성]
+배포 단계에는 SageMaker Endpoint 를 생성하고 생성한 Endpoint 에 모델을 배포합니다. 먼저 배포 단계에 필요한 코드를 다운받고 SageMaker Studio 에 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [deploy.py](주소 지정 필요) 파일을 다운 받아서 /src/deploy.py 경로에 업로드 합니다.
+
+[배포1]
+
+이제 앞서 올린 deploy.py 을 이용해서 SageMaker Endpoint 에 배포하는 단계를 생성하고 파이프라인을 구성합니다. 이를 위해서 [build-pipelin-deploy.ipynb](주소 지정 필요) 을 다운 받고 SageMaker Studio 에서 루트 폴더로 나와서 /build-pipelin-deploy.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image 를 TensorFlow 2.12.0 Python 3.10 CPU Optimized 로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 추가된 단계는 다음과 같습니다.
+
+```
+# 5. Create Endpoint and Deploy
+
+from sagemaker.workflow.steps import ProcessingStep
+from sagemaker.sklearn.processing import SKLearnProcessor
+
+sklearn_processor = SKLearnProcessor(
+    framework_version="1.0-1",
+    instance_type="ml.m5.large",
+    instance_count=1,
+    # base_job_name="comprehen",
+    sagemaker_session=sagemaker_session,
+    role=role,
+)
+
+step_create_model = ProcessingStep(
+    name="CreateEndpoint",
+    processor=sklearn_processor,
+    job_arguments=[
+        "--model-name",
+        step_create_model.properties.ModelName,
+    ],
+    code="src/deploy.py",
+)
+```
+
+학습 단계에서 했던 과정과 동일하게 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Deploy 가 생성된 것을 확인할 수 있습니다.
+
+<img width="1024" alt="deploy-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/36b4c416-4eb8-43d5-b563-e96a9171517f">
+
+AppMlPipeline-Deploy 을 선택해서 들어간 다음 Graph 탭으로 이동하면 DeployEndpoint 스탭이 생긴 것을 확인할 수 있습니다. 이제 오른쪽 위에 있는 Create execution 을 눌러서 파이프라인을 시작합니다. 필요한 값들을 입력하고 Start 버튼을 눌러서 실행합니다.
+
+<img width="1024" alt="deploy-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8a546ca3-55e6-47f2-8d2d-d6313297af48">
+<img width="1024" alt="deploy-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/346a20f9-6bf3-4162-ae84-9790969f34b9">
+
+파이프라인이 완료되어 학습과 모델이 생성되고 엔드포인트에 배포까지 완료되면 다음과 같은 화면을 볼 수 있습니다.
+
+<img width="1024" alt="deploy-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/15d29280-e37f-4391-bf1a-e1680b07ef56">
+
+
+## 엔드포인트 주소 확인
+
+
 
 ## 전체 파이프라인 코드
 
