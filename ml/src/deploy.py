@@ -24,11 +24,18 @@ def update(args):
         EndpointConfigName=endpoint_config_name,
         ProductionVariants=[production_variant_dict],
     )
-
-    client.update_endpoint(
+    
+    # Create endpoint
+    client.create_endpoint(
         EndpointName="image-classifier",
         EndpointConfigName=endpoint_config_name
     )
+    
+    # Update endpoint
+    # client.update_endpoint(
+    #     EndpointName="image-classifier",
+    #     EndpointConfigName=endpoint_config_name
+    # )
     
 
 if __name__ == "__main__":
