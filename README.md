@@ -44,7 +44,7 @@ Amazon SageMaker Pipelines 을 사용하면 데이터 준비에서 모델 배포
 
 # VPC 생성
 
-AWS가 전 세계에서 데이터 센터를 클러스터링하는 물리적 위치를 리전이라고 합니다. 이번 블로그에서 프로젝트는 Oregon(us-west-2) 리전 에서 진행합니다. VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
+AWS가 전 세계에서 데이터 센터를 클러스터링하는 물리적 위치를 리전이라고 합니다. 이번 블로그에서는 Oregon(us-west-2) 리전 에서 진행합니다. VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
 
 <p align="center">
 <img width="588" alt="region-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/04967cad-e083-4388-a6cb-3b1ce7898142">
@@ -254,8 +254,6 @@ Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 
 
 <img width="1024" alt="5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0cb17fbf-abdc-4b72-8fbf-bce70411b594">
 
-## Boto3 를 이용하여 Amazon SageMaker 엔드포인트 호출
-[코드 입력]
 
 ## Task definitions 구성
 Task definition 을 구성하기 전에 Task 에서 Amazon SageMaker Endpoint 를 호출하기 위한 역할을 먼저 생성합니다. Identity and Access Management(IAM) 콘솔로 이동합니다. 왼쪽 메뉴에서 Roles 를 선택하고 Create role 버튼을 눌러서 역할 생성을 시작합니다.
