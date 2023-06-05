@@ -22,24 +22,24 @@ Amazon ECS 는 AWS Fargate 를 사용해서 Web Service 와 WAS(Web Application 
 
 ## 아키텍처에 사용된 주요 AWS 서비스
 
-**Amazon ECS**
+### Amazon ECS
 
 Amazon Elastic Container Service(Amazon ECS)는 완전 관리형 컨테이너 오케스트레이션 서비스로서 컨테이너화된 애플리케이션을 손쉽게 배포, 관리 및 확장할 수 있도록 도와줍니다. Amazon ECS 컨트롤 플레인은 나머지 AWS 환경과 긴밀하게 통합되어 클라우드에서 컨테이너 워크로드를 실행하기 위한 안전하고 사용하기 쉬운 솔루션을 제공합니다.
 
-**AWS Fargate**
+### AWS Fargate
 
-Amazon EC2 인스턴스의 서버나 클러스터를 관리할 필요 없이 컨테이너를 실행하기 위해 Amazon ECS에 사용할 수 있는 기술입니다. Fargate를 사용하면 더 이상 컨테이너를 실행하기 위해 가상 머신의 클러스터를 프로비저닝, 구성 또는 조정할 필요가 없습니다. 
+AWS Fargate Fargate 는 Amazon EC2 인스턴스의 서버나 클러스터를 관리할 필요 없이 컨테이너를 실행하기 위해 Amazon ECS 에서 사용할 수 있는 기술입니다. Fargate를 사용하면 더 이상 컨테이너를 실행하기 위해 가상 머신의 클러스터를 프로비저닝, 구성 또는 조정할 필요가 없습니다. 따라서 서버 유형을 선택하거나, 클러스터를 조정할 시점을 결정하거나, 클러스터 패킹을 최적화할 필요가 없습니다.
 
-**AWS CodePipeline**
+### AWS CodePipeline
 
-AWS CodePipeline은 소프트웨어를 릴리스하는 데 필요한 단계를 모델링, 시각화 및 자동화할 수 있게 해주는 지속적 전달 서비스입니다. AWS CodePipeline을 사용하여 코드 빌드, 사전 프로덕션 환경으로의 배포, 애플리케이션 테스트 및 프로덕션으로 릴리스를 비롯한 전체 릴리스 프로세스를 모델링합니다. 그러면 AWS CodePipeline이 정의된 워크플로우에 따라 코드 변경이 있을 때마다 애플리케이션을 빌드, 테스트, 배포합니다. 파트너 도구 및 자체 사용자 지정 도구를 릴리스 프로세스 중 원하는 단계에 통합하여 포괄적이며 지속적 전달 솔루션을 형성할 수 있습니다.
+AWS CodePipeline 은 소프트웨어를 릴리스하는 데 필요한 단계를 모델링, 시각화 및 자동화할 수 있게 해주는 지속적 전달 서비스입니다. AWS CodePipeline을 사용하여 코드 빌드, 사전 프로덕션 환경으로의 배포, 애플리케이션 테스트 및 프로덕션으로 릴리스를 비롯한 전체 릴리스 프로세스를 모델링합니다. 그러면 AWS CodePipeline이 정의된 워크플로우에 따라 코드 변경이 있을 때마다 애플리케이션을 빌드, 테스트, 배포합니다. 파트너 도구 및 자체 사용자 지정 도구를 릴리스 프로세스 중 원하는 단계에 통합하여 포괄적이며 지속적 전달 솔루션을 형성할 수 있습니다.
 
-**Amazon SageMaker**
+### Amazon SageMaker
 
 Amazon SageMaker 는 종합 관리형 기계 학습 서비스입니다. Amazon SageMaker 를 통해 데이터 사이언티스트와 개발자들은 기계 학습 모델을 빠르고 쉽게 구축하고 훈련시킬 수 있습니다. 그리고 이들 모델을 프로덕션 지원 호스팅 환경에 직접 배포할 수 있습니다. 탐색 및 분석에 필요한 내장형 Jupyter 작성 노트북 인스턴스를 제공하기 때문에 서버를 관리할 필요가 없습니다. 또한 대규모 데이터를 효율적으로 실행하는 데 최적화된 일반 기계 학습 알고리즘도 제공합니다. 
 
-**Amazon SageMaker Pipeline**
-Amazon SageMaker Pipelines를 사용하면 데이터 준비에서 모델 배포에 이르기까지 완전히 자동화된 ML 워크플로를 생성할 수 있으므로 프로덕션에서 수천 개의 ML 모델로 확장할 수 있습니다. SageMaker Pipelines는 Amazon SageMaker Studio에 연결되는 Python SDK도 함께 제공하므로, 시각적 인터페이스를 활용하여 워크플로의 각 단계를 구축할 수 있습니다. 그런 다음, 단일 API를 사용하여 각 단계를 연결하고 포괄적인 워크플로를 생성할 수 있습니다.
+### Amazon SageMaker Pipelines
+Amazon SageMaker Pipelines 을 사용하면 데이터 준비에서 모델 배포에 이르기까지 완전히 자동화된 ML 워크플로를 생성할 수 있으므로 프로덕션에서 수천 개의 ML 모델로 확장할 수 있습니다. SageMaker Pipelines는 Amazon SageMaker Studio에 연결되는 Python SDK도 함께 제공하므로, 시각적 인터페이스를 활용하여 워크플로의 각 단계를 구축할 수 있습니다. 그런 다음, 단일 API를 사용하여 각 단계를 연결하고 포괄적인 워크플로를 생성할 수 있습니다.
 
 
 # VPC 생성
