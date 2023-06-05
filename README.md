@@ -33,9 +33,12 @@ Amazon EC2 인스턴스의 서버나 클러스터를 관리할 필요 없이 컨
 데이터 과학자 및 개발자가 모든 규모의 기계 학습 모델을 간편하게 빌드, 학습 및 배포할 수 있도록 하는 완전 관리형 서비스로 클라우드 환경에서 학습을 진행하고 모델 서빙을 위한 Endpoint 를 구성할 수 있습니다. 또한 학습부터 배포까지 자동화할 수 있는 Pipeline 기능도 제공합니다.
 
 # VPC 생성
-[리전에 대한 내용 추가]
 
-VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
+AWS가 전 세계에서 데이터 센터를 클러스터링하는 물리적 위치를 리전이라고 합니다. 이번 블로그에서 프로젝트는 Oregon(us-west-2) 리전 에서 진행합니다. VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
+
+<p align="center">
+<img width="588" alt="region-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/04967cad-e083-4388-a6cb-3b1ce7898142">
+</p>
 
 <p align="center">
 <img width="1024" alt="0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/597166b5-7584-4cee-b9af-ea039a99384f">
@@ -161,6 +164,11 @@ Listeners and routing 에서 Create target group 버튼을 눌러서 신규 타�
 Create load balancer 버튼을 눌러서 로드 밸런서 생성을 완료합니다.
 
 <img width="1024" alt="10" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1b0fda5e-c3e8-4995-92ee-713ce87e2619">
+
+생성한 app-web-alb 를 눌러서 DNS name 을 확인하고 복사해 둡니다. Web 서비스 구성이 마치면 해당 주소로 접속할 수 있습니다.
+
+<img width="1024" alt="alb-11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8a8786c8-d967-4f75-b458-0f1681af7ea0">
+
 
 ## AWS ECS Service 생성
 AWS ECS 에서 구동되는 Web 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다. 
@@ -335,6 +343,11 @@ Listeners and routing 에서 Create target group 을 누르고 신규 타겟 그
 Create load balancer 버튼을 눌러서 로드 밸런서 생성을 완료합니다.
 
 <img width="1024" alt="8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/98c39d68-c42b-4ca0-a961-e98e78687fb8">
+
+생성한 app-was-alb 를 눌러서 DNS name 을 확인하고 복사해 둡니다. WAS 서비스 구성이 마치면 해당 주소로 접속할 수 있으며 Web 서비스의 어플리케이션에서 접근할 수 있는 주소입니다.
+
+<img width="1024" alt="alb-9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a35481d5-9d1f-4151-9eb6-eecbaefa397e">
+
 
 ## AWS ECS Service 생성
 AWS ECS 에서 구동되는 WAS 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭을 보면 기존에 구성한 Web 서비스가 있는 것을 볼 수 있습니다. Create 버튼을 눌러 WAS 서비스 구성을 시작합니다.
@@ -624,8 +637,19 @@ AppMlPipeline-Deploy 을 선택해서 들어간 다음 Graph 탭으로 이동하
 <img width="1024" alt="deploy-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/15d29280-e37f-4391-bf1a-e1680b07ef56">
 
 
-## 엔드포인트 주소 확인
+## 엔드포인트 API 접근
+WAS 서버에서 이미지 분류를 위해서는 학습한 모델이 배포된 SageMaker Endpoint 에 접근해야 합니다. 접근을 위해서는 AWS SDK 인 boto3 를 사용합니다. boto3 를 사용하면 내부적으로 자격증명(Credentials)을 확인하기 때문에 편하게 접근할 수 있습니다. 다음 코드는 WAS 서버 코드의 app/main.py 에서 boto3 를 이용해서 SageMaker Endpoint 를 호출하는 코드블럭입니다.
 
+```
+client = boto3.client("sagemaker-runtime")
+endpoint_name = 'image-classifier'
+response = client.invoke_endpoint(
+    EndpointName=endpoint_name,
+    Body=body,
+    ContentType='application/json',
+    Accept='Accept'
+)
+```
 
 
 ## 전체 파이프라인 코드
