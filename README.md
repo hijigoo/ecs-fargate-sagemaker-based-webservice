@@ -210,7 +210,7 @@ Services 탭에서 app-web-service 를 선택하고 Tasks 탭에 선택해서 �
 
 <img width="1024" alt="alb-11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8a8786c8-d967-4f75-b458-0f1681af7ea0">
 
-<img width="724" alt="access-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/50f69e6d-0df7-48ac-964b-23b51804be05">
+![access-1](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a102c561-9f87-4fcc-8493-749eb13f45fc)
 
 
 # AWS Fargate 기반 WAS Service 구성
