@@ -1,7 +1,5 @@
 const send = document.getElementById("flower-send");
 
-current_flower_info = {}
-
 BASE_URL = ""
 CLASSIFIY_IMAGE = "/classify/image"
 
@@ -34,27 +32,13 @@ function updateflowerName(name) {
     .innerHTML = "<p>" + name + "</p>"
 }
 
-function updateflowerDetail(detail, intent) {
-  //분류, 설명, 진화, 타입
-  content=""
-  if (intent === "설명") {
-    if (detail['description']) {
-      content = "<p style='font-weight:600;'>" + detail['description'] + "</p>"
-    }
-  }
+function updateflowerDescription(description) {
+  content = "<p style='font-weight:600;'>" + description + "</p>"
   console.log("--- Update flower description ---")
   document.getElementById("flower-desc")
     .innerHTML = content
 }
 
-function getflowerTitle(result) {
-  return result["result"]["name"]
-}
-
-function setflowerDetailToGlobal(info) {
-  current_flower_info = info
-  console.log(current_flower_info)
-}
 send.addEventListener("click", function () {
   console.log("--- Submit ---")
   const imageInput = document.getElementById("flower-input-image");
@@ -71,9 +55,8 @@ send.addEventListener("click", function () {
     imageFile,
     function(result) {
       console.log("Success: ", result)
-      setflowerDetailToGlobal(result["result"]["detail"])
-      updateflowerName(getflowerTitle(result))
-      updateflowerDetail(current_flower_info, "설명")
+      updateflowerName(result["result"]["name"])
+      updateflowerDescription(result["result"]["description"])
     },
     function(error) {
       console.log("Error: ", error)

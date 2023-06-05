@@ -22,9 +22,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-preload_pokedex_datasets()
-
 async def image_classifier(file):
+    print("--- CALL: image_classifier ---", flush=True)
     # Get image array
     image_array = await get_image_array(file=file)
 
@@ -46,6 +45,9 @@ async def image_classifier(file):
 
     # Parse Result
     result = json.loads(response['Body'].read().decode('utf-8'))
+    print(f"Result: {json.dumps(result, ensure_ascii=False)}")
+
+
     prediction = result["predictions"][0]
     num_prediction = np.argmax(prediction).item()
     no = num_prediction
@@ -61,11 +63,10 @@ async def classify_image(file: UploadFile):
     start = time.time()
 
     no, acc = await image_classifier(file)
-    detail = get_pokemon_by_id(no)
+    detail = get_flower_detail(no)
     name = detail['name']
+    description = detail['description']
 
-    usage_log = {"name": "AI-USAGE", "api": "/classify/image", "pokemon": name, "accuracy": acc}
-    print(json.dumps(usage_log, ensure_ascii=False), flush=True)
     print(f"Elapsed time: {time.time() - start}", flush=True)
 
     return {
@@ -73,7 +74,7 @@ async def classify_image(file: UploadFile):
             "no": no,
             "name": name,
             "acc": acc,
-            "detail": detail
+            "description": description
         }
     }
 
