@@ -175,10 +175,6 @@ Create load balancer 버튼을 눌러서 로드 밸런서 생성을 완료합니
 
 <img width="1024" alt="10" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1b0fda5e-c3e8-4995-92ee-713ce87e2619">
 
-생성한 app-web-alb 를 눌러서 DNS name 을 확인하고 복사해 둡니다. Web 서비스 구성이 마치면 해당 주소로 접속할 수 있습니다.
-
-<img width="1024" alt="alb-11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8a8786c8-d967-4f75-b458-0f1681af7ea0">
-
 
 ## AWS ECS Service 생성
 AWS ECS 에서 구동되는 Web 서비스 구성을 위해서 AWS ECS 클러스터 콘솔로 이동합니다. 처음에 생성한 AppEcsCluster 링크를 클릭해서 들어간 뒤, Services 탭에서 Create 버튼을 눌러 서비스 구성을 시작합니다. 
@@ -210,7 +206,12 @@ Services 탭에서 app-web-service 를 선택하고 Tasks 탭에 선택해서 �
 <img width="1024" alt="9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7c2d73b1-2548-43af-a998-2e208a369478">
 
 ## Web 서버 접속 확인
-[추가 필요]
+앞서 생성한 로드 밸런서인 app-web-alb 에 들어가서 DNS name 을 복사합니다. 복사한 URL 을 통해서 접속할 수 있는지 웹 브라우저에서 확인합니다.
+
+<img width="1024" alt="alb-11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8a8786c8-d967-4f75-b458-0f1681af7ea0">
+
+<img width="634" alt="access-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e0210605-95fb-4897-8207-8ffcacb39cdb">
+
 
 # AWS Fargate 기반 WAS Service 구성
 AWS Fargate 기반 Web Service 구성과 비슷한 흐름으로 진행되지만 다른 부분이 있기 때문에 주의해서 보시기 바랍니다.
