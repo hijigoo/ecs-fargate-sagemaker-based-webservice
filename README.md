@@ -60,7 +60,6 @@ Resources to create 으로 VPC and more 를 선택합니다. 2개의 AZ 를 구�
 <img width="400" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/40047ac6-99cc-44ef-b5f9-fdd714b1349e">
 <img width="400" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/d243317d-ed30-4262-9505-e10d0a922f21">
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6ad72229-d781-4606-a751-f2d9b479bd81">
-
 </p>
 
 구성을 완료한 다음에 Create VPC 버튼을 누르고 기다리면 VPC 와 Subnet이 생성된 것을 확인할 수 있습니다.
@@ -389,10 +388,11 @@ Services 탭에서 app-was-service 를 선택하고 Tasks 탭에 선택해서 �
 ## WAS 서비스 접속 확인
 WAS 서비스의 로드 밸런서는 프라이빗 서브넷에 위치해 있기 때문에 직접 접속할 수 없습니다. 그렇기 때문에 Web 서비스에 배포된 어플리케이션에서 제공하는 웹 페이지를 통해서 접속을 확인합니다. 앞서 생성한 Web 어플리케이션에 접속합니다. 그리고 왼쪽 위에 있는 'WAS 접속 확인 페이지' 버튼을 눌러서 이동합니다. 텍스트 입력 창에 WAS 서비스의 로드 밸런서인 app-was-alb 의 주소를 입력하고 'WAS 접속 확인' 버튼을 누릅니다. {"was-health":{"message":"WAS-Connected"}} 메시지가 보이면 정상적으로 배포되어 Web 서비스에서 접근이 가능한 상태입니다.
 
+<p align="center">
 <img width="621" alt="check-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/bd7e0f32-1402-4751-9e31-25226b1b0897">
 
 <img width="354" alt="check-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/4ff39510-436a-4f8d-8d92-eeaced03c48f">
-
+</p>
 
 
 # AWS CodePipeline 을 이용한 CI/CD 구성
@@ -486,8 +486,10 @@ Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsClu
 
 다시 파이프라인으로 돌아가서 Release change 버튼을 선택해서 파이프라인을 실행합니다. 
 
+<p align="center">
 <img width="450" alt="build2-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c4e2a5c5-fca8-42e8-81cc-258dc54ebddb">
 <img width="450" alt="build2-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/314eadf8-a21e-4abd-89b2-3b95f62eb38d">
+</p>
 
 동일한 방식으로 app-was 를 위한 파이프라인을 생성합니다. 생성할 때 사용되는 값들은 web 대신 was 로 변경합니다. Buildspec 에 있는 코드도 was 에 맞게 수정합니다. 구성이 완료되면 아래와 같이 두 개의 파이프라인이 생성된 것을 확인할 수 있습니다.
 
@@ -505,7 +507,9 @@ Quick setup (1 min) 을 선택하고 Name 으로 app-sagemaker-studio 을 입력
 
 도메인 생성시 뜨는 팝업에서 vpc 는 app-vpc 를 선택하고 subnet 은 public subnet 하나를 선택합니다. 
 
+<p align="center">
 <img width="970" alt="studio-3 5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/97af258a-1867-420c-acb6-4424a29f6734">
+</p>
 
 도메인이 생성되면 도메인 이름을 선택해서 들어간 다음에 생성된 사용자 오른쪽에 있는 Launch 버튼을 펼쳐서 Studio 에 접속합니다.
 
@@ -521,7 +525,9 @@ Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다
 
 다음으로 학습 단계에 필요한 코드를 다운받고 SageMaker Studio 에 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 과 [flower.py](주소지정 필요) 파일 을 다운 받아서 /src/train.py 경로와 src/train.py 경로에 각각 업로드 합니다.
 
+<p align="center">
 <img width="800" alt="train-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/aa15494c-fdaa-4f46-b522-c91d3779da71">
+</p>
 
 이제 앞서 올린 train.py 을 이용해서 학습 단계를 생성하고 학습 단계만 있는 파이프라인을 구성합니다. 이를 위해서 [build-pipelin-train.ipynb](주소 지정 필요) 을 다운 받고 SageMaker Studio 에서 루트 폴더로 나와서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image 를 TensorFlow 2.12.0 Python 3.10 CPU Optimized 로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 여기서 구성하는 환경은 학습 환경이 아닌 파이프라인 생성을 위한 환경이기 때문에 GPU 를 사용하지 않습니다.
 
@@ -616,6 +622,7 @@ AppMlPipeline-Model 을 선택해서 들어간 다음 Graph 탭으로 이동하�
 ## 배포 단계 생성
 배포 단계에는 SageMaker Endpoint 를 생성하고 생성한 Endpoint 에 모델을 배포합니다. 먼저 배포 단계에 필요한 코드를 다운받고 SageMaker Studio 에 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [deploy.py](주소 지정 필요) 파일을 다운 받아서 /src/deploy.py 경로에 업로드 합니다.
 
+
 <p align="center">
 <img width="518" alt="deploy-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/45009fa6-2a99-406a-9011-69deeeb59ed5">
 </p>
@@ -676,7 +683,9 @@ response = client.invoke_endpoint(
 )
 ```
 
+# 웹 어플리케이션 동작 확인
+로드 밸런서(app-web-alb-sg) 의 도메인 주소를 통해서 WAS 서비스에서 구동되고 있는 어플리케이션에 접속합니다. 빨간 사진기 버튼을 눌러서 학습한 꽃 이미지 중 하나를 선택합니다. 노란 돋보기 버튼을 눌러서 분석을 요청하고 기다립니다. 기다리면 분석과 함께 설명이 나오는 것을 확인할 수 있습니다.
 
-## 전체 파이프라인 코드
-
-# 결론
+<p align="center">
+<img width="553" alt="app-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/5b49f6e1-2bf4-40db-bde7-b9112abb7ce9">
+</p>
