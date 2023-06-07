@@ -208,7 +208,7 @@ Services 탭에서 app-web-service 를 선택하고 Tasks 탭에 선택해서 �
 
 <img width="1024" alt="9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7c2d73b1-2548-43af-a998-2e208a369478">
 
-## Web 서버 접속 확인
+## Web 서비스 접속 확인
 앞서 생성한 로드 밸런서인 app-web-alb 에 들어가서 DNS name 을 복사합니다. 복사한 URL 을 통해서 접속할 수 있는지 웹 브라우저에서 확인합니다.
 
 <img width="1024" alt="alb-11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8a8786c8-d967-4f75-b458-0f1681af7ea0">
@@ -386,14 +386,20 @@ Services 탭에서 app-was-service 를 선택하고 Tasks 탭에 선택해서 �
 
 <img width="1024" alt="11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8335dfc5-35b3-4cef-b86a-ce901c802d8f">
 
-## WAS 서버 접속 확인
-[추가 필요]
+## WAS 서비스 접속 확인
+WAS 서비스의 로드 밸런서는 프라이빗 서브넷에 위치해 있기 때문에 직접 접속할 수 없습니다. 그렇기 때문에 Web 서비스에 배포된 어플리케이션에서 제공하는 웹 페이지를 통해서 접속을 확인합니다. 앞서 생성한 Web 어플리케이션에 접속합니다. 그리고 왼쪽 위에 있는 'WAS 접속 확인 페이지' 버튼을 눌러서 이동합니다. 텍스트 입력 창에 WAS 서비스의 로드 밸런서인 app-was-alb 의 주소를 입력하고 'WAS 접속 확인' 버튼을 누릅니다. {"was-health":{"message":"WAS-Connected"}} 메시지가 보이면 정상적으로 배포되어 Web 서비스에서 접근이 가능한 상태입니다.
+
+<img width="621" alt="check-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/bd7e0f32-1402-4751-9e31-25226b1b0897">
+
+<img width="354" alt="check-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/4ff39510-436a-4f8d-8d92-eeaced03c48f">
+
+
 
 # AWS CodePipeline 을 이용한 CI/CD 구성
 CI/CD 를 구성하기 위해서 CodeCommit 와 CodeBuild 를 먼저 구성하고 CodePipeline 과 연결합니다.
 
 ## AWS CodeCommit 레파지토리 구성
-CodeCommit 레파지토리를 생성하고 다운 받았던 web 과 app 프로젝트 코드를 새로 생성한 레파지토리에 푸시합니다. 먼저 AWS CodeCommit 콘솔로 이동 후 Create repository 버튼을 눌러서 생성을 시작합니다. 
+CodeCommit 레파지토리를 생성하고 다운받았던 web 과 app 프로젝트 코드를 새로 생성한 레파지토리에 올려야 합니다. 먼저 AWS CodeCommit 콘솔로 이동 후 Create repository 버튼을 눌러서 생성을 시작합니다. 
 
 <img width="1024" alt="commit-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/26beeddc-7b68-4dd6-be76-7ce72c24957f">
 
@@ -402,7 +408,15 @@ Repository name 은 app-web 으로 입력하고 Create 버튼을 눌러서 레�
 <img width="1024" alt="commit-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/25b49439-3701-4a5b-bbe7-4a639b91d74b">
 <img width="1024" alt="commit-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2866e7f7-715c-4d61-b4ea-3c5aadc61a0d">
 
-기존 사용하던 web 프로젝트 폴더 안의 내용을 모두 복사해서 클론한 app-web 폴더에 붙여넣고 코드를 푸시합니다. 푸시가 완료되면 다음과 같이 확인할 수 있습니다.
+기존 사용하던 web 프로젝트 폴더 안의 내용을 모두 복사해서 클론한 app-web 폴더에 붙여넣습니다. 그리고 app/router.js 파일에서 BASE_URL 을 앞서 생성한 app-was-alb 주소로 변경합니다. 프로토콜은 HTTP 입니다.
+
+```
+// Redirect
+const request = require('request');
+BASE_URL = "HTTP://[app-was-alb 도메인 주소]"
+```
+
+ 코드를 업데이트 한 다음에 코드를 푸시합니다. 푸시가 완료되면 다음과 같이 확인할 수 있습니다.
 
 <img width="1024" alt="commit-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1c450d66-c743-4d14-987e-27f684c54459">
 
