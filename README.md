@@ -1,19 +1,19 @@
 # Amazon ECS 와 Amazon SageMaker 를 이용한 AI 웹 애플리케이션 구현과 CI/CD 파이프라인 구축
 
-마이크로 서비스 아키텍처(MSA)와 인공지능(AI)은 현대화 애플리케이션 구현에서 가장 많이 언급되는 기술입니다. 애플리케이션은 규모가 커질 경우 다양한 환경에서 구동되는 마이크로 서비스가 만들어지는데 이를 운영할 수 있는 환경이 필요합니다. 그리고 인공지능 서비스를 위해서는 머신러닝 모델을 생성 및 학습하고 학습된 모델을 운영할 수 있는 환경이 필요합니다. 
+마이크로 서비스 아키텍처(MSA)와 인공지능(AI)은 현대화 애플리케이션 구현에서 가장 많이 언급되는 기술입니다. 애플리케이션은 규모가 커질 경우 다양한 환경에서 구동되는 마이크로 서비스가 만들어지는데 이를 운영할 수 있는 환경이 필요합니다. 그리고 인공지능 서비스를 위해서는 기계학습 모델을 생성 및 학습하고 학습된 모델을 운영할 수 있는 환경이 필요합니다. 
 
-본 문서에서는 컨테이너화된 애플리케이션을 쉽게 배포, 관리, 확장할 수 있도록 도와주는 완전 관리형 컨테이너 오케스트레이션 서비스인 Amazon ECS 와 머신러닝 모델을 학습하고 배포하여 운영할 수 있는 Amazon SageMaker 를 이용하여 AI 웹 서비스를 구현합니다. 그리고 Amazon SageMaker Pipeline 을 이용하여 머신 러닝 모델 학습 및 배포를 자동화하고 AWS CodePipeline 을 이용해서 컨테이너 통합 및 배포를 위한 CI/CD 파이프라인을 구축하는 방법을 소개합니다.
+본 문서에서는 컨테이너화된 애플리케이션을 쉽게 배포, 관리, 확장할 수 있도록 도와주는 완전 관리형 컨테이너 오케스트레이션 서비스인 Amazon ECS 와 기계학습 모델을 학습하고 배포하여 운영할 수 있는 Amazon SageMaker 를 이용하여 AI 웹 서비스를 구현합니다. 그리고 Amazon SageMaker Pipeline 을 이용하여 머신 러닝 모델 학습 및 배포를 자동화하고 AWS CodePipeline 을 이용해서 컨테이너 통합 및 배포를 위한 CI/CD 파이프라인을 구축하는 방법을 소개합니다.
 
-# AI 웹 어플리케이션 아키텍처
+# AI 웹 애플리케이션 아키텍처
 
 <img width="1024" alt="architecture-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/aaefe807-9368-41d8-b68a-0e86368ed6af">
 
-## Amazon ECS 와 Amazon SageMaker 를 이용한 AI 웹 어플리케이션
-Amazon ECS 는 AWS Fargate 를 사용해서 Web Service 와 WAS(Web Application Server) Service 로 구성된 애플리케이션을 운영합니다. 그리고 Amazon SageMaker 는 모델을 학습하고 학습된 모델을 Amazon SageMaker Endpoint 를 통해 API 형태로 WAS 에 제공합니다. NAT gateway 는 네트워크 주소 변환 서비스로 Private Subnet 에 위치한 WAS Service 가 외부의 서비스와 연결이 필요한 경우 사용됩니다. 하지만 외부 서비스에서는 WAS Service 에 연결을 시작할 수 없어 보안을 강화할 수 있습니다. Application Load Balancer 는 Service 에서 운영되고 있는 복제된 여러개의 Task에 트래픽을 분산합니다. Task는 한 개 이상의 컨테이너를 정의할 수 있습니다. 이번 아키텍처에서는 Task 에 하나의 컨테이너를 정의하여 운영합니다. 본 시스템에서 사용자는 Web Service 에서 제공하는 UI 를 통해 AI 웹 애플리케이션에 접근합니다. Web Service 는 비지니스 로직을 수행을 위해서 WAS Service 를 호출하고 WAS Service 는 이미지 분류와 같은 AI 기능을 수행하기 위해서 Amazon SageMaker Endpoint 를 호출합니다.
+## Amazon ECS 와 Amazon SageMaker 를 이용한 AI 웹 애플리케이션
+Amazon ECS 는 AWS Fargate 를 사용해서 Web Service 와 WAS(Web Application Server) Service 로 구성된 애플리케이션을 운영합니다. 그리고 Amazon SageMaker 는 모델을 학습하고 학습된 모델을 Amazon SageMaker Endpoint 를 통해 API 형태로 WAS 에 제공합니다. NAT gateway 는 네트워크 주소 변환 서비스로 Private Subnet 에 위치한 WAS Service 가 외부의 서비스와 연결이 필요한 경우 사용됩니다. 하지만 외부 서비스에서는 WAS Service 에 연결을 시작할 수 없어 보안을 강화할 수 있습니다. Application Load Balancer 는 Service 에서 운영되고 있는 복제된 여러 개의 Task에 트래픽을 분산합니다. Task는 한 개 이상의 컨테이너를 정의할 수 있습니다. 이번 아키텍처에서는 Task 에 하나의 컨테이너를 정의하여 운영합니다. 본 시스템에서 사용자는 Web Service 에서 제공하는 UI 를 통해 AI 웹 애플리케이션에 접근합니다. Web Service 는 비즈니스 로직을 수행을 위해서 WAS Service 를 호출하고 WAS Service 는 이미지 분류와 같은 AI 기능을 수행하기 위해서 Amazon SageMaker Endpoint 를 호출합니다.
 
 ## AWS CodePipeline 를 이용한 Application CI/CD 구성
 
-코드의 통합과 배포를 자동화할 수 있는 CI/CD 서비스를 제공합니다. 애플리케이션 개발자는 AWS CodePipeline 를 통해서 빠르고 안정적으로 애플리케이션을 빌드하고 Amazon ECS 로 구성된 인프라 배포하는 과정을 자동화합니다. 먼저 AWS CodeCommit 을 통해서 개발 중인 코드를 형상관리 할 수 있습니다. 그리고 코드는 특정 브랜치에 업데이트 되거나 머지되어 변경 사항이 생기면 AWS CodeBuild 를 통해서 컨테이너 이미지를 빌드하고 ECR 에 업로드됩니다. 이후 AWS CodeDeploy 를 통해서 ECS 환경에 배포합니다.
+코드의 통합과 배포를 자동화할 수 있는 CI/CD 서비스를 제공합니다. 애플리케이션 개발자는 AWS CodePipeline 를 통해서 빠르고 안정적으로 애플리케이션을 빌드하고 Amazon ECS 로 구성된 인프라 배포하는 과정을 자동화합니다. 먼저 AWS CodeCommit 을 통해서 개발 중인 코드를 형상 관리 할 수 있습니다. 그리고 코드는 특정 브랜치에 업데이트 되거나 머지되어 변경 사항이 생기면 AWS CodeBuild 를 통해서 컨테이너 이미지를 빌드하고 ECR 에 업로드됩니다. 이후 AWS CodeDeploy 를 통해서 ECS 환경에 배포합니다.
 
 ## Amazon SageMaker Pipeline 를 이용한 기계학습 CI/CD 구성
 
@@ -36,7 +36,7 @@ AWS CodePipeline 은 소프트웨어를 릴리스하는 데 필요한 단계를 
 
 ### Amazon SageMaker
 
-Amazon SageMaker 는 종합 관리형 기계 학습 서비스입니다. Amazon SageMaker 를 통해 데이터 사이언티스트와 개발자들은 기계 학습 모델을 빠르고 쉽게 구축하고 훈련시킬 수 있습니다. 그리고 이들 모델을 프로덕션 지원 호스팅 환경에 직접 배포할 수 있습니다. 탐색 및 분석에 필요한 내장형 Jupyter 작성 노트북 인스턴스를 제공하기 때문에 서버를 관리할 필요가 없습니다. 또한 대규모 데이터를 효율적으로 실행하는 데 최적화된 일반 기계 학습 알고리즘도 제공합니다. 
+Amazon SageMaker 는 종합 관리형 기계 학습 서비스입니다. Amazon SageMaker 를 통해 데이터 사이언티스트와 개발자들은 기계 학습 모델을 빠르고 쉽게 구축하고 훈련할 수 있습니다. 그리고 이들 모델을 프로덕션 지원 호스팅 환경에 직접 배포할 수 있습니다. 탐색 및 분석에 필요한 내장형 Jupyter 작성 노트북 인스턴스를 제공하기 때문에 서버를 관리할 필요가 없습니다. 또한 대규모 데이터를 효율적으로 실행하는 데 최적화된 일반 기계 학습 알고리즘도 제공합니다. 
 
 ### Amazon SageMaker Pipelines
 Amazon SageMaker Pipelines 을 사용하면 데이터 준비에서 모델 배포에 이르기까지 완전히 자동화된 ML 워크플로를 생성할 수 있으므로 프로덕션에서 수천 개의 ML 모델로 확장할 수 있습니다. SageMaker Pipelines는 Amazon SageMaker Studio에 연결되는 Python SDK도 함께 제공하므로, 시각적 인터페이스를 활용하여 워크플로의 각 단계를 구축할 수 있습니다. 그런 다음, 단일 API를 사용하여 각 단계를 연결하고 포괄적인 워크플로를 생성할 수 있습니다.
@@ -44,7 +44,7 @@ Amazon SageMaker Pipelines 을 사용하면 데이터 준비에서 모델 배포
 
 # VPC 생성
 
-AWS가 전 세계에서 데이터 센터를 클러스터링하는 물리적 위치를 리전이라고 합니다. 이번 블로그에서는 Oregon(us-west-2) 리전 에서 진행합니다. VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
+AWS가 전 세계에서 데이터 센터를 클러스터링하는 물리적 위치를 리전이라고 합니다. 이번 블로그에서는 Oregon(us-west-2) 리전에서 진행합니다. VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
 
 <p align="center">
 <img width="588" alt="region-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/04967cad-e083-4388-a6cb-3b1ce7898142">
@@ -65,7 +65,7 @@ Resources to create 으로 VPC and more 를 선택합니다. 2개의 AZ 를 구�
 구성을 완료한 다음에 Create VPC 버튼을 누르고 기다리면 VPC 와 Subnet이 생성된 것을 확인할 수 있습니다.
 
 # Amazon ECS 클러스터 구성
-Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 Clusters 를 선택 하고 Create Cluster 버튼을 눌러서 클러스터를 생성을 시작합니다. 
+Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 Clusters 를 선택하고 Create Cluster 버튼을 눌러서 클러스터를 생성을 시작합니다. 
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/28445be5-3374-43f4-b611-72b928a5e5c2">
 
@@ -82,12 +82,12 @@ Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 C
 
 # AWS Fargate 기반 Web Service 구성
 
-AWS Fargate 기반 Web 서비스를 구성하기 위해서 여러 단게를 거칩니다. 먼저 사용할 샘플 Web Application 을 다운로드 하고 Docker 로 빌드합니다. 그리고 빌드한 이미지를 Amazon ECR 에 등록하여 AWS ECS Service 에 배포할 준비를 합니다. 다음으로 Web 서비스와 로드 밸런서에 적용할 Security Group 을 생성하고 로드 밸런서를 생성합니다. 마지막으로 Web 서비스 구성을 위한 태스크 정의를 하고 Web 서비스를 생성합니다.
+AWS Fargate 기반 Web 서비스를 구성하기 위해서 여러 단계를 거칩니다. 먼저 사용할 샘플 Web Application 을 다운로드 하고 Docker 로 빌드합니다. 그리고 빌드한 이미지를 Amazon ECR 에 등록하여 AWS ECS Service 에 배포할 준비를 합니다. 다음으로 Web 서비스와 로드 밸런서에 적용할 Security Group 을 생성하고 로드 밸런서를 생성합니다. 마지막으로 Web 서비스 구성을 위한 태스크 정의를 하고 Web 서비스를 생성합니다.
 
 
 ## Web Application 다운로드 및 빌드
 
-[Web Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/web) 샘플 프로젝트 코드를 다운 받습니다. 그리고 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
+[Web Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/web) 샘플 프로젝트 코드를 다운받습니다. 그리고 콘솔이나 터미널에서 web 폴더로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
 ```
 docker build  -t app-web .
 ```
@@ -103,7 +103,7 @@ docker images
 ```
 
 ## Amazon ECR 에 Web Application 이미지 등록
-Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 Repositories 를 선택합니다. 그리고 Private 탭에서 Create repository 버튼을 눌러서 레지스토리를 생성을 시작합니다.
+Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 Repositories 를 선택합니다. 그리고 Private 탭에서 Create repository 버튼을 눌러서 레파지토리 생성을 시작합니다.
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/d3b7c698-c72e-4a00-92b8-3d1f093671ef">
 
@@ -111,7 +111,7 @@ Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 
 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c11ff57f-b3c8-455c-bef3-976548fe968b">
 
-구성을 완료한 다음에 맨 아래에 있는 Create 버튼을 누르고 기다리면 레지스트리가 생성된 것을 확인할 수 있습니다.
+구성을 완료한 다음에 맨 아래에 있는 Create 버튼을 누르고 기다리면 레파지토리가 생성된 것을 확인할 수 있습니다.
 
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/9e7e97fd-7f1d-4b70-ba4c-e7d26b136931">
 
@@ -142,13 +142,13 @@ AWS ECS Web 서비스의 구성에 사용할 로드 밸런서를 생성합니다
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/af78d083-6afb-420a-92f3-32a6f6206457">
 
-Load balancer name 는 app-web-alb 으로 입력하고 Scheme 은 Internet-facing 을 선택합니다. Networking 구성에서 VPC 는 생성해 놓은 app-vpc 를 선택하고 Subnets 에는 public subnets 두 개를 선택합니다. 그리고 Security groups 에는 미리 생성해놓은 app-web-alb-sg 를 선택합니다.
+Load balancer name 는 app-web-alb 으로 입력하고 Scheme 은 Internet-facing 을 선택합니다. Networking 구성에서 VPC 는 생성해 둔 app-vpc 를 선택하고 Subnets 에는 public subnets 두 개를 선택합니다. 그리고 Security groups 에는 미리 생성해 둔 app-web-alb-sg 를 선택합니다.
 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f0ddfd81-b722-483e-a1a7-dd71e0adc4e1">
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/258d0d78-2a1d-4f40-abfa-a502e5e37231">
 <img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/eb7bafa5-6508-4fdb-a29b-e028c4474c9f">
 
-Listeners and routing 에서 Create target group 버튼을 눌러서 신규 타겟 그룹을 구성을 시작합니다. Choose a target type 는 IP addresses 를 선택하고 Target group name 값으로 app-web-alb-tg 를 입력하고 Port 는 8000을 입력합니다. VPC 는 app-vpc 를 선택합니다. 그리고 Health check path 값으로 /health 를 입력합니다. Next 버튼을 눌러서 다음 단계를 넘어간 뒤 Create target group 버튼을 눌러서 타겟 그룹을 생성을 완료합니다.
+Listeners and routing 에서 Create target group 버튼을 눌러서 신규 타겟 그룹의 구성을 시작합니다. Choose a target type 는 IP addresses 를 선택하고 Target group name 값으로 app-web-alb-tg 를 입력하고 Port 는 8000을 입력합니다. VPC 는 app-vpc 를 선택합니다. 그리고 Health check path 값으로 /health 를 입력합니다. Next 버튼을 눌러서 다음 단계를 넘어간 뒤 Create target group 버튼을 눌러서 타겟 그룹을 생성을 완료합니다.
 
 <img width="1024" alt="5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7aa1ce60-8388-4302-852c-1fb635fbb0fa">
 <img width="1024" alt="6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6801ec6a-818b-4281-b4fc-889a22568fe4">
@@ -173,7 +173,7 @@ Amazon ECS 에서 Docker 컨테이너를 실행하기 위해서 태스크를 정
 <img width="800" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/5f5d98e5-befc-4a15-be00-ab9448093b8a">
 </p>
 
-모두 기본 값으로 남기고 다시 Next 버튼을 눌러서 다음 진행 단계로 넘어갑니다. 구성을 확인하고 맨 아래에 있는 Create 버튼을 누르고 기다리면 태스크 정의가 생성된 것을 확인할 수 있습니다.
+모두 기본값으로 남기고 다시 Next 버튼을 눌러서 다음 진행 단계로 넘어갑니다. 구성을 확인하고 맨 아래에 있는 Create 버튼을 누르고 기다리면 태스크 정의가 생성된 것을 확인할 수 있습니다.
 
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c32dd2c0-ec4c-4702-928a-7212677a7178">
 
@@ -188,7 +188,7 @@ Environment 는 다음과 같이 구성합니다. Compute options 으로 Launch 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/879595fb-e543-40dc-9817-28512fde554b">
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/ed0509fa-d887-4ecd-9457-a3dfed5a04bd">
 
-Networking 구성에서 VPC 는 생성해 놓은 app-vpc 를 선택하고 Subnets 에는 private subnets 두 개를 선택합니다. 그리고 Security group 에는 미리 생성해놓은 app-web-sg 를 적용합니다. 그리고 로드 밸런서를 통해 접근할 예정이기 때문에 Public IP 는 disable 해놓습니다.
+Networking 구성에서 VPC 는 생성해 둔 app-vpc 를 선택하고 Subnets 에는 private subnets 두 개를 선택합니다. 그리고 Security group 에는 미리 생성해 둔 app-web-sg 를 적용합니다. 그리고 로드 밸런서를 통해 접근할 예정이기 때문에 Public IP 는 disable 해놓습니다.
 
 <img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/daf8cbce-ec3b-4ea9-8932-edd587f0c333">
 
@@ -216,10 +216,10 @@ Services 탭에서 app-web-service 를 선택하고 Tasks 탭에 선택해서 �
 
 
 # AWS Fargate 기반 WAS Service 구성
-이번 단계는 AWS Fargate 기반 WAS Service 구성과 비슷한 흐름으로 진행되지만 다른 부분이 있기 때문에 주의해서 보시기 바랍니다 Web Service 를 구성했던 것과 마찬가지로 AWS Fargate 기반 WAS 서비스를 구성하기 위해서 여러 단게를 거칩니다. 먼저 사용할 샘플 WAS Application 을 다운로드 하고 Docker 로 빌드합니다. 그리고 빌드한 이미지를 Amazon ECR 에 등록하여 AWS ECS Service 에 배포할 준비를 합니다. 다음으로 Web 서비스와 로드 밸런서에 적용할 Security Group 을 생성하고 로드 밸런서를 생성합니다. 마지막으로 WAS 서비스 구성을 위한 태스크 정의를 하고 WAS 서비스를 생성합니다.
+이번 단계는 AWS Fargate 기반 WAS Service 구성과 비슷한 흐름으로 진행되지만 다른 부분이 있기 때문에 주의해서 보시기 바랍니다. Web Service 를 구성했던 것과 마찬가지로 AWS Fargate 기반 WAS 서비스를 구성하기 위해서 여러 단계를 거칩니다. 먼저 사용할 샘플 WAS Application 을 다운로드 하고 Docker 로 빌드합니다. 그리고 빌드한 이미지를 Amazon ECR 에 등록하여 AWS ECS Service 에 배포할 준비를 합니다. 다음으로 Web 서비스와 로드 밸런서에 적용할 Security Group 을 생성하고 로드 밸런서를 생성합니다. 마지막으로 WAS 서비스 구성을 위한 태스크 정의를 하고 WAS 서비스를 생성합니다.
 
 ## WAS Application 다운로드 및 빌드
-[WAS Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/was) 샘플 프로젝트 코드를 다운 받습니다. 그리고 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
+[WAS Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/feat/add-readme/was) 샘플 프로젝트 코드를 다운받습니다. 그리고 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
 ```
 docker build  -t app-was .
 ```
@@ -235,15 +235,15 @@ docker images
 ```
 
 ## Amazon ECR 에 WAS Application 이미지 등록
-Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 Repositories 를 선택합니다. 기존에 등록한 app-web 레지스트리가 있는 것을 볼 수 있습니다. 우리는 WAS Application 레지스트리가 추가로 필요하기 때문에 Private 탭에서 Create repository 버튼을 눌러서 레지스트리를 생성을 시작합니다.
+Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 Repositories 를 선택합니다. 기존에 등록한 app-web 레파지토리가 있는 것을 볼 수 있습니다. 우리는 WAS Application 레파지토리가 추가로 필요하기 때문에 Private 탭에서 Create repository 버튼을 눌러서 레지스트리를 생성을 시작합니다.
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/2403522d-e9e3-4802-a9bd-f52909f3e327">
 
-레파지토리는 다음 그림과 같이 구성합니다. 이름은 app-was 으로 입력하고 나머지는 그대로 둡니다.
+레파지토리는 다음 그림과 같이 구성합니다. 이름은 app-was 로 입력하고 나머지는 그대로 둡니다.
 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/016c07a9-d8de-44f9-a3ad-7c37a7d3380e">
 
-구성을 완료한 다음에 맨 아래에 있는 Create 버튼을 누르고 기다리면 레지스트리가 생성된 것을 확인할 수 있습니다. 현재까지 총 2개의 레지스트리가 생성되었습니다.
+구성을 완료한 다음에 맨 아래에 있는 Create 버튼을 누르고 기다리면 레파지토리가 생성된 것을 확인할 수 있습니다. 현재까지 총 2개의 레파지토리가 생성되었습니다.
 
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/574d46aa-4304-4c70-8d04-68a2eb30b8da">
 
@@ -271,7 +271,7 @@ AWS ECS 에서 구동되는 WAS 서비스에 적용할 보안 그룹과 서비�
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/3830fb05-d680-42c1-a25c-993e742ce870">
 
 ## Load balancer 생성
-AWS ECS WAS 서비스의 구성에 사용할 로드 밸런서를 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load balancers 를 선택합니다. 그리고 Create load balancer 버튼을 눌러서 로드 밸런서 구성을 시작합니다. Application Load Balancer 의 Create 버튼을 눌러서 생성을 시작합니다. Load balancer name 는 app-was-alb 으로 입력하고 Scheme 은 Internal 을 선택합니다. Networking 구성에서 VPC 는 생성해 놓은 app-vpc 를 선택하고 Subnets 에는 private subnets 두 개를 선택합니다. 그리고 Security groups 에는 미리 생성해놓은 app-was-alb-sg 를 선택합니다.
+AWS ECS WAS 서비스의 구성에 사용할 로드 밸런서를 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load balancers 를 선택합니다. 그리고 Create load balancer 버튼을 눌러서 로드 밸런서 구성을 시작합니다. Application Load Balancer 의 Create 버튼을 눌러서 생성을 시작합니다. Load balancer name 는 app-was-alb 으로 입력하고 Scheme 은 Internal 을 선택합니다. Networking 구성에서 VPC 는 생성해 둔 app-vpc 를 선택하고 Subnets 에는 private subnets 두 개를 선택합니다. 그리고 Security groups 에는 미리 생성해 둔 app-was-alb-sg 를 선택합니다.
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/675bfa24-758c-401c-8d9d-a943c696397f">
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/10d6a524-fc17-4545-ae3d-4281a46618e0">
@@ -291,7 +291,7 @@ Create load balancer 버튼을 눌러서 로드 밸런서 생성을 완료합니
 
 <img width="1024" alt="8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/98c39d68-c42b-4ca0-a961-e98e78687fb8">
 
-생성한 app-was-alb 를 눌러서 DNS name 을 확인하고 복사해 둡니다. WAS 서비스 구성이 마치면 해당 주소로 접속할 수 있으며 Web 서비스의 어플리케이션에서 접근할 수 있는 주소입니다.
+생성한 app-was-alb 를 눌러서 DNS name 을 확인하고 복사해 둡니다. WAS 서비스 구성이 마치면 해당 주소로 접속할 수 있으며 Web 서비스의 애플리케이션에서 접근할 수 있는 주소입니다.
 
 <img width="1024" alt="alb-9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a35481d5-9d1f-4151-9eb6-eecbaefa397e">
 
@@ -334,19 +334,19 @@ InvokeSageMakerEndpoint 으로 검색하면 다음과 같이 정책이 생성된
 
 <img width="1024" alt="0-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1dd1342f-81b0-491e-8ae5-1e2981a03311">
 
-역할을 생성하던 페이지로 다시 돌아온 뒤 Create Policy 버튼 옆에 있는 새로고침 아이콘 버튼을 눌러서 정책리스트를 다시 로드합니다. InvokeSageMakerEndpoint 을 검색하면 방금 생성한 정책이 나옵니다. 나온 정책을 선택하고 Next 버튼을 눌러서 다음 단계로 진행합니다.
+역할을 생성하던 페이지로 다시 돌아온 뒤 Create Policy 버튼 옆에 있는 새로고침 아이콘 버튼을 눌러서 정책 리스트를 다시 로드합니다. InvokeSageMakerEndpoint 을 검색하면 방금 생성한 정책이 나옵니다. 나온 정책을 선택하고 Next 버튼을 눌러서 다음 단계로 진행합니다.
 
 <img width="1024" alt="0-7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/e94ff1f5-3171-4817-a675-f38bdcc6b54e">
 
-Role name 으로 ecsWasTaskRole 으로 입력하고 Create role 버튼을 눌러서 롤 생성을 완료합니다.
+Role name 으로 ecsWasTaskRole 으로 입력하고 Create role 버튼을 눌러서 역할 생성을 완료합니다.
 
 <img width="1024" alt="0-8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/214abdd0-67a7-4fab-846b-260a33bb4968">
 
-Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 Task definition 을 선택합니다. 기존에 등록한 app-web 레지스트리가 있는 것을 볼 수 있습니다. Create new task definition 버튼을 눌러서 태스크 정의를 시작합니다. 
+Amazon ECS(Elastic Container Service) 콘솔로 이동 후 왼쪽 메뉴에서 Task definition 을 선택합니다. 기존에 등록한 app-web 레파지토리가 있는 것을 볼 수 있습니다. Create new task definition 버튼을 눌러서 태스크 정의를 시작합니다. 
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/a4cb9be8-9e55-413b-86cb-d7aae34dccce">
 
-태스크 정의는 다음 그림과 같이 구성합니다. Task definition family 는 app-was-td 로 지정합니다. 그리고 태스크를 구성할 컨테이너 정보를 입력합니다. Name 은 app-was 으로 지정하고 Image URI 는 ECR 콘솔에서 앞 단계에서 푸시한 이미지 URI 를 찾아서 입력합니다. 포트는 8081 으로 입력합니다. Environment 칸에 있는 Task role 에 앞서 생성한 ecsWasRole 을 선택하여 입력합니다. Next 버튼을 눌러서 다음으로 진행합니다.
+태스크 정의는 다음 그림과 같이 구성합니다. Task definition family 는 app-was-td 로 지정합니다. 그리고 태스크를 구성할 컨테이너 정보를 입력합니다. Name 은 app-was 로 지정하고 Image URI 는 ECR 콘솔에서 앞 단계에서 푸시한 이미지 URI 를 찾아서 입력합니다. 포트는 8081 로 입력합니다. Environment 칸에 있는 Task role 에 앞서 생성한 ecsWasRole 을 선택하여 입력합니다. Next 버튼을 눌러서 다음으로 진행합니다.
 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/5e4c9828-12c6-4f46-bbf9-e189b134fac9">
 
@@ -362,12 +362,12 @@ AWS ECS 에서 구동되는 WAS 서비스 구성을 위해서 AWS ECS 클러스�
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8d7f52b9-a9f3-434f-aeb8-4b6867805eb6">
 
-Environment 는 다음과 같이 구성합니다. Compute options 으로 Launch Type 을 선택하고, Application type 으로 Service 를 선택합니다. 그리고 family 값으로 앞서 생성한 task definition 인 app-was-td 를 선택합니다. Service Name 으로는 app-was-service 를 입력합니다. Desired tasks 값으로 2를 입력합니다.
+Environment 는 다음과 같이 구성합니다. Compute options 로 Launch Type 을 선택하고, Application type 으로 Service 를 선택합니다. 그리고 family 값으로 앞서 생성한 task definition 인 app-was-td 를 선택합니다. Service Name 으로는 app-was-service 를 입력합니다. Desired tasks 값으로 2를 입력합니다.
 
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f833f315-3b2b-423b-b8eb-b899c105eeca">
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/f4d1d260-4464-4a59-b3d5-59ef88c1922c">
 
-Networking 구성에서 VPC 는 생성해 놓은 app-vpc 를 선택하고 Subnets 에는 private subnets 두 개를 선택합니다. 그리고 Security group 에는 미리 생성해놓은 app-was-sg 를 적용합니다. 그리고 로드 밸런서를 통해 접근할 예정이기 때문에 Public IP 는 disable 해놓습니다.
+Networking 구성에서 VPC 는 생성해 둔 app-vpc 를 선택하고 Subnets 에는 private subnets 두 개를 선택합니다. 그리고 Security group 에는 미리 생성해 둔 app-was-sg 를 적용합니다. 그리고 로드 밸런서를 통해 접근할 예정이기 때문에 Public IP 는 disable 해놓습니다.
 
 <img width="1024" alt="4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/9c006b3e-a915-4280-822e-b7c7906feeef">
 
@@ -376,7 +376,7 @@ Load Balancing 구성에서 Load balancer type 으로 Application Load Balancer 
 <img width="1024" alt="alb2-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/fd218e66-bb5a-4db7-bebe-972f62c99437">
 <img width="1024" alt="alb2-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/89b76348-d491-4d39-95e4-2ec4d09681d5">
 
-Service auto scaling 구성에서 Use service auto scaling 를 체크합니다. Minimum number of tasks 값으로 2를 입력하고 Maximum number of tasks 값으로 4를 입력합니다. Policy name 값으로 app-was-asg-policy 을 입력합니다. ECS service metric 으로 ECSServiceMetricAverageCPUUtilization 을 선택하고 Target value 로 70 을 입력합니다. Scale-out cooldown period 과 Scale-in cooldown period 모두 300으로 입력합니다. 모든 구성을 완료한 다음에 Create 버튼을 눌러서 서비스를 생성합니다.
+Service auto scaling 구성에서 Use service auto scaling 을 체크합니다. Minimum number of tasks 값으로 2를 입력하고 Maximum number of tasks 값으로 4를 입력합니다. Policy name 값으로 app-was-asg-policy 을 입력합니다. ECS service metric 으로 ECSServiceMetricAverageCPUUtilization 을 선택하고 Target value 로 70 을 입력합니다. Scale-out cooldown period 과 Scale-in cooldown period 모두 300으로 입력합니다. 모든 구성을 완료한 다음에 Create 버튼을 눌러서 서비스를 생성합니다.
 
 <img width="1024" alt="7" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/4718b952-272c-427e-bfcc-34930f1592b5">
 <img width="1024" alt="8" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/00cff2ba-f12d-4146-80d5-72bc3714bd2d">
@@ -386,7 +386,7 @@ Services 탭에서 app-was-service 를 선택하고 Tasks 탭에 선택해서 �
 <img width="1024" alt="11" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/8335dfc5-35b3-4cef-b86a-ce901c802d8f">
 
 ## WAS 서비스 접속 확인
-WAS 서비스의 로드 밸런서는 프라이빗 서브넷에 위치해 있기 때문에 직접 접속할 수 없습니다. 그렇기 때문에 Web 서비스에 배포된 어플리케이션에서 제공하는 웹 페이지를 통해서 접속을 확인합니다. 앞서 생성한 Web 어플리케이션에 접속합니다. 그리고 왼쪽 위에 있는 'WAS 접속 확인 페이지' 버튼을 눌러서 이동합니다. 텍스트 입력 창에 WAS 서비스의 로드 밸런서인 app-was-alb 의 주소를 입력하고 'WAS 접속 확인' 버튼을 누릅니다. {"was-health":{"message":"WAS-Connected"}} 메시지가 보이면 정상적으로 배포되어 Web 서비스에서 접근이 가능한 상태입니다.
+WAS 서비스의 로드 밸런서는 프라이빗 서브넷에 있기 때문에 직접 접속할 수 없습니다. 그렇기 때문에 Web 서비스에 배포된 애플리케이션에서 제공하는 웹 페이지를 통해서 접속을 확인합니다. 앞서 생성한 Web 애플리케이션에 접속합니다. 그리고 왼쪽 위에 있는 'WAS 접속 확인 페이지' 버튼을 눌러서 이동합니다. 텍스트 입력 창에 WAS 서비스의 로드 밸런서인 app-was-alb 의 주소를 입력하고 'WAS 접속 확인' 버튼을 누릅니다. {"was-health":{"message":"WAS-Connected"}} 메시지가 보이면 정상적으로 배포되어 Web 서비스에서 접근이 가능한 상태입니다.
 
 <p align="center">
 <img width="621" alt="check-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/bd7e0f32-1402-4751-9e31-25226b1b0897">
@@ -416,11 +416,11 @@ const request = require('request');
 BASE_URL = "HTTP://[app-was-alb 도메인 주소]"
 ```
 
- 코드를 업데이트 한 다음에 코드를 푸시합니다. 푸시가 완료되면 다음과 같이 확인할 수 있습니다.
+ 변경한 코드를 저장한 다음에 푸시합니다. 푸시가 완료되면 다음과 같이 확인할 수 있습니다.
 
 <img width="1024" alt="commit-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/1c450d66-c743-4d14-987e-27f684c54459">
 
-WAS 프로젝트 코드도 위와 동일한 방법으로 진행합니다. Repository name 은 app-was 로 입력합니다. 완료가 되면 아래와 같이 두 개의 레파지토리에 코드가 모두 업로드 된 것을 확인할 수 있습니다.
+WAS 프로젝트 코드도 위와 동일한 방법으로 진행합니다. Repository name 은 app-was 로 입력합니다. 완료되면 아래와 같이 두 개의 레파지토리에 코드가 모두 업로드된 것을 확인할 수 있습니다.
 
 <img width="1024" alt="commit-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/7ee7f841-f258-4080-bf6f-bc610472f116">
 
@@ -480,7 +480,7 @@ Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsClu
 
 <img width="1024" alt="build2-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/049285b0-a9b3-40f8-a0c2-d397dd5a9043">
 
-빌드 과정에서 ECR 에 로그인이 필요하기 때문에 정책을 추가해야합니다. Identity and Access Management(IAM) 콘솔로 이동합니다. 왼쪽 메뉴에서 Roles 를 선택하고 codebuild-appWebBuild-service-role 을 검색해서 선택합니다. Add permissions 버튼을 누르고 Attach policies 를 선택합니다. AmazonEC2ContainerRegistryPowerUser 를 검색하고 체크하고 Add permissions 버튼을 눌러서 정책을 추가합니다. 추가가 완료되면 다음과 같이 두 개의 정책이 있는 것을 확인할 수 있습니다.
+빌드 과정에서 ECR 에 로그인이 필요하기 때문에 정책을 추가해야 합니다. Identity and Access Management(IAM) 콘솔로 이동합니다. 왼쪽 메뉴에서 Roles 를 선택하고 codebuild-appWebBuild-service-role 을 검색해서 선택합니다. Add permissions 버튼을 누르고 Attach policies 를 선택합니다. AmazonEC2ContainerRegistryPowerUser 를 검색하고 체크하고 Add permissions 버튼을 눌러서 정책을 추가합니다. 추가가 완료되면 다음과 같이 두 개의 정책이 있는 것을 확인할 수 있습니다.
 
 <img width="1024" alt="build2-5" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/4a47f6cc-56d6-4c3c-bde6-f652ae7602a4">
 
@@ -496,7 +496,7 @@ Deploy provider 으로 Amazon ECS 를 선택하고 Cluster name 으로 AppEcsClu
 <img width="1024" alt="build-9" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/333195e1-f780-4a08-8283-31d0a1bec8d7">
 
 # Amazon SageMaker Studio 생성
-기계 학습 모델을 학습하고 배포하는 환경을 구성하기 위해서 웹 기반 통합 개발 환경(IDE)인 Amazon SageMaker Studio 를 이용합니다. Amazon SageMaker 콘솔로 이동 후 왼쪽 메뉴에서 Domains 를 선택 하고 Create Domain 버튼을 눌러서 도메인 생성을 시작합니다.
+기계 학습 모델을 학습하고 배포하는 환경을 구성하기 위해서 웹 기반 통합 개발 환경(IDE)인 Amazon SageMaker Studio 를 이용합니다. Amazon SageMaker 콘솔로 이동 후 왼쪽 메뉴에서 Domains 를 선택하고 Create Domain 버튼을 눌러서 도메인 생성을 시작합니다.
 
 <img width="1024" alt="studio-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/9aae352b-626b-4016-ac99-9f223e30f059">
 
@@ -519,11 +519,11 @@ Quick setup (1 min) 을 선택하고 Name 으로 app-sagemaker-studio 을 입력
 # Amazon SagemMaker Pipeline 을 이용한 모델 학습 및 배포 자동화
 
 ## 학습 단계 생성
-Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다운받아서 사용됩니다. 먼저 학습에 필요한 [꽃 학습 데이터](https://www.kaggle.com/datasets/l3llff/flowers)를 다운 받습니다. 그리고 Amazon S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운받은 파일 중 'astilbe', 'bellflower', 'black_eyed_susan' 를 업로드 합니다. 여기서는 app-ml-dataset-0410 으로 생성했습니다. 버킷에 접속해서 다운로드 받은 폴더를 전부 업로드합니다. 다음 그림과 같이 astilbe 의 경로는 /app-ml-dataset-0410/flowers/astilbe 가 됩니다.
+Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다운받아서 사용됩니다. 먼저 학습에 필요한 [꽃 학습 데이터](https://www.kaggle.com/datasets/l3llff/flowers)를 다운받습니다. 그리고 Amazon S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운받은 파일 중 'astilbe', 'bellflower', 'black_eyed_susan' 를 업로드 합니다. 여기서는 app-ml-dataset-0410 으로 생성했습니다. 버킷에 접속해서 다운로드 받은 폴더를 전부 업로드합니다. 다음 그림과 같이 astilbe 의 경로는 /app-ml-dataset-0410/flowers/astilbe 가 됩니다.
 
 <img width="1024" alt="data-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0a4b372a-a5e6-4184-adaf-2e304383f026">
 
-다음으로 학습 단계에 필요한 코드를 다운받고 SageMaker Studio 에 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 과 [flower.py](주소지정 필요) 파일 을 다운 받아서 /src/train.py 경로와 src/train.py 경로에 각각 업로드 합니다.
+다음으로 학습 단계에 필요한 코드를 다운받고 SageMaker Studio 에 업로드합니다. 먼저 SageMaker Studio 에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 [train.py](주소 지정 필요) 과 [flower.py](주소지정 필요) 파일을 다운 받아서 /src/train.py 경로와 src/train.py 경로에 각각 업로드 합니다.
 
 <p align="center">
 <img width="800" alt="train-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/aa15494c-fdaa-4f46-b522-c91d3779da71">
@@ -533,7 +533,7 @@ Amazon SageMaker 에서 학습에 사용되는 데이터는 Amazon S3 에서 다
 
 <img width="1024" alt="train-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c6148994-c3b7-4896-915b-ae0e6574ed5a">
 
-파일에서 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 과정을 단순화 하기 위해서 학습 데이터와 테스트 데이터는 같은 데이터를 사용합니다. 다음 코드는 학습되는 컴퓨팅 환경을 구성하는 부분으로 학습 모델에 따라 다르게 설정할 수 있습니다.
+파일에서 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본값으로 사용합니다. 과정을 단순화하기 위해서 학습 데이터와 테스트 데이터는 같은 데이터를 사용합니다. 다음 코드는 학습되는 컴퓨팅 환경을 구성하는 부분으로 학습 모델에 따라 다르게 설정할 수 있습니다.
 
 ```
 tf_estimator=TensorFlow(
@@ -559,7 +559,7 @@ tf_estimator=TensorFlow(
 )
 ```
 
-구성을 완료하고 상단에 있는 재생 아이콘 버튼을 눌러서 모든 코드 블럭을 실행해서 파이프라인을 구성하고 생성합니다. 생성된 파이프라인을 확인하기 위해서 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Train 이 생성된 것을 확인할 수 있습니다.
+구성을 완료하고 상단에 있는 재생 아이콘 버튼을 눌러서 모든 코드 블록을 실행해서 파이프라인을 구성하고 생성합니다. 생성된 파이프라인을 확인하기 위해서 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Train 이 생성된 것을 확인할 수 있습니다.
 
 <img width="1024" alt="train-6" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/b80267e1-0b79-4257-bb7a-46b586fc4bef">
 
@@ -604,7 +604,7 @@ step_create_model = CreateModelStep(
 )
 ```
 
-학습 단계에서 했던 과정과 동일하게 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Model 이 생성된 것을 확인할 수 있습니다.
+학습 단계에서 했던 과정과 동일하게 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본값으로 사용합니다. 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Model 이 생성된 것을 확인할 수 있습니다.
 
 <img width="1024" alt="model-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/31d17cee-ff76-4511-8c49-b3d64701e9ca">
 
@@ -655,7 +655,7 @@ step_create_model = ProcessingStep(
 )
 ```
 
-학습 단계에서 했던 과정과 동일하게 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본 값으로 사용합니다. 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Deploy 가 생성된 것을 확인할 수 있습니다.
+학습 단계에서 했던 과정과 동일하게 train_data_uri 값으로 앞서 업로드한 학습 데이터 경로를 대입하여 기본값으로 사용합니다. 왼쪽의 메뉴에서 홈 아이콘 버튼을 눌러서 메뉴가 펼쳐지면 Pipelines 버튼을 선택해서 이동합니다. 이동하면 다음과 같이 AppMlPipeline-Deploy 가 생성된 것을 확인할 수 있습니다.
 
 <img width="1024" alt="deploy-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/36b4c416-4eb8-43d5-b563-e96a9171517f">
 
@@ -670,7 +670,7 @@ AppMlPipeline-Deploy 을 선택해서 들어간 다음 Graph 탭으로 이동하
 
 
 ## 엔드포인트 API 접근
-WAS 서버에서 이미지 분류를 위해서는 학습한 모델이 배포된 SageMaker Endpoint 에 접근해야 합니다. 접근을 위해서는 AWS SDK 인 boto3 를 사용합니다. boto3 를 사용하면 내부적으로 자격증명(Credentials)을 확인하기 때문에 편하게 접근할 수 있습니다. 다음 코드는 WAS 서버 코드의 app/main.py 에서 boto3 를 이용해서 SageMaker Endpoint 를 호출하는 코드블럭입니다.
+WAS 서버에서 이미지 분류를 위해서는 학습한 모델이 배포된 SageMaker Endpoint 에 접근해야 합니다. 접근을 위해서는 AWS SDK 인 boto3 를 사용합니다. boto3 를 사용하면 내부적으로 자격증명(Credentials)을 확인하기 때문에 편하게 접근할 수 있습니다. 다음 코드는 WAS 서버 코드의 app/main.py 에서 boto3 를 이용해서 SageMaker Endpoint 를 호출하는 코드 블록입니다.
 
 ```
 client = boto3.client("sagemaker-runtime")
@@ -683,8 +683,8 @@ response = client.invoke_endpoint(
 )
 ```
 
-# AI 웹 어플리케이션 동작 확인
-로드 밸런서(app-web-alb-sg) 의 도메인 주소를 통해서 WAS 서비스에서 구동되고 있는 어플리케이션에 접속합니다. 빨간 사진기 버튼을 눌러서 학습한 꽃 이미지 중 하나를 선택합니다. 노란 돋보기 버튼을 눌러서 분석을 요청하고 기다립니다. 기다리면 분석과 함께 설명이 나오는 것을 확인할 수 있습니다.
+# AI 웹 애플리케이션 동작 확인
+로드 밸런서(app-web-alb-sg) 의 도메인 주소를 통해서 WAS 서비스에서 구동되고 있는 애플리케이션에 접속합니다. 빨간 사진기 버튼을 눌러서 학습한 꽃 이미지 중 하나를 선택합니다. 노란 돋보기 버튼을 눌러서 분석을 요청하고 기다립니다. 기다리면 분석과 함께 설명이 나오는 것을 확인할 수 있습니다.
 
 <p align="center">
 <img width="553" alt="app-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/5b49f6e1-2bf4-40db-bde7-b9112abb7ce9">
