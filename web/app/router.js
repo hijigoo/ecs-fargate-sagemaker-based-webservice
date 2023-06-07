@@ -21,6 +21,11 @@ BASE_URL = "http://internal-app-was-alb-1863869934.us-west-2.elb.amazonaws.com"
 
 CLASSIFIY_IMAGE = "/classify/image"
 HEALTH = "/health"
+
+router.get('/was/check', function(req, res, next) {
+  res.render('check-was.html');
+});
+
 router.get("/was/health", function (req, res) {
   let url = BASE_URL + HEALTH
   request.get({
@@ -31,8 +36,25 @@ router.get("/was/health", function (req, res) {
   })
 });
 
+router.get("/was/health/:url", function (req, res) {
+  console.log(req.params.url)
+
+  let url = "http://" + req.params.url + HEALTH
+  if(!req.params.url) {
+    url = BASE_URL + HEALTH
+  }
+
+  request.get({
+    url: url,
+  },function(err,response,body){
+    console.log(body)
+    return res.json({"was-health":JSON.parse(body)})
+  })
+});
+
 router.post('/classify/image', multer().single('file'), function(req, res) {
   console.log("/classify/sentence")
+
   let url = BASE_URL + CLASSIFIY_IMAGE
   let formData = {
     //file field need set options 'contentType' and 'filename' for formData

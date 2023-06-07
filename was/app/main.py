@@ -81,4 +81,9 @@ async def classify_image(file: UploadFile):
 
 @app.get("/health")
 async def root():
-    return {"message": "Healthy"}
+    return {"message": "WAS-Connected"}
+
+
+@app.get("/")
+async def root():
+    return {"message": "connected"}

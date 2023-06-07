@@ -12,6 +12,11 @@
 <!--    <link rel="stylesheet" href="cloud.css">-->
 
   </head>
+
+  <button id="button-for-was-check" style="position:absolute; top: 15px; left: 15px;">
+    WAS 접속 확인 페이지
+  </button>
+
   <body class="flower-site has-navbar-fixed-bottom">
 
     <section class="flower-section section">
@@ -61,6 +66,7 @@
       </div>
     </nav>
 
+    
     <!-- Image select -->
     <div id="modal-js-example" class="modal">
       <div class="modal-background"></div>
@@ -72,16 +78,16 @@
 
             <!-- Take with camera -->
             <p style="text-align: center">
-            <a class="panel-block" style="font-size: 1.3rem; margin-bottom: 2px;">
-              <span class="panel-icon is-large">
-                <i class="fas fa-camera fa-lg" aria-hidden="true"></i>
-              </span>
-              <label class="file-label" style="width: 100%;">
-                <input id="flower-input-image" class="file-input" type="file" capture="environment" accept="image/*">
-                카메라로 촬영
-              </label>
-            </a>
-              </p>
+              <a class="panel-block" style="font-size: 1.3rem; margin-bottom: 2px;">
+                <span class="panel-icon is-large">
+                  <i class="fas fa-camera fa-lg" aria-hidden="true"></i>
+                </span>
+                <label class="file-label" style="width: 100%;">
+                  <input id="flower-input-image" class="file-input" type="file" capture="environment" accept="image/*">
+                  카메라로 촬영
+                </label>
+              </a>
+            </p>
 
             <!-- Select from album -->
             <a class="panel-block" style="font-size: 1.3rem; margin-top: 2px;">
@@ -134,4 +140,11 @@
   <script type="text/javascript" src="jquery-3.6.3.min.js"></script>
   <script src="inference.js"></script>
   <script src="modal-controller.js"></script>
+
+  <script>
+    document.getElementById("button-for-was-check").onclick = function () {
+        location.href = "/was/check";
+    };
+  </script>
+
 </html>
