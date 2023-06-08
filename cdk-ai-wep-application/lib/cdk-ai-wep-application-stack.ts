@@ -65,13 +65,19 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
     const webImage = ecs.ContainerImage.fromAsset('../web');
     const wasImage = ecs.ContainerImage.fromAsset('../was'); 
 
+    // define task definition family
     const taskDefinition = new ecs.FargateTaskDefinition(this, 'ServiceTask', {
-      family: 'ServiceTask'
+      family: 'app-web-td'
     });
-
-    const webContainerDefinition = taskDefinition.addContainer('Web', {
+    const webContainerDefinition = taskDefinition.addContainer('app-web', {
       image: webImage,
-      portMappings: [{ containerPort: 80 }]
+      portMappings: [{ 
+        containerPort: 8000,
+        protocol: ecs.Protocol.TCP,  
+        name: "app-web-8000-tcp",
+        appProtocol: ecs.AppProtocol.http,        
+      }],
+      containerName: "app-web"
     });
     const wasContainerDefinition = taskDefinition.addContainer('Was', {
       image: wasImage,
@@ -80,7 +86,8 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
 
     // ecs cluster
     const cluster = new ecs.Cluster(this, "AppEcsCluster", {
-      vpc: vpc
+      vpc: vpc,
+      // name: "AppEcsCluster"
     }); 
 
     // Create an application load-balanced Fargate service and make it public
