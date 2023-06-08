@@ -7,7 +7,7 @@
 
 # AI 웹 애플리케이션 아키텍처
 
-<img width="1024" alt="architecture-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/b86ae55b-7e6b-4b99-9c38-3880634a2096">
+<img width="1024" alt="architecture-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0a93afac-2287-48af-b37d-c49c846253af">
 
 ## Amazon ECS 와 Amazon SageMaker 를 이용한 AI 웹 애플리케이션
 [Amazon ECS](https://aws.amazon.com/ko/ecs/) 는 [AWS Fargate](https://aws.amazon.com/ko/fargate/)) 를 사용해서 Web Service 와 WAS(Web Application Server) Service 로 구성된 애플리케이션을 운영합니다. 그리고 [Amazon SageMaker](https://aws.amazon.com/ko/sagemaker/) 는 모델을 학습하고 학습된 모델을 Amazon SageMaker Endpoint 를 통해 API 형태로 WAS 에 제공합니다. NAT gateway 는 네트워크 주소 변환 서비스로 Private Subnet 에 위치한 WAS Service 가 외부의 서비스와 연결이 필요한 경우 사용됩니다. 하지만 외부 서비스에서는 WAS Service 에 연결을 시작할 수 없어 보안을 강화할 수 있습니다. Application Load Balancer 는 Service 에서 운영되고 있는 복제된 여러 개의 Task에 트래픽을 분산합니다. Task는 한 개 이상의 컨테이너를 정의할 수 있습니다. 이번 아키텍처에서는 Task 에 하나의 컨테이너를 정의하여 운영합니다. 본 시스템에서 사용자는 Web Service 에서 제공하는 UI 를 통해 AI 웹 애플리케이션에 접근합니다. Web Service 는 비즈니스 로직을 수행을 위해서 WAS Service 를 호출하고 WAS Service 는 이미지 분류와 같은 AI 기능을 수행하기 위해서 Amazon SageMaker Endpoint 를 호출합니다.
@@ -45,10 +45,10 @@
 
 # VPC 생성
 
-AWS가 전 세계에서 데이터 센터를 클러스터링하는 물리적 위치를 리전이라고 합니다. 이번 블로그에서는 Oregon(us-west-2) 리전에서 진행합니다. VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
+AWS가 전 세계에서 데이터 센터를 클러스터링하는 물리적 위치를 리전이라고 합니다. 이번 블로그에서는 Seoul (ap-northeast-2) 리전에서 진행합니다. 그리고 각 리전은 가용 영역(Availability Zone)이라고 알려진 격리된 위치를 여러 개 가지고 있는데 한 가용 영역에서 장애가 발생하더라도 다른 가용 영역에서 서비스를 운영할 수 있도록 2개의 가용 영역으로 구성합니다. 구성을 위해서 VPC 콘솔로 이동 후 Create VPC 버튼을 눌러서 VPC 생성을 시작합니다. 
 
 <p align="center">
-<img width="588" alt="region-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/04967cad-e083-4388-a6cb-3b1ce7898142">
+<img width="472" alt="region-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/d830b931-90fb-4587-9557-945da2a9c09d">
 </p>
 
 <p align="center">
