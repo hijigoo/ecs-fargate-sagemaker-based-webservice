@@ -52,7 +52,7 @@ cdk bootstrap aws://account-id/ap-northeast-2
 cdk deploy
 ```
 
-셜치과 완료가 되면 아래와 같이 "WebPageURL"와 "WasAlbUrl"을 알 수 있습니다.
+셜치과 완료가 되면 아래와 같이 CDK의 Output에서 "WebPageURL"와 "WasAlbUrl"을 알 수 있습니다.
 
 ![image](https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice/assets/52392004/9c308c78-618e-488e-8060-c98f684ce121)
 
@@ -60,8 +60,21 @@ cdk deploy
 
 ![noname](https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice/assets/52392004/b8af281b-5f7e-4235-a17e-aeb5d102cdc4)
 
+저장후에 Cloud9의 터미널로 가서 아래와 같이 재설치를 합니다.
 
-실행이 완료 되면 아래와 같이 CDK의 Output을 확인할 수 있습니다.
+```java
+cdk deploy
+```
+
+완료가 되면, "WebPageURL"로 접속하여 아래와 같은 화면이 나오는지 확인합니다. 
+
+![image](https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice/assets/52392004/f4c0f8e4-a0fb-48c5-8d6b-8c2055cd64b6)
+
+
+![image](https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice/assets/52392004/2d82ee90-d8d8-41d8-93d1-a22244485f60)
+
+![image](https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice/assets/52392004/f2f0b5db-6038-4f3d-91cd-8cab823beea8)
+
 
 
 ## 리소스 정리하기
