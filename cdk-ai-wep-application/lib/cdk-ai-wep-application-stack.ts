@@ -142,7 +142,7 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
     }); 
 
     ////////////////////////////////////////////////////////    
-    // Security Group - aapp-was-alb-sg
+    // Security Group - app-was-alb-sg
     const sg_WasAlb = new ec2.SecurityGroup(this, "AppWasAlbSg", {
       vpc: vpc,
       allowAllOutbound: true,
@@ -183,7 +183,7 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       })],
     }));
    
-    // Fargate task definition for Was
+    // Fargate task definition for WAS
     const taskDefinition_Was = new ecs.FargateTaskDefinition(this, 'ServiceTaskForWas', {
       family: 'app-was-td',
       cpu: 1024, // 1024 (1 vCPU) 
