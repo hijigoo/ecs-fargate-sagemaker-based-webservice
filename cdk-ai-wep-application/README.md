@@ -80,10 +80,13 @@ cdk deploy
 
 ## CDK 코드 설명
 
+아래와 같이 [cdk-ai-wep-application-stack.ts](./lib/cdk-ai-wep-application-stack.ts)에 대해 설명합니다. 
+
+2개의 AZ로 이중화 될 수 있도록 VPC와 Subnet을 설치합니다. VPC의 CIDR은 "10.0.0.0/16"이며, 2개의 public subnet과 2개의 private subnet을 선언하였습니다.
+
 ```typescript
-// VPC, Subnet
 const vpc = new ec2.Vpc(this, 'my-app-vpc', {
-    maxAzs: 2, // Default is all AZs in region
+    maxAzs: 2, 
     natGateways: 2,
     ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
     vpcName: 'app-vpc',
@@ -102,6 +105,98 @@ const vpc = new ec2.Vpc(this, 'my-app-vpc', {
 });
 ```  
 
+ECS Cluster를 선업합니다.
+```typescript
+const cluster = new ecs.Cluster(this, "AppEcsCluster", {
+    vpc: vpc,
+    clusterName: "AppEcsCluster"
+}); 
+``` 
+
+WEB의 Load Balancer와 WEB을 위한 Security Group을 선언합니다. WEB ALB를 위한 Security Group는 HTTP로 들어오는 모든 트래픽을 허용하고, WEB을 위한 Security Group은 WEB ALB의 Security Group과 8000 포트에 대해 인바운드 트래픽을 허용합니다.
+
+```typescript
+// Security Group - app-web-alb-sg
+const sg_WebAlb = new ec2.SecurityGroup(this, "AppWebAlbSg", {
+    vpc: vpc,
+    allowAllOutbound: true,
+    description: 'security group',
+    securityGroupName: "app-web-alb-sg",
+});
+sg_WebAlb.addIngressRule(
+    ec2.Peer.anyIpv4(),
+    ec2.Port.tcp(80),
+    'allow HTTP traffic from anywhere',
+);
+
+// Security Group - app-web-sg
+const sg_Web = new ec2.SecurityGroup(this, "AppWebSg", {
+    vpc: vpc,
+    allowAllOutbound: true,
+    description: 'security group',
+    securityGroupName: "app-web-sg",
+});
+sg_Web.addIngressRule(
+    ec2.Peer.securityGroupId(sg_WebAlb.securityGroupId),
+    ec2.Port.tcp(8000),
+    'allow TCP traffic from Web',
+);  
+``` 
+
+"/web"에 있는 Dockerfile을 이용하여 도커 컨테이너 이미지를 빌드하고 ECR에 업로드합니다.
+
+```typescript
+const webImage = ecs.ContainerImage.fromAsset('../web');
+``` 
+
+ECR의 WEB 서비스를 위한 Task를 아래와 같이 정의합니다. 이때 WEB 컨테이너는 8000번 포트로 HTTP를 이용합니다. 
+
+```typescript
+const taskDefinition_Web = new ecs.FargateTaskDefinition(this, 'ServiceTaskForWeb', {
+    family: 'app-web-td'
+});
+taskDefinition_Web.addContainer('app-web', {
+    image: webImage,
+    portMappings: [{
+        containerPort: 8000,
+        protocol: ecs.Protocol.TCP,
+        name: "app-web-8000-tcp",
+        appProtocol: ecs.AppProtocol.http,
+    }],
+    logging: ecs.LogDrivers.awsLogs({
+        streamPrefix: 'AppWeb',
+        logRetention: logs.RetentionDays.ONE_WEEK,
+    }),
+    containerName: "app-web"
+});
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
+
+```typescript
+``` 
 
 ## 리소스 정리하기
 
