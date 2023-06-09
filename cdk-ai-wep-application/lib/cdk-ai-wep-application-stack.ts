@@ -170,10 +170,26 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
 
     // ECR image registration for Was
     const wasImage = ecs.ContainerImage.fromAsset('../was'); 
-    
+
+    const wasTaskRole = new iam.Role(this, "EcsWasTaskRole", {
+      roleName: "ecsWasTaskRole",
+      assumedBy: new iam.ServicePrincipal("ecs-tasks.amazonaws.com")
+    });
+    wasTaskRole.attachInlinePolicy(new iam.Policy(this, 'EcsWasTaskPolicy', {
+      policyName: "InvokeSageMakerEndpoint",
+      statements: [new iam.PolicyStatement({
+        actions: ['sagemaker:InvokeEndpoint'],   
+        resources: ['*'],
+      })],
+    }));
+   
     // Fargate task definition for Was
     const taskDefinition_Was = new ecs.FargateTaskDefinition(this, 'ServiceTaskForWas', {
-      family: 'app-was-td'
+      family: 'app-was-td',
+      cpu: 1024, // 1024 (1 vCPU) 
+      memoryLimitMiB: 3072, // 3 GB,
+      taskRole: wasTaskRole,
+      // runtimePlatform: {cpuArchitecture: ecs.CpuArchitecture.ARM64}  // X86_64 or ARM64
     });
     taskDefinition_Was.addContainer('app-was', {
       image: wasImage,
@@ -187,7 +203,7 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
         streamPrefix: 'AppWas',
         logRetention: logs.RetentionDays.ONE_WEEK,
       }), 
-      containerName: "app-was"
+      containerName: "app-was",      
     }); 
 
     // Fargate Service for WAS
@@ -234,20 +250,5 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       port: 8081,
       protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,      
     });  
-
-
-
-  /*  const SageMakerPolicy = new iam.PolicyStatement({  // policy statement for sagemaker
-      // actions: ['sagemaker:*'],
-      actions: ['sagemaker:InvokeEndpoint'],      
-      resources: ['*'],
-    });
-
-    lambdaBulkStableDiffusion[i].role?.attachInlinePolicy( // add sagemaker policy
-        new iam.Policy(this, 'sagemaker-policy-for-bulk'+i, {
-          statements: [SageMakerPolicy],
-        }),
-      ); */
-
   } 
 }
