@@ -30,9 +30,17 @@ router.get("/was/health", function (req, res) {
   let url = BASE_URL + HEALTH
   request.get({
     url: url,
+    timeout: 4000,
   },function(err,response,body){
-    console.log(body)
-    return res.json({"was-health":JSON.parse(body)})
+    if (body) {
+      message = {"was-health":JSON.parse(body)}
+      console.log(message)
+      return res.json(message)
+    } {
+      message = {"error": err, "message": "WAS 주소를 변경해주세요"}
+      console.log(message)
+      return res.json(message)
+    }
   })
 });
 
