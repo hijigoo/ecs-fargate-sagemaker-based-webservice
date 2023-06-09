@@ -1,9 +1,10 @@
-# Amazon ECS 와 Amazon SageMaker 를 이용하여 마이크로서비스로 AI 웹 애플리케이션 구축과 운영하기
+# Amazon ECS 와 Amazon SageMaker 를 이용하여 이미지 분류 AI 웹 애플리케이션 구축과 운영하기
 
 마이크로서비스 아키텍처(MSA)와 인공지능(AI)은 현대화 애플리케이션 구현에서 가장 많이 언급되는 기술입니다. 애플리케이션은 규모가 커질 경우 다양한 환경에서 구동되는 마이크로서비스가 만들어지는데 이를 운영할 수 있는 환경이 필요합니다. 그리고 인공지능 서비스를 위해서는 기계 학습 모델을 생성 및 학습하고 학습된 모델을 운영할 수 있는 환경이 필요합니다. 
 
-이번 글에서는 [Amazon ECS](https://aws.amazon.com/ko/ecs/) 와 [AWS Fargate](https://aws.amazon.com/ko/fargate/) 를 이용해서 AI 웹 애플리케이션을 컨테이너기반 마이크로서비스로 구성하여 운영을 자동화하고 손쉽게 배포, 관리 및 확장할 수 있도록 합니다. 마이크로서비스를 구성은 Web 계층과 WAS 계층으로 분리하여 서버 부하에 따른 확장을 효율적으로 하고 사용자에게 노출 되는 부분을 최소화 하여 보안을 강화합니다. Web 계층과 WAS 계층에는 기능 확장을 위해서 여러 마이크로 서비스들이 배포될 수 있습니다. 그리고 [Amazon SageMaker](https://aws.amazon.com/ko/sagemaker/) 를 이용해서 기계 학습 모델을 학습하고 배포하여 이미지를 추론하는데 사용할 수 있도록 합니다. 또한, [AWS CodePipeline](https://aws.amazon.com/ko/codepipeline/) 을 이용해서 코드를 컨테이너로 빌드하고 배포하는 과정을 자동화하고 [Amazon SageMaker Pipelines](https://aws.amazon.com/ko/sagemaker/pipelines/) 을 이용해서 모델을 학습하고 배포하는 과정을 자동화합니다. 이를 통해서 소프트웨어의 품질 개선과 출시 주기를 단축하여 운영의 효율성을 가져갈 수 있습니다.
+이번 글에서는 [Amazon ECS](https://aws.amazon.com/ko/ecs/) 와 [Amazon SageMaker](https://aws.amazon.com/ko/sagemaker/) 를 이용해서 꽃 이미지 분류를 위한 AI 웹 애플리케이션을 마이크로서비스 아키텍처로 구축하는 방법을 소개합니다. 그리고 [AWS CodePipeline](https://aws.amazon.com/ko/codepipeline/) 과 [Amazon SageMaker Pipelines](https://aws.amazon.com/ko/sagemaker/pipelines/) 를 이용해서 CI/CD 구축하여 서비스를 민첩하게 운영하는 방법도 함께 소개합니다.
 
+서비스 구축에 사용되는 Amazon ECS 와 AWS Fargate 는 AI 웹 애플리케이션을 컨테이너기반 마이크로서비스로 구성하여 운영을 자동화하고 손쉽게 배포, 관리 및 확장할 수 있도록 합니다. 마이크로서비스를 구성은 Web 계층과 WAS 계층으로 분리하여 서버 부하에 따른 확장을 효율적으로 하고 사용자에게 노출 되는 부분을 최소화 하여 보안을 강화합니다. Web 계층과 WAS 계층에는 기능 확장을 위해서 여러 마이크로 서비스들이 배포될 수 있습니다. 그리고 Amazon SageMaker 는 기계 학습 모델을 학습하고 배포하여 이미지를 추론하는데 사용할 수 있도록 합니다. 또한, AWS CodePipeline 는 코드를 컨테이너로 빌드하고 배포하는 과정을 자동화하고 Amazon SageMaker Pipelines 을 이용해서 모델을 학습하고 배포하는 과정을 자동화합니다. 이를 통해서 소프트웨어의 품질 개선과 출시 주기를 단축하여 운영의 효율성을 가져갈 수 있습니다.
 
 # AI 웹 애플리케이션 아키텍처
 
@@ -692,4 +693,4 @@ AppMlPipeline-Deploy 을 선택해서 들어간 다음 Graph 탭으로 이동하
 </p>
 
 # 결론
-컨테이너화된 애플리케이션을 쉽게 배포, 관리, 확장할 수 있도록 도와주는 완전 관리형 컨테이너 오케스트레이션 서비스인 Amazon ECS 와 기계 학습 모델을 학습하고 배포하여 운영할 수 있는 Amazon SageMaker 를 대규모 트래픽에도 유연하게 확장할 수 있는 웹 서비스를 구현했습니다. 그리고 Amazon SageMaker Pipeline 을 이용하여 기계 학습 모델 학습 및 배포를 자동화하고 AWS CodePipeline 을 이용해서 컨테이너 통합 및 배포를 위한 CI/CD 파이프라인을 구축하는 방법을 소개했습니다. 애플리케이션 규모가 커지더라도 마이크로서비스 및 모델의 확장과 운영에 유연한 아키텍처로 최신 애플리케이션을 구현하는데 참고가 될 수 있을 것으로 기대됩니다.
+이 글에서는 AWS 에서 제공하는 다양한 서비스를 이용하여 꽃 이미지 분류를 위한 AI 애플리케이션 구축하는 방법을 소개했습니다. 컨테이너화된 애플리케이션을 쉽게 배포, 관리, 확장할 수 있도록 도와주는 완전 관리형 컨테이너 오케스트레이션 서비스인 Amazon ECS 와 기계 학습 모델을 학습하고 배포하여 운영할 수 있는 Amazon SageMaker 를 대규모 트래픽에도 유연하게 확장할 수 있도록 했습니다. 그리고 Amazon SageMaker Pipeline 을 이용하여 기계 학습 모델 학습 및 배포를 자동화하고 AWS CodePipeline 을 이용해서 컨테이너 통합 및 배포를 위한 CI/CD 파이프라인을 구축하는 방법을 소개했습니다. 애플리케이션 규모가 커지더라도 마이크로서비스 및 모델의 확장과 운영에 유연한 아키텍처로 최신 AI 애플리케이션을 구현하는데 참고가 될 수 있을 것으로 기대됩니다.
