@@ -250,5 +250,10 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       port: 8081,
       protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,      
     });  
+
+    new cdk.CfnOutput(this, 'Was-Alb-Url', {
+      value: "http://"+alb_was.loadBalancerDnsName,
+      description: 'Address of WAS ALB URL',
+    }); 
   } 
 }
