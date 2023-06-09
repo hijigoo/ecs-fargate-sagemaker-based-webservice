@@ -11,7 +11,7 @@ import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 import * as logs from "aws-cdk-lib/aws-logs"
 import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import * as autoscaling from 'aws-cdk-lib/aws-autoscaling';
-
+import * as iam from 'aws-cdk-lib/aws-iam';
 
 export class CdkAiWepApplicationStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
@@ -35,6 +35,12 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
           name: 'private'
         },
       ]
+    });
+    
+    // ecs cluster
+    const cluster = new ecs.Cluster(this, "AppEcsCluster", {
+      vpc: vpc,
+      clusterName: "AppEcsCluster"
     }); 
 
     // Security Group - app-web-alb-sg
@@ -62,50 +68,15 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       ec2.Port.tcp(8000),
       'allow TCP traffic from Web',
     );  
-
     
-    // target group
-  /*  const tg = new elbv2.ApplicationTargetGroup(this, 'TG', {
-      targetType: elbv2.TargetType.IP,
-      targetGroupName: "app-web-alb-tg",
-      protocol: elbv2.ApplicationProtocol.HTTP,
-      port: 8000,
-      vpc: vpc,
-      protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,
-      healthCheck: {
-        enabled: true,
-        path: "/health",
-        // port: "8000",
-      },      
-    }); */
-
-
-    // create auto-scaling group
-  /*  const asg = new autoscaling.AutoScalingGroup(this, 'asg', {
-      vpc,
-      instanceType: ec2.InstanceType.of(
-        ec2.InstanceClass.BURSTABLE2,
-        ec2.InstanceSize.MICRO,
-      ),
-      machineImage: new ec2.AmazonLinuxImage({
-        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
-      }),
-      userData,
-      minCapacity: 2,
-      maxCapacity: 3,
-    }); */
-
-
-
-    // ECR image registration
+    // ECR image registration for Web
     const webImage = ecs.ContainerImage.fromAsset('../web');
-    const wasImage = ecs.ContainerImage.fromAsset('../was'); 
     
-    // define task definition family
-    const taskDefinition = new ecs.FargateTaskDefinition(this, 'ServiceTask', {
+    // Fargate task definition for Web
+    const taskDefinition_Web = new ecs.FargateTaskDefinition(this, 'ServiceTaskForWeb', {
       family: 'app-web-td'
     });
-    taskDefinition.addContainer('app-web', {
+    taskDefinition_Web.addContainer('app-web', {
       image: webImage,
       portMappings: [{ 
         containerPort: 8000,
@@ -119,7 +90,92 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       }), 
       containerName: "app-web"
     });
-    taskDefinition.addContainer('app-was', {
+
+    // Fargate Service for WEB
+    const fargateService_Web = new ecs.FargateService(this, 'ServiceForWeb', {
+      cluster: cluster,
+      taskDefinition: taskDefinition_Web,
+      serviceName: "app-web-service",
+      desiredCount: 2,
+      assignPublicIp: false,
+      securityGroups: [sg_Web],      
+    }); 
+    // Setup AutoScaling policy
+    const scalingWeb = fargateService_Web.autoScaleTaskCount({ 
+      minCapacity: 2,
+      maxCapacity: 4      
+    });
+    scalingWeb.scaleOnCpuUtilization('CpuScalingWeb', {
+      policyName: "app-web-asg-policy",
+      targetUtilizationPercent: 70,
+      scaleInCooldown: cdk.Duration.seconds(300),
+      scaleOutCooldown: cdk.Duration.seconds(300)
+    });
+
+    // load balancer for Web
+    const alb_web = new elbv2.ApplicationLoadBalancer(this, 'alb', {
+      loadBalancerName: "app-web-alb",
+      internetFacing: true,
+      ipAddressType: elbv2.IpAddressType.IPV4,
+      vpc: vpc,
+      securityGroup: sg_WebAlb,
+    });
+    const listener = alb_web.addListener('Listener', {
+      port: 80,
+      open: true,
+    }); 
+    listener.addTargets('targetServiceWeb', {
+      targets: [fargateService_Web],
+      healthCheck: {
+        enabled: true,
+        path: '/health',
+      },
+      targetGroupName: "app-web-alb-tg",
+      protocol: elbv2.ApplicationProtocol.HTTP,
+      port: 8000,
+      protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,      
+    }); 
+    
+    new cdk.CfnOutput(this, 'WebPageURL', {
+      value: "http://"+alb_web.loadBalancerDnsName,
+      description: 'Url of webpage',
+    }); 
+
+    ////////////////////////////////////////////////////////    
+    // Security Group - aapp-was-alb-sg
+    const sg_WasAlb = new ec2.SecurityGroup(this, "AppWasAlbSg", {
+      vpc: vpc,
+      allowAllOutbound: true,
+      description: 'security group of WAS ALB',
+      securityGroupName: "app-was-alb-sg",
+    }); 
+    sg_WasAlb.addIngressRule(
+      ec2.Peer.securityGroupId(sg_Web.securityGroupId),
+      ec2.Port.tcp(80),
+      'allow HTTP traffic from WEB',
+    );  
+
+     // Security Group - app-was-sg
+     const sg_Was = new ec2.SecurityGroup(this, "AppWasSg", {
+      vpc: vpc,
+      allowAllOutbound: true,
+      description: 'security group of WAS',
+      securityGroupName: "app-was-sg",
+    }); 
+    sg_Was.addIngressRule(
+      ec2.Peer.securityGroupId(sg_WasAlb.securityGroupId),
+      ec2.Port.tcp(8081),
+      'allow tcp traffic from WAS ALB',
+    );  
+
+    // ECR image registration for Was
+    const wasImage = ecs.ContainerImage.fromAsset('../was'); 
+    
+    // Fargate task definition for Was
+    const taskDefinition_Was = new ecs.FargateTaskDefinition(this, 'ServiceTaskForWas', {
+      family: 'app-was-td'
+    });
+    taskDefinition_Was.addContainer('app-was', {
       image: wasImage,
       portMappings: [{ 
         containerPort: 8081,
@@ -132,89 +188,28 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
         logRetention: logs.RetentionDays.ONE_WEEK,
       }), 
       containerName: "app-was"
-    });
-
-    // ecs cluster
-    const cluster = new ecs.Cluster(this, "AppEcsCluster", {
-      vpc: vpc,
-      clusterName: "AppEcsCluster"
     }); 
 
-    const fargateService = new ecs.FargateService(this, 'Service', {
+    // Fargate Service for WAS
+    const fargateService_Was = new ecs.FargateService(this, 'ServiceForWas', {
       cluster: cluster,
-      taskDefinition: taskDefinition,
-      serviceName: "app-web-service",
+      taskDefinition: taskDefinition_Was,
+      serviceName: "app-was-service",
       desiredCount: 2,
       assignPublicIp: false,
-      securityGroups: [sg_Web],      
+      securityGroups: [sg_Was],      
     }); 
-
     // Setup AutoScaling policy
-    const scaling = fargateService.autoScaleTaskCount({ 
+    const scalingWas = fargateService_Was.autoScaleTaskCount({ 
       minCapacity: 2,
       maxCapacity: 4      
     });
-    scaling.scaleOnCpuUtilization('CpuScaling', {
-      policyName: "app-web-asg-policy",
+    scalingWas.scaleOnCpuUtilization('CpuScalingWas', {
+      policyName: "app-was-asg-policy",
       targetUtilizationPercent: 70,
       scaleInCooldown: cdk.Duration.seconds(300),
       scaleOutCooldown: cdk.Duration.seconds(300)
     });
-
-    // load balancer
-    const alb = new elbv2.ApplicationLoadBalancer(this, 'alb', {
-      loadBalancerName: "app-web-alb",
-      internetFacing: true,
-      ipAddressType: elbv2.IpAddressType.IPV4,
-      vpc: vpc,
-      securityGroup: sg_WebAlb,
-    });
-    const listener = alb.addListener('Listener', {
-      port: 80,
-      open: true,
-    }); 
-    listener.addTargets('targetService', {
-      targets: [fargateService],
-      healthCheck: {
-        enabled: true,
-        path: '/health',
-      },
-      targetGroupName: "app-web-alb-tg",
-      protocol: elbv2.ApplicationProtocol.HTTP,
-      port: 8000,
-      protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,      
-    }); 
-
-    new cdk.CfnOutput(this, 'WebPageURL', {
-      value: "url: "+alb.loadBalancerDnsName,
-      description: 'Url of webpage',
-    }); 
-
-    // Security Group - aapp-was-alb-sg
-  /*  const sg_WasAlb = new ec2.SecurityGroup(this, "AppWasAlbSg", {
-      vpc: vpc,
-      allowAllOutbound: true,
-      description: 'security group of WAS ALB',
-      securityGroupName: "app-was-alb-sg",
-    }); 
-    sg_WasAlb.addIngressRule(
-      ec2.Peer.securityGroupId(sg_Web.securityGroupId),
-      ec2.Port.tcp(80),
-      'allow HTTP traffic from Web',
-    );  
-
-     // Security Group - app-was-sg
-     const sg_Was = new ec2.SecurityGroup(this, "AppWasSg", {
-      vpc: vpc,
-      allowAllOutbound: true,
-      description: 'security group of WAS',
-      securityGroupName: "app-was-sg",
-    }); 
-    sg_WasAlb.addIngressRule(
-      ec2.Peer.securityGroupId(sg_WasAlb.securityGroupId),
-      ec2.Port.tcp(8081),
-      'allow tcp traffic from WAS ALB',
-    );  
 
     // load balancer for WAS
     const alb_was = new elbv2.ApplicationLoadBalancer(this, 'AlbWas', {
@@ -229,7 +224,7 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       open: true,
     }); 
     listener_was.addTargets('targetServiceForWAS', {
-      targets: [fargateService],
+      targets: [fargateService_Was],
       healthCheck: {
         enabled: true,
         path: '/health',
@@ -238,7 +233,21 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       protocol: elbv2.ApplicationProtocol.HTTP,
       port: 8081,
       protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,      
-    }); */
+    });  
+
+
+
+  /*  const SageMakerPolicy = new iam.PolicyStatement({  // policy statement for sagemaker
+      // actions: ['sagemaker:*'],
+      actions: ['sagemaker:InvokeEndpoint'],      
+      resources: ['*'],
+    });
+
+    lambdaBulkStableDiffusion[i].role?.attachInlinePolicy( // add sagemaker policy
+        new iam.Policy(this, 'sagemaker-policy-for-bulk'+i, {
+          statements: [SageMakerPolicy],
+        }),
+      ); */
 
   } 
 }
