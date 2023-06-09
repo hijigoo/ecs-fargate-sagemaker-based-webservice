@@ -78,6 +78,30 @@ cdk deploy
 ![image](https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice/assets/52392004/f2f0b5db-6038-4f3d-91cd-8cab823beea8)
 
 
+## CDK 코드 설명
+
+```typescript
+// VPC, Subnet
+const vpc = new ec2.Vpc(this, 'my-app-vpc', {
+    maxAzs: 2, // Default is all AZs in region
+    natGateways: 2,
+    ipAddresses: ec2.IpAddresses.cidr('10.0.0.0/16'),
+    vpcName: 'app-vpc',
+    subnetConfiguration: [
+        {
+            subnetType: ec2.SubnetType.PUBLIC, // PUBLIC, PRIVATE_ISOLATED, PRIVATE_WITH_EGRESS
+            cidrMask: 20,
+            name: 'public'
+        },
+        {
+            subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS,
+            cidrMask: 20,
+            name: 'private'
+        },
+    ]
+});
+```  
+
 
 ## 리소스 정리하기
 
