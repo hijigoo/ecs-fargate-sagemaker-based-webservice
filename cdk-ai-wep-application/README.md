@@ -12,6 +12,14 @@
 
 ![image](https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice/assets/52392004/272281b0-a99d-42ff-b771-2e69ba986a4f)
 
+Cloud9 용량을 확장합니다.
+
+```java
+wget https://raw.githubusercontent.com/kyopark2014/technical-summary/main/resize.sh
+chmod a+rx resize.sh
+./resize.sh 100
+```
+
 ## CDK로 설치하기
 
 소스를 다운로드 합니다. (아래 경로 변경 필요함)
