@@ -9,6 +9,8 @@ import { DockerImageAsset } from 'aws-cdk-lib/aws-ecr-assets';
 // import * as ecrdeploy from 'cdk-ecr-deployment';
 // import * as aws_elasticloadbalancingv2 from 'aws-cdk-lib/ aws_elasticloadbalancingv2';
 import * as logs from "aws-cdk-lib/aws-logs"
+import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
+import * as autoscaling from 'aws-cdk-lib/aws-autoscaling';
 
 
 export class CdkAiWepApplicationStack extends cdk.Stack {
@@ -56,20 +58,54 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
       securityGroupName: "app-web-sg",
     }); 
     sg_Web.addIngressRule(
-      // ec2.Peer.anyIpv4(),
       ec2.Peer.securityGroupId(sg_WebAlb.securityGroupId),
       ec2.Port.tcp(8000),
-      'allow HTTP traffic from anywhere',
+      'allow TCP traffic from Web',
     );  
 
+    
+    // target group
+  /*  const tg = new elbv2.ApplicationTargetGroup(this, 'TG', {
+      targetType: elbv2.TargetType.IP,
+      targetGroupName: "app-web-alb-tg",
+      protocol: elbv2.ApplicationProtocol.HTTP,
+      port: 8000,
+      vpc: vpc,
+      protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,
+      healthCheck: {
+        enabled: true,
+        path: "/health",
+        // port: "8000",
+      },      
+    }); */
+
+
+    // create auto-scaling group
+  /*  const asg = new autoscaling.AutoScalingGroup(this, 'asg', {
+      vpc,
+      instanceType: ec2.InstanceType.of(
+        ec2.InstanceClass.BURSTABLE2,
+        ec2.InstanceSize.MICRO,
+      ),
+      machineImage: new ec2.AmazonLinuxImage({
+        generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
+      }),
+      userData,
+      minCapacity: 2,
+      maxCapacity: 3,
+    }); */
+
+
+
+    // ECR image registration
     const webImage = ecs.ContainerImage.fromAsset('../web');
     const wasImage = ecs.ContainerImage.fromAsset('../was'); 
-
+    
     // define task definition family
     const taskDefinition = new ecs.FargateTaskDefinition(this, 'ServiceTask', {
       family: 'app-web-td'
     });
-    const webContainerDefinition = taskDefinition.addContainer('app-web', {
+    taskDefinition.addContainer('app-web', {
       image: webImage,
       portMappings: [{ 
         containerPort: 8000,
@@ -77,76 +113,132 @@ export class CdkAiWepApplicationStack extends cdk.Stack {
         name: "app-web-8000-tcp",
         appProtocol: ecs.AppProtocol.http,        
       }],
+      logging: ecs.LogDrivers.awsLogs({
+        streamPrefix: 'AppWeb',
+        logRetention: logs.RetentionDays.ONE_WEEK,
+      }), 
       containerName: "app-web"
     });
-    const wasContainerDefinition = taskDefinition.addContainer('Was', {
+    taskDefinition.addContainer('app-was', {
       image: wasImage,
-      portMappings: [{ containerPort: 8000 }]
+      portMappings: [{ 
+        containerPort: 8081,
+        protocol: ecs.Protocol.TCP,  
+        name: "app-was-8081-tcp",
+        appProtocol: ecs.AppProtocol.http,        
+      }],
+      logging: ecs.LogDrivers.awsLogs({
+        streamPrefix: 'AppWas',
+        logRetention: logs.RetentionDays.ONE_WEEK,
+      }), 
+      containerName: "app-was"
     });
 
     // ecs cluster
     const cluster = new ecs.Cluster(this, "AppEcsCluster", {
       vpc: vpc,
-      // name: "AppEcsCluster"
+      clusterName: "AppEcsCluster"
     }); 
 
-    // Create an application load-balanced Fargate service and make it public
-    const fargateService = new ecs_patterns.ApplicationLoadBalancedFargateService(this, "MyFargateService", {
-      cluster: cluster, // Required
-    //  circuitBreaker: {
-    //    rollback: true,
-    //  }, 
-      cpu: 512, // Default is 256
-      desiredCount: 1, // Default is 1
-      taskImageOptions: { 
-        image: ecs.ContainerImage.fromRegistry("amazon/amazon-ecs-sample")
-      //  image: webImage,
-      //  containerPort: 80,
-      //  logDriver: ecs.LogDrivers.awsLogs({
-      //    streamPrefix: id,
-      //    logRetention: logs.RetentionDays.ONE_YEAR,
-      //  }), 
-      },
-    //  taskDefinition: taskDefinition,
-      securityGroups: [sg_WebAlb, sg_Web],
-      memoryLimitMiB: 2048, // Default is 512
-      // loadBalancerName
-      // publicLoadBalancer: true, // Default is true
+    const fargateService = new ecs.FargateService(this, 'Service', {
+      cluster: cluster,
+      taskDefinition: taskDefinition,
+      serviceName: "app-web-service",
+      desiredCount: 2,
+      assignPublicIp: false,
+      securityGroups: [sg_Web],      
     }); 
 
-    fargateService.targetGroup.configureHealthCheck({
-      path: "/health",
-    });
-
-    const scalableTaskCount = fargateService.service.autoScaleTaskCount({
+    // Setup AutoScaling policy
+    const scaling = fargateService.autoScaleTaskCount({ 
       minCapacity: 2,
-      maxCapacity: 4,
+      maxCapacity: 4      
+    });
+    scaling.scaleOnCpuUtilization('CpuScaling', {
+      policyName: "app-web-asg-policy",
+      targetUtilizationPercent: 70,
+      scaleInCooldown: cdk.Duration.seconds(300),
+      scaleOutCooldown: cdk.Duration.seconds(300)
     });
 
-    scalableTaskCount.scaleOnCpuUtilization('CpuUtilizationScaling', {
-      targetUtilizationPercent: 70,      
-      scaleInCooldown: cdk.Duration.seconds(300),
-      scaleOutCooldown: cdk.Duration.seconds(300),
-    });  
-  } 
-}
-
-
-
-  /*  const image = new DockerImageAsset(this, 'CDKDockerImageforWeb', {
-      directory: path.join(__dirname, '../../web'),
-    }); */
-
-  /*  const tg = new elbv2.ApplicationTargetGroup(this, 'TG', {
-      targetType: elbv2.TargetType.IP,
-      port: 50051,
-      protocol: elbv2.ApplicationProtocol.HTTP,
-      protocolVersion: elbv2.ApplicationProtocolVersion.GRPC,
+    // load balancer
+    const alb = new elbv2.ApplicationLoadBalancer(this, 'alb', {
+      loadBalancerName: "app-web-alb",
+      internetFacing: true,
+      ipAddressType: elbv2.IpAddressType.IPV4,
+      vpc: vpc,
+      securityGroup: sg_WebAlb,
+    });
+    const listener = alb.addListener('Listener', {
+      port: 80,
+      open: true,
+    }); 
+    listener.addTargets('targetService', {
+      targets: [fargateService],
       healthCheck: {
         enabled: true,
-        healthyGrpcCodes: '0-99',
+        path: '/health',
       },
-      vpc,
-    }); */    
+      targetGroupName: "app-web-alb-tg",
+      protocol: elbv2.ApplicationProtocol.HTTP,
+      port: 8000,
+      protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,      
+    }); 
 
-// const image = ecs.ContainerImage.fromRegistry("amazon/amazon-ecs-sample";    
+    new cdk.CfnOutput(this, 'WebPageURL', {
+      value: "url: "+alb.loadBalancerDnsName,
+      description: 'Url of webpage',
+    }); 
+
+    // Security Group - aapp-was-alb-sg
+  /*  const sg_WasAlb = new ec2.SecurityGroup(this, "AppWasAlbSg", {
+      vpc: vpc,
+      allowAllOutbound: true,
+      description: 'security group of WAS ALB',
+      securityGroupName: "app-was-alb-sg",
+    }); 
+    sg_WasAlb.addIngressRule(
+      ec2.Peer.securityGroupId(sg_Web.securityGroupId),
+      ec2.Port.tcp(80),
+      'allow HTTP traffic from Web',
+    );  
+
+     // Security Group - app-was-sg
+     const sg_Was = new ec2.SecurityGroup(this, "AppWasSg", {
+      vpc: vpc,
+      allowAllOutbound: true,
+      description: 'security group of WAS',
+      securityGroupName: "app-was-sg",
+    }); 
+    sg_WasAlb.addIngressRule(
+      ec2.Peer.securityGroupId(sg_WasAlb.securityGroupId),
+      ec2.Port.tcp(8081),
+      'allow tcp traffic from WAS ALB',
+    );  
+
+    // load balancer for WAS
+    const alb_was = new elbv2.ApplicationLoadBalancer(this, 'AlbWas', {
+      loadBalancerName: "app-was-alb",
+      internetFacing: false,  // internal
+      ipAddressType: elbv2.IpAddressType.IPV4,
+      vpc: vpc,
+      securityGroup: sg_WasAlb,
+    });
+    const listener_was = alb_was.addListener('Listener', {
+      port: 80,
+      open: true,
+    }); 
+    listener_was.addTargets('targetServiceForWAS', {
+      targets: [fargateService],
+      healthCheck: {
+        enabled: true,
+        path: '/health',
+      },
+      targetGroupName: "app-was-alb-tg",
+      protocol: elbv2.ApplicationProtocol.HTTP,
+      port: 8081,
+      protocolVersion: elbv2.ApplicationProtocolVersion.HTTP1,      
+    }); */
+
+  } 
+}
