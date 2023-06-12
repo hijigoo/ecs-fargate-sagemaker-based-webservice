@@ -1,6 +1,6 @@
 # Amazon ECS와 Amazon SageMaker를 이용하여 이미지 분류 AI 웹 애플리케이션 구축과 운영하기
 
-이번 글에서는 [Amazon ECS](https://aws.amazon.com/ko/ecs/)와 [Amazon SageMaker](https://aws.amazon.com/ko/sagemaker/)를 이용해서 꽃 이미지 분류를 위한 AI 웹 애플리케이션을 마이크로서비스 아키텍처로 구축하는 방법을 소개합니다. 그리고 [AWS CodePipeline](https://aws.amazon.com/ko/codepipeline/)과 [Amazon SageMaker Pipelines](https://aws.amazon.com/ko/sagemaker/pipelines/)를 이용해서 CI/CD 구축하여 서비스를 민첩하게 운영하는 방법도 함께 소개합니다.
+[Amazon ECS](https://aws.amazon.com/ko/ecs/)와 [Amazon SageMaker](https://aws.amazon.com/ko/sagemaker/)를 이용해서 꽃 이미지 분류를 위한 AI 웹 애플리케이션을 마이크로서비스 아키텍처(MSA)로 구축하는 방법을 소개합니다. 그리고 [AWS CodePipeline](https://aws.amazon.com/ko/codepipeline/)과 [Amazon SageMaker Pipelines](https://aws.amazon.com/ko/sagemaker/pipelines/)를 이용해서 CI/CD를 구축하여 서비스를 민첩하게 운영하는 방법도 함께 소개합니다.
 
 마이크로서비스 아키텍처(MSA)와 인공지능(AI)은 현대화 애플리케이션 구현에서 가장 많이 언급되는 기술입니다. 애플리케이션은 규모가 커질 경우 다양한 환경에서 구동되는 마이크로서비스가 만들어지는데 이를 운영할 수 있는 환경이 필요합니다. 그리고 인공지능 서비스를 위해서는 기계 학습 모델을 생성 및 학습하고 학습된 모델을 운영할 수 있는 환경이 필요합니다. 
 
