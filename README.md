@@ -143,7 +143,7 @@ AWS ECS에서 구동되는 Web 서비스에 적용할 보안 그룹과 서비스
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6694397b-d770-461e-ac4e-893c481a30b1">
 
 ## Load balancer 생성
-AWS ECS Web 서비스의 구성에 사용할 로드 밸런서를 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load balancers를 선택합니다. 그리고 Create load balancer 버튼을 눌러서 로드 밸런서 구성을 시작합니다. Application Load Balancer의 Create 버튼을 눌러서 생성을 시작합니다.
+AWS ECS의 Web 서비스 구성에 사용할 로드 밸런서를 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load balancers를 선택합니다. 그리고 Create load balancer 버튼을 눌러서 로드 밸런서 구성을 시작합니다. Application Load Balancer의 Create 버튼을 눌러서 생성을 시작합니다.
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/af78d083-6afb-420a-92f3-32a6f6206457">
 
@@ -290,7 +290,7 @@ AWS ECS에서 구동되는 WAS 서비스에 적용할 보안 그룹과 서비스
 <img width="1024" alt="3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/3830fb05-d680-42c1-a25c-993e742ce870">
 
 ## Load balancer 생성
-AWS ECS WAS 서비스의 구성에 사용할 로드 밸런서를 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load balancers를 선택합니다. 그리고 Create load balancer 버튼을 눌러서 로드 밸런서 구성을 시작합니다. Application Load Balancer의 Create 버튼을 눌러서 생성을 시작합니다. Load balancer name은 app-was-alb로 입력하고 Scheme 은 Internal을 선택합니다. Networking 구성에서 VPC는 생성해 둔 app-vpc를 선택하고 Subnets에는 private subnets 두 개를 선택합니다. 그리고 Security groups에는 미리 생성해 둔 app-was-alb-sg를 선택합니다.
+AWS ECS의 WAS 서비스 구성에 사용할 로드 밸런서를 생성합니다. EC2 콘솔로 이동 후 왼쪽 메뉴에서 Load balancers를 선택합니다. 그리고 Create load balancer 버튼을 눌러서 로드 밸런서 구성을 시작합니다. Application Load Balancer의 Create 버튼을 눌러서 생성을 시작합니다. Load balancer name은 app-was-alb로 입력하고 Scheme 은 Internal을 선택합니다. Networking 구성에서 VPC는 생성해 둔 app-vpc를 선택하고 Subnets에는 private subnets 두 개를 선택합니다. 그리고 Security groups에는 미리 생성해 둔 app-was-alb-sg를 선택합니다.
 
 <img width="1024" alt="1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/675bfa24-758c-401c-8d9d-a943c696397f">
 <img width="1024" alt="2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/10d6a524-fc17-4545-ae3d-4281a46618e0">
