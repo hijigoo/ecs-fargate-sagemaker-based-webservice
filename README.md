@@ -43,6 +43,9 @@ Amazon SageMaker는 종합 관리형 기계 학습 서비스입니다. Amazon Sa
 ### Amazon SageMaker Pipelines
 Amazon SageMaker Pipelines를 사용하면 데이터 준비에서 모델 배포에 이르기까지 완전히 자동화된 ML 워크플로를 생성할 수 있으므로 프로덕션에서 수천 개의 ML 모델로 확장할 수 있습니다. SageMaker Pipelines는 Amazon SageMaker Studio에 연결되는 Python SDK도 함께 제공하므로, 시각적 인터페이스를 활용하여 워크플로의 각 단계를 구축할 수 있습니다. 그런 다음, 단일 API를 사용하여 각 단계를 연결하고 포괄적인 워크플로를 생성할 수 있습니다.
 
+# CDK 를 이용한 인프라 설치
+
+다음부터 진행되는 내용 중 'VPC 생성', 'Amazon ECS 클러스터 구성', 'AWS Fargate 기반 Web Service 구성' 그리고 'AWS Fargate 기반 WAS Service 구성'은 CDK를 이용해서도 편하게 구성하실 수 있습니다. CDK 사용을 원하신다면 [CDK를 이용한 인프라 설치](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/main/cdk-ai-wep-application#cdk%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EC%9D%B8%ED%94%84%EB%9D%BC-%EC%84%A4%EC%B9%98)를 참고 부탁드립니다.
 
 # VPC 생성
 
