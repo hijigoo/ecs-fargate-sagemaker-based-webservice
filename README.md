@@ -225,7 +225,20 @@ Services 탭에서 app-web-service를 선택하고 Tasks 탭에 선택해서 들
 
 
 ## WAS Application 다운로드 및 빌드
-[WAS Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/main/was) 샘플 프로젝트 코드를 다운받습니다. 그리고 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
+[WAS Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/main/was) 샘플 프로젝트 코드를 다운받습니다. 다운 받은 코드에서는 학습한 모델이 배포된 Amazon SageMaker Endpoint 에 접근합니다. 접근을 위해서는 AWS SDK 인 boto3를 사용합니다. [boto3](https://aws.amazon.com/ko/sdk-for-python/)를 사용하면 내부적으로 자격증명(Credentials)을 확인하기 때문에 편하게 접근할 수 있습니다. 다음 코드는 Amazon SageMaker Endpoint를 호출하는 코드 블록입니다. app/main.py에서 확인할 수 있습니다.
+
+```
+client = boto3.client("sagemaker-runtime")
+endpoint_name = 'image-classifier'
+response = client.invoke_endpoint(
+    EndpointName=endpoint_name,
+    Body=body,
+    ContentType='application/json',
+    Accept='Accept'
+)
+```
+
+코드 확인을 마친 후 콘솔이나 터미널에서 web 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
 ```
 docker build  -t app-was .
 ```
@@ -240,18 +253,6 @@ Docker 이미지가 빌드되었는지 확인합니다.
 docker images
 ```
 
-다운 받은 코드에서 학습한 모델이 배포된 Amazon SageMaker Endpoint 에 접근합니다. 접근을 위해서는 AWS SDK 인 boto3를 사용합니다. [boto3](https://aws.amazon.com/ko/sdk-for-python/)를 사용하면 내부적으로 자격증명(Credentials)을 확인하기 때문에 편하게 접근할 수 있습니다. 다음 코드는 Amazon SageMaker Endpoint를 호출하는 코드 블록입니다. app/main.py에서 확인할 수 있습니다.
-
-```
-client = boto3.client("sagemaker-runtime")
-endpoint_name = 'image-classifier'
-response = client.invoke_endpoint(
-    EndpointName=endpoint_name,
-    Body=body,
-    ContentType='application/json',
-    Accept='Accept'
-)
-```
 
 ## Amazon ECR 에 WAS Application 이미지 등록
 Amazon ECR(Elastic Container Registry) 콘솔로 이동 후 왼쪽 메뉴에서 Repositories를 선택합니다. 기존에 등록한 app-web 레파지토리가 있는 것을 볼 수 있습니다. 우리는 WAS Application 레파지토리가 추가로 필요하기 때문에 Private 탭에서 Create repository 버튼을 눌러서 레지스트리를 생성을 시작합니다.
