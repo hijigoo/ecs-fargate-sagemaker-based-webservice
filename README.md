@@ -8,7 +8,8 @@
 
 # AI 웹 애플리케이션 아키텍처
 
-<img width="1024" alt="architecture-3" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0a93afac-2287-48af-b37d-c49c846253af">
+<img width="1024" alt="architecture-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/6a07e849-c30c-4162-85b4-40222992dc73">
+
 
 ## Amazon ECS와 Amazon SageMaker를 이용한 AI 웹 애플리케이션
 Amazon ECS는 AWS Fargate를 사용해서 Web Service와 WAS(Web Application Server) Service로 구성된 애플리케이션을 운영합니다. 그리고 Amazon SageMaker는 모델을 학습하고 학습된 모델을 Amazon SageMaker Endpoint를 통해 API 형태로 WAS 에 제공합니다. NAT gateway는 네트워크 주소 변환 서비스로 Private Subnet 에 위치한 WAS Service 가 외부의 서비스와 연결이 필요한 경우 사용됩니다. 하지만 외부 서비스에서는 WAS Service 에 연결을 시작할 수 없어 보안을 강화할 수 있습니다. Application Load Balancer는 Service에서 운영되고 있는 복제된 여러 개의 Task에 트래픽을 분산합니다. Task는 한 개 이상의 컨테이너를 정의할 수 있습니다. 이번 아키텍처에서는 Task 에 하나의 컨테이너를 정의하여 운영합니다. 본 시스템에서 사용자는 Web Service에서 제공하는 UI를 통해 AI 웹 애플리케이션에 접근합니다. Web Service는 비즈니스 로직을 수행을 위해서 WAS Service를 호출하고 WAS Service는 이미지 분류와 같은 AI 기능을 수행하기 위해서 Amazon SageMaker Endpoint를 호출합니다.
