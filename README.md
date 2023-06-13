@@ -461,9 +461,9 @@ Source provider으로 AWS CodeCommit을 선택하고 Repository name 은 app-web
 
 Build provider으로 AWS CodeBuild를 선택하고 Project name 아래 있는 Create project 버튼을 눌러서 빌드 프로젝트 생성을 시작합니다. 
 
-<img width="1024" alt="build2-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/914d6c08-eaea-4f31-b7f6-17a1210871a0">
-
 팝업으로 뜬 창에서 Project name으로 appWebBuild을 입력합니다. Environment에서 Operating system 은 Amazon Linux2를 선택하고 Runtime(s) 은 Standard를 선택하고 Image는 aws/codebuild/amazonlinux2-aarch64-standard:4.0를 선택합니다. Privileged는 체크합니다. 나머지는 그대로 유지합니다.
+
+<img width="1024" alt="build2-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/914d6c08-eaea-4f31-b7f6-17a1210871a0">
 
 <img width="1024" alt="build2-2" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/3f970514-809f-416c-a9af-0ebf9cfd681b">
 
