@@ -546,7 +546,7 @@ Quick setup (1 min)을 선택하고 Name으로 app-sagemaker-studio을 입력하
 <img width="1024" alt="studio-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/024e3c39-1440-4127-a4db-d3f72070c160">
 
 
-# Amazon SagemMaker Pipeline을 이용한 모델 학습 및 배포 자동화
+# Amazon SagemMaker Pipelines을 이용한 모델 학습 및 배포 자동화
 
 ## 학습 단계 생성
 Amazon SageMaker에서 학습에 사용되는 데이터는 Amazon S3에서 다운로드해서 사용됩니다. 그렇기 때문에 먼저 학습에 필요한 데이터를 Amazon S3에 업로드해야 합니다. Amazon S3 에 app-ml-dataset-[yourname] 버킷을 생성합니다. 여기서는 app-ml-dataset-0410으로 생성했습니다. 그리고 생성한 버킷에 접속해서 다운로드한 프로젝트의 /datasets/flowsers 폴더를 전부 업로드합니다. 다음 그림과 같이 astilbe의 경로는 /app-ml-dataset-0410/flowers/astilbe 가 됩니다.
@@ -748,6 +748,16 @@ AppMlPipeline-Deploy을 선택해서 들어간 다음 Graph 탭으로 이동하�
 <p align="center">
 <img width="553" alt="app-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/5b49f6e1-2bf4-40db-bde7-b9112abb7ce9">
 </p>
+
+# 리소스 삭제
+실습 후 추가 과금을 방지하기 위해서 사용한 리소스를 모두 삭제해야 합니다. Amazon S3 콘솔로 이동해서 직접 생성한 버킷을 모두 삭제하고 'codepipeline-', 'sagemaker-' 로 시작하는 생성된 버킷도 모두 삭제합니다. Amazon ECR 콘솔로 이동해서 생성한 Repository를 모두 삭제합니다.
+
+CodePipeline 콘솔로 이동해서 왼쪽 메뉴의 Repositories, Build projects, Pipelines 에 들어가서 생성한 리소스를 모두 삭제합니다. Amazon Elastic Container Service 콘솔로 이동해서 생성한 Cluster를 삭제합니다. EC2 콘솔로 이동해서 왼쪽 메뉴의 Target Groups, Load Balancers, Security Groups 에 들어가서 생성한 리소스를 모두 삭제합니다. 
+
+Amazon SageMaker 콘솔로 이동합니다. 그리고 오른쪽 메뉴에서 Domains로 이동합니다. 생성한 도메인을 선택해서 들어간 다음 사용자를 선택합니다. Delete App 버튼을 눌러서 사용중인 App 을 모두 삭제하고 Edit 버튼을 눌러서 사용자도 함께 삭제합니다. 사용자가 삭제되었으면 생성한 도메인을 삭제합니다. 그리고 왼쪽 메뉴 Models, Endpoints, Endpoint configuration 에 들어가서 파이프라인에서 생성한 리소스를 모두 삭제합니다.
+
+마지막으로 VPC 콘솔로 이동해서 생성한 NAT Gateways, Subnets, Route Tables, Network ACLs, Internet Gateways, Security Groups 을 삭제하고 VPC 를 삭제합니다.
+
 
 # 결론
 이 글에서는 AWS에서 제공하는 다양한 서비스를 이용하여 꽃 이미지 분류를 위한 AI 애플리케이션 구축하는 방법을 소개했습니다. 컨테이너화된 애플리케이션을 쉽게 배포, 관리, 확장할 수 있도록 도와주는 완전 관리형 컨테이너 오케스트레이션 서비스인 Amazon ECS와 기계 학습 모델을 학습하고 배포하여 운영할 수 있는 Amazon SageMaker를 대규모 트래픽에도 유연하게 확장할 수 있도록 했습니다. 그리고 Amazon SageMaker Pipelines를 이용하여 기계 학습 모델 학습 및 배포를 자동화하고 AWS CodePipeline을 이용해서 컨테이너 통합 및 배포를 위한 CI/CD 파이프라인을 구축하는 방법을 소개했습니다. 애플리케이션 규모가 커지더라도 마이크로서비스 및 모델의 확장과 운영에 유연한 아키텍처로 최신 AI 애플리케이션을 구현하는데 참고가 될 수 있을 것으로 기대됩니다.
