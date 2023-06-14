@@ -22,10 +22,10 @@ chmod a+rx resize.sh
 
 ## CDK로 설치하기
 
-소스를 다운로드 합니다. (아래 경로 변경 필요함)
+소스를 다운로드 합니다.
 
 ```java
-git clone https://github.com/kyopark2014/ecs-fargate-sagemaker-based-webservice
+git clone https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice.git
 ```
 
 관련된 라이브러리를 설치합니다.
