@@ -559,7 +559,50 @@ Amazon SageMaker에서 학습에 사용되는 데이터는 Amazon S3에서 다�
 <img width="800" alt="train-1" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/aa15494c-fdaa-4f46-b522-c91d3779da71">
 </p>
 
-이제 앞서 올린 train.py을 이용해서 학습 단계를 생성하고 학습 단계만 있는 파이프라인을 구성합니다. 이를 위해서 다운로드한 프로젝트에서 [/ml/build-pipeline-train.ipynb](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/blob/main/ml/build-pipeline-train.ipynb)을 SageMaker Studio에서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image를 TensorFlow 2.12.0 Python 3.10 CPU Optimized로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 여기서 구성하는 환경은 학습 환경이 아닌 파이프라인 생성을 위한 환경이기 때문에 GPU를 사용하지 않습니다.
+train.py 파일에는 학습 데이터 로드, 모델 생성, 모델 학습 그리고 학습한 모델을 저장하는 코드가 있습니다. Amazon SageMaker 는 학습을 시작하기 전에 S3 에 있는 학습 데이터를 지정된 경로에 다운 받기 때문에 코드에서 불러와서 사용할 수 있습니다. 그리고 학습이 완료된 모델을 지정된 경로에 저장하면 Amazon SageMaker 는 S3에 업로드 합니다. 다음 코드는 모델을 생성하는 함수로 이미지 추론을 위해서 MobileNetV2 모델을 생성합니다.
+
+```
+def build_model(dropout=0.2, category_num=3):
+    print(" --- BUILD MODEL --- ")
+    mobile_net_layers = tf.keras.applications.MobileNetV2(include_top=False,
+                                                          weights='imagenet',
+                                                          pooling='avg',
+                                                          input_shape=(224, 224, 3))
+    mobile_net_layers.trainable = False
+    model = tf.keras.Sequential([
+        mobile_net_layers,
+        tf.keras.layers.Dropout(dropout),
+        tf.keras.layers.Dense(category_num, activation='softmax')
+    ])
+    model.summary()
+    return model
+```
+
+그리고 생성된 모델과 학습 데이터를 이용해서 모델을 학습하는 코드입니다.
+```
+def train_model(model, x, y, learning_rate=0.0001, batch_size=32, epochs=50):
+    print(" --- TRAIN MODEL --- ")
+    adam = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+    model.compile(loss='categorical_crossentropy', optimizer=adam, metrics=['accuracy'])
+    history = model.fit(x, y,
+                        shuffle=True,
+                        batch_size=batch_size,
+                        epochs=epochs,
+                        validation_split=0.2)
+    return history
+```
+
+마지막으로 학습이 완료된 모델을 특정 경로에 저장하는 코드입니다.
+```
+def store(model, model_path="/opt/ml/model"):
+    print(" --- STORE --- ")
+    print(model_path)
+    
+    # Store Keras
+    model.save(model_path + "/1")
+```
+
+이제 앞서 확인한 train.py을 이용해서 학습 단계를 생성하고 학습 단계만 있는 파이프라인을 구성합니다. 이를 위해서 다운로드한 프로젝트에서 [/ml/build-pipeline-train.ipynb](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/blob/main/ml/build-pipeline-train.ipynb)을 SageMaker Studio에서 /build-pipelin-train.ipynb 경로로 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image를 TensorFlow 2.12.0 Python 3.10 CPU Optimized로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 여기서 구성하는 환경은 학습 환경이 아닌 파이프라인 생성을 위한 환경이기 때문에 GPU를 사용하지 않습니다.
 
 <img width="1024" alt="train-4" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/c6148994-c3b7-4896-915b-ae0e6574ed5a">
 
