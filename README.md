@@ -232,9 +232,8 @@ Services 탭에서 app-web-service를 선택하고 Tasks 탭에 선택해서 들
 # AWS Fargate 기반 WAS Service 구성
 이번 단계는 AWS Fargate 기반 WAS Service 구성과 비슷한 흐름으로 진행되지만 다른 부분이 있기 때문에 주의해서 보시기 바랍니다. Web Service를 구성했던 것과 마찬가지로 AWS Fargate 기반 WAS 서비스를 구성하기 위해서 여러 단계를 거칩니다. 먼저 다운로드한 프로젝트에서 WAS Application을 Docker로 빌드합니다. 그리고 빌드한 이미지를 Amazon ECR 에 등록하여 AWS ECS Service에 배포할 준비를 합니다. 다음으로 Web 서비스와 로드 밸런서에 적용할 Security Group을 생성하고 로드 밸런서를 생성합니다. 마지막으로 WAS 서비스 구성을 위한 태스크 정의를 하고 WAS 서비스를 생성합니다.
 
-
-## WAS Application 빌드
-다운로드한 프로젝트에서 [WAS Application](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/tree/main/was)는 학습한 모델이 배포된 Amazon SageMaker Endpoint 에 접근합니다. 접근을 위해서는 AWS SDK 인 boto3를 사용합니다. [boto3](https://aws.amazon.com/ko/sdk-for-python/)를 사용하면 내부적으로 자격증명(Credentials)을 확인하기 때문에 편하게 접근할 수 있습니다. 다음 코드는 Amazon SageMaker Endpoint를 호출하는 코드 블록입니다. /was/app/main.py에서 확인할 수 있습니다.
+# Amazon SageMaker Endpoint 호출
+이미지 분류를 위해서 학습한 모델이 배포된 Amazon SageMaker Endpoint 에 접근합니다. 접근을 위해서는 AWS SDK 인 boto3를 사용합니다. boto3를 사용하면 내부적으로 자격증명(Credentials)을 확인하기 때문에 편하게 접근할 수 있습니다. 다음 코드는 Amazon SageMaker Endpoint를 호출하는 코드 블록입니다. was/app/main.py에서 확인할 수 있습니다.
 
 ```
 client = boto3.client("sagemaker-runtime")
@@ -247,7 +246,9 @@ response = client.invoke_endpoint(
 )
 ```
 
-코드 확인을 마친 후 콘솔이나 터미널에서 /was 디렉토리로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
+## WAS Application 빌드
+다운로드한 프로젝트에서 WAS Application을 빌드합니다. 콘솔이나 터미널에서 /was 폴더로 이동 후 다음 명령어로 Docker 빌드를 진행합니다.
+
 ```
 docker build  -t app-was .
 ```
@@ -604,7 +605,7 @@ AppMlPipeline-Train을 선택해서 들어간 다음 Graph 탭으로 이동하�
 
 
 ## 모델 등록 단계 생성
-다음으로 모델 등록 단계가 추가된 파일을 다운받고 업로드합니다. 이를 위해서 다운로드한 프로젝트에서 모델 생성 단계 [/ml/build-pipelin-model.ipynb](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/blob/main/ml/build-pipeline-model.ipynb)을 SageMaker Studio에서 /build-pipelin-model.ipynb 경로에 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image를 TensorFlow 2.12.0 Python 3.10 CPU Optimized로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 추가된 단계는 다음과 같습니다.
+다음으로 모델 등록 단계가 추가된 파일을 업로드합니다. 이를 위해서 다운로드한 프로젝트에서 모델 생성 단계 [/ml/build-pipelin-model.ipynb](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/blob/main/ml/build-pipeline-model.ipynb)을 SageMaker Studio에서 /build-pipelin-model.ipynb 경로에 업로드 합니다. 업로드한 파일 열면 뜨는 Set up notebook environment 창에서 Image를 TensorFlow 2.12.0 Python 3.10 CPU Optimized로 선택하고 Select 버튼을 눌러서 노트북 환경 설정을 마칩니다. 추가된 단계는 다음과 같습니다.
 
 ```
 # 4. Create Model
@@ -649,7 +650,7 @@ AppMlPipeline-Model을 선택해서 들어간 다음 Graph 탭으로 이동하�
 
 
 ## 배포 단계 생성
-배포 단계에는 SageMaker Endpoint를 생성하고 생성한 Endpoint 에 모델을 배포합니다. 먼저 배포 단계에 필요한 코드를 다운받고 SageMaker Studio 에 업로드합니다. 먼저 SageMaker Studio에서 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 다운로드한 프로젝트에서 [/ml/src/deploy.py](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/blob/main/ml/src/deploy.py) 파일을 /src/deploy.py 경로에 업로드 합니다.
+배포 단계에는 SageMaker Endpoint를 생성하고 생성한 Endpoint 에 모델을 배포합니다. 먼저 배포 단계에 필요한 코드를 SageMaker Studio 에 업로드합니다. SageMaker Studio에 접속해서 왼쪽 메뉴에서 폴더 아이콘을 클릭한 뒤 src 폴더를 생성합니다. 그리고 다운로드한 프로젝트에서 [/ml/src/deploy.py](https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/blob/main/ml/src/deploy.py) 파일을 /src/deploy.py 경로에 업로드 합니다.
 
 
 <p align="center">
