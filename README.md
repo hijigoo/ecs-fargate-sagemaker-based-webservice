@@ -549,7 +549,7 @@ Quick setup (1 min)을 선택하고 Name으로 app-sagemaker-studio을 입력하
 # Amazon SagemMaker Pipeline을 이용한 모델 학습 및 배포 자동화
 
 ## 학습 단계 생성
-Amazon SageMaker에서 학습에 사용되는 데이터는 Amazon S3에서 다운로드해서 사용됩니다. 먼저 학습에 필요한 [꽃 학습 데이터](https://www.kaggle.com/datasets/l3llff/flowers)를 다운로드합니다. 그리고 Amazon S3 에 app-ml-dataset-[yourname] 버켓을 생성하고 다운로드한 파일 중 'astilbe', 'bellflower', 'black_eyed_susan'를 업로드 합니다. 여기서는 app-ml-dataset-0410으로 생성했습니다. 버킷에 접속해서 다운로드한 폴더를 전부 업로드합니다. 다음 그림과 같이 astilbe의 경로는 /app-ml-dataset-0410/flowers/astilbe 가 됩니다.
+Amazon SageMaker에서 학습에 사용되는 데이터는 Amazon S3에서 다운로드해서 사용됩니다. 그렇기 때문에 먼저 학습에 필요한 데이터를 Amazon S3에 업로드해야 합니다. Amazon S3 에 app-ml-dataset-[yourname] 버킷을 생성합니다. 여기서는 app-ml-dataset-0410으로 생성했습니다. 그리고 생성한 버킷에 접속해서 다운로드한 프로젝트의 /datasets/flowsers 폴더를 전부 업로드합니다. 다음 그림과 같이 astilbe의 경로는 /app-ml-dataset-0410/flowers/astilbe 가 됩니다.
 
 <img width="1024" alt="data-0" src="https://github.com/hijigoo/ecs-fargate-sagemaker-based-webservice/assets/1788481/0a4b372a-a5e6-4184-adaf-2e304383f026">
 
